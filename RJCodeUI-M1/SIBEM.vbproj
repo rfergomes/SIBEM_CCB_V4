@@ -1,0 +1,1048 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.SqlServer.Types.160.1000.6\build\net462\Microsoft.SqlServer.Types.props" Condition="Exists('..\packages\Microsoft.SqlServer.Types.160.1000.6\build\net462\Microsoft.SqlServer.Types.props')" />
+  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4070B4A0-2377-4DC3-8D04-044C52144577}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>PROJETOBASE.Program</StartupObject>
+    <RootNamespace>PROJETOBASE</RootNamespace>
+    <AssemblyName>SIBEM</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsFormsWithCustomSubMain</MyType>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <PublishUrl>C:\Projeto_Publicado\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <InstallUrl>https://www.sibem.online/app/</InstallUrl>
+    <UpdateUrl>https://sibem.online/app/</UpdateUrl>
+    <SupportUrl>https://www.sibem.online/#faq</SupportUrl>
+    <ErrorReportUrl>https://www.sibem.online/erro</ErrorReportUrl>
+    <ProductName>SIBEM - Sistema para Inventário de Bens Móveis</ProductName>
+    <PublisherName>Rodrigo Lima</PublisherName>
+    <SuiteName>SIBEM CCB</SuiteName>
+    <MinimumRequiredVersion>4.0.0.0</MinimumRequiredVersion>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>home.htm</WebPage>
+    <ApplicationRevision>10</ApplicationRevision>
+    <ApplicationVersion>4.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>true</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <ExcludeDeploymentUrl>true</ExcludeDeploymentUrl>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>SIBEM.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>SIBEM.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>SIBEM.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>1FCA702CFE05F88135F3BD7C811FE3459C42BE35</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestTimestampUrl>
+    </ManifestTimestampUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
+      <HintPath>..\packages\BouncyCastle.Cryptography.2.5.1\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
+    </Reference>
+    <Reference Include="DynamicData, Version=9.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DynamicData.9.1.1\lib\net462\DynamicData.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="FirebirdSql.Data.FirebirdClient, Version=10.3.2.0, Culture=neutral, PublicKeyToken=3750abcc3150b00c, processorArchitecture=MSIL">
+      <HintPath>..\packages\FirebirdSql.Data.FirebirdClient.10.3.2\lib\net48\FirebirdSql.Data.FirebirdClient.dll</HintPath>
+    </Reference>
+    <Reference Include="FontAwesome.Sharp, Version=6.6.0.0, Culture=neutral, PublicKeyToken=d16d1e4e568ec10f, processorArchitecture=MSIL">
+      <HintPath>..\packages\FontAwesome.Sharp.6.6.0\lib\net48\FontAwesome.Sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Protobuf, Version=3.29.3.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Protobuf.3.29.3\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.4, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.4\lib\net461\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Compression.LZ4, Version=1.3.8.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
+      <HintPath>..\packages\K4os.Compression.LZ4.1.3.8\lib\net462\K4os.Compression.LZ4.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Compression.LZ4.Streams, Version=1.3.8.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
+      <HintPath>..\packages\K4os.Compression.LZ4.Streams.1.3.8\lib\net462\K4os.Compression.LZ4.Streams.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Hash.xxHash, Version=1.0.8.0, Culture=neutral, PublicKeyToken=32cd54395057cec3, processorArchitecture=MSIL">
+      <HintPath>..\packages\K4os.Hash.xxHash.1.0.8\lib\net462\K4os.Hash.xxHash.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=9.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.9.0.2\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.HashCode, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.HashCode.6.0.0\lib\net462\Microsoft.Bcl.HashCode.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=9.0.0.2, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.9.0.2\lib\net462\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=9.0.0.2, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.9.0.2\lib\net462\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Design, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.160.1000.6\lib\net462\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=9.2.0.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.9.2.0\lib\net48\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Npgsql, Version=8.0.5.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Npgsql.8.0.5\lib\netstandard2.0\Npgsql.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.122.23.1, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.23.7.0\lib\net472\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="PlaceholderTextBox, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PlaceholderTextBox.1.3.1\lib\PlaceholderTextBox.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="ReactiveUI, Version=20.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ReactiveUI.20.1.63\lib\net472\ReactiveUI.dll</HintPath>
+    </Reference>
+    <Reference Include="Splat, Version=15.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Splat.15.3.1\lib\netstandard2.0\Splat.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.6.0\lib\net462\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.CodeDom, Version=9.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.CodeDom.9.0.2\lib\net462\System.CodeDom.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=9.0.0.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.9.0.2\lib\net462\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.5.0.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.ConfigurationManager, Version=9.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Configuration.ConfigurationManager.9.0.2\lib\net462\System.Configuration.ConfigurationManager.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.OleDb, Version=9.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.OleDb.9.0.2\lib\net462\System.Data.OleDb.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite, Version=1.0.119.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\lib\net46\System.Data.SQLite.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.119.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.EF6.1.0.119.0\lib\net46\System.Data.SQLite.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.119.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Linq.1.0.119.0\lib\net46\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=9.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.9.0.2\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Formats.Asn1, Version=9.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Formats.Asn1.9.0.2\lib\net462\System.Formats.Asn1.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Pipelines, Version=9.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Pipelines.9.0.2\lib\net462\System.IO.Pipelines.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Management" />
+    <Reference Include="System.Memory, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.6.0\lib\net462\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.6.0\lib\net462\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive, Version=6.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.6.0.1\lib\net472\System.Reactive.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.1.0\lib\net462\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=9.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.9.0.2\lib\net462\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=9.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.9.0.2\lib\net462\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Channels, Version=9.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Channels.9.0.2\lib\net462\System.Threading.Channels.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.6.0\lib\net462\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Vip.Notification, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vip.Notification.1.0.4\lib\net45\Vip.Notification.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="WinFormAnimation, Version=1.6.0.4, Culture=neutral, PublicKeyToken=310fd07b25df79b3, processorArchitecture=MSIL">
+      <HintPath>..\packages\WinFormAnimation.1.6.0.4\lib\net40\WinFormAnimation.dll</HintPath>
+    </Reference>
+    <Reference Include="ZstdSharp, Version=0.8.4.0, Culture=neutral, PublicKeyToken=8d151af33a4ad5cf, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZstdSharp.Port.0.8.4\lib\net462\ZstdSharp.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Data.SQLite" />
+    <Import Include="System.Data.SQLite.EF6" />
+    <Import Include="System.Data.SQLite.Generic" />
+    <Import Include="System.Data.SQLite.Linq" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BLL\Adm Remoto\AdmlcOnBLL.vb" />
+    <Compile Include="BLL\Adm Remoto\IgrejasOnBLL.vb" />
+    <Compile Include="BLL\Adm Remoto\DependenciasOnBLL.vb" />
+    <Compile Include="BLL\Adm Remoto\SetoresOnBLL.vb" />
+    <Compile Include="BLL\AdmrgBLL.vb" />
+    <Compile Include="BLL\InventarioDetalhesBLL.vb" />
+    <Compile Include="BLL\InventariosBLL.vb" />
+    <Compile Include="BLL\IgrejasBLL.vb" />
+    <Compile Include="BLL\AdmlcBLL.vb" />
+    <Compile Include="BLL\Remoto\BensOnBLL.vb" />
+    <Compile Include="BLL\Remoto\InventarioDetalhesOnBLL.vb" />
+    <Compile Include="BLL\Remoto\InventariosOnBLL.vb" />
+    <Compile Include="BLL\SetoresBLL.vb" />
+    <Compile Include="BLL\DependenciasBLL.vb" />
+    <Compile Include="BLL\ServidoresBLL.vb" />
+    <Compile Include="BLL\Adm Remoto\ServidoresOnBLL.vb" />
+    <Compile Include="BLL\Adm Remoto\TokenSolicitacaoOnBLL.vb" />
+    <Compile Include="BLL\Adm Remoto\TokenOnBLL.vb" />
+    <Compile Include="BLL\SistemaBLL.vb" />
+    <Compile Include="BLL\SincronizarBLL.vb" />
+    <Compile Include="BLL\SituacaoSetorBLL.vb" />
+    <Compile Include="BLL\DashboardBLL.vb" />
+    <Compile Include="BLL\TipoBLL.vb" />
+    <Compile Include="BLL\StatusBLL.vb" />
+    <Compile Include="BLL\UsuarioBLL.vb" />
+    <Compile Include="DAL\Adm Remoto\AdmlcOnDAL .vb" />
+    <Compile Include="DAL\Adm Remoto\DependenciasOnDAL.vb" />
+    <Compile Include="DAL\Adm Remoto\SetoresOnDAL.vb" />
+    <Compile Include="DAL\AdmrgDAL.vb" />
+    <Compile Include="DAL\SituacaoSetorDAL.vb" />
+    <Compile Include="DAL\GenericDAL.vb" />
+    <Compile Include="DAL\Adm Remoto\IgrejasOnDAL .vb" />
+    <Compile Include="DAL\InventarioDetalhesDAL.vb" />
+    <Compile Include="DAL\InventariosDAL.vb" />
+    <Compile Include="DAL\IgrejasDAL.vb" />
+    <Compile Include="DAL\AdmlcDAL.vb" />
+    <Compile Include="DAL\Remoto\BensOnDAL.vb" />
+    <Compile Include="DAL\Remoto\InventarioDetalhesOnDAL.vb" />
+    <Compile Include="DAL\Remoto\InventariosOnDAL.vb" />
+    <Compile Include="DAL\SetoresDAL.vb" />
+    <Compile Include="DAL\DependenciasDAL.vb" />
+    <Compile Include="DAL\BensDAL.vb" />
+    <Compile Include="DAL\ServidoresDAL.vb" />
+    <Compile Include="DAL\Adm Remoto\ServidoresOnDAL.vb" />
+    <Compile Include="DAL\Adm Remoto\TokenSolicitacaoOnDAL.vb" />
+    <Compile Include="DAL\Adm Remoto\TokenOnDAL .vb" />
+    <Compile Include="DAL\SistemaDAL.vb" />
+    <Compile Include="DAL\SincronizarDAL.vb" />
+    <Compile Include="DAL\DashboardDAL.vb" />
+    <Compile Include="DAL\TipoDAL.vb" />
+    <Compile Include="DAL\StatusDAL.vb" />
+    <Compile Include="DAL\UsuarioDAL.vb" />
+    <Compile Include="DTO\Adm Remoto\AdmlcOnDTO.vb" />
+    <Compile Include="DTO\Adm Remoto\DependenciasOnDTO .vb" />
+    <Compile Include="DTO\Adm Remoto\IgrejasOnDTO .vb" />
+    <Compile Include="DTO\Adm Remoto\SetoresOnDTO.vb" />
+    <Compile Include="DTO\AdmrgDTO .vb" />
+    <Compile Include="DTO\DashboardDTO.vb" />
+    <Compile Include="DTO\Remoto\BensOnDTO.vb" />
+    <Compile Include="DTO\Remoto\InventarioDetalhesOnDTO.vb" />
+    <Compile Include="DTO\InventarioDetalhesDTO.vb" />
+    <Compile Include="DTO\AnosDTO.vb" />
+    <Compile Include="DTO\IgrejasDTO.vb" />
+    <Compile Include="DTO\Remoto\InventariosOnDTO.vb" />
+    <Compile Include="DTO\ServidoresDTO.vb" />
+    <Compile Include="DTO\SetoresDTO.vb" />
+    <Compile Include="DTO\DependenciasDTO.vb" />
+    <Compile Include="DTO\AdmlcDTO.vb" />
+    <Compile Include="DTO\BensDTO.vb" />
+    <Compile Include="DTO\InventariosDTO.vb" />
+    <Compile Include="DTO\Adm Remoto\ServidoresOnDTO .vb" />
+    <Compile Include="DTO\Adm Remoto\TokenSolicitacaoOnDTO.vb" />
+    <Compile Include="DTO\Adm Remoto\TokenOnDTO .vb" />
+    <Compile Include="DTO\SistemaDTO.vb" />
+    <Compile Include="DTO\SincronizarDTO .vb" />
+    <Compile Include="DTO\SituacaoSetorDTO.vb" />
+    <Compile Include="DTO\TipoDTO.vb" />
+    <Compile Include="DTO\StatusDTO .vb" />
+    <Compile Include="DTO\UsuarioDTO.vb" />
+    <Compile Include="LoginFormDemo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginFormDemo.Designer.vb">
+      <DependentUpon>LoginFormDemo.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainFormDemo.Designer.vb">
+      <DependentUpon>MainFormDemo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MainFormDemo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Models\Customer.vb" />
+    <Compile Include="Models\Product.vb" />
+    <Compile Include="Models\SalesAnalysis.vb" />
+    <Compile Include="Models\SalesOrder.vb" />
+    <Compile Include="Models\User.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Program.vb" />
+    <Compile Include="RJControls\Design\ButtonDesign.vb" />
+    <Compile Include="RJControls\Design\ControlStyle.vb" />
+    <Compile Include="RJControls\Design\DropdownMenuColors.vb" />
+    <Compile Include="RJControls\Design\DropdownMenuPosition.vb" />
+    <Compile Include="RJControls\Design\DropdownMenuRenderer.vb" />
+    <Compile Include="RJControls\Design\LabelStyle.vb" />
+    <Compile Include="RJControls\Design\TextBoxStyle.vb" />
+    <Compile Include="RJControls\Design\TextPosition.vb" />
+    <Compile Include="RJControls\RJButton.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RJControls\RJChart.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RJControls\RJCheckBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RJControls\RJCircularPictureBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RJControls\RJComboBox.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RJControls\RJDataGridView.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RJControls\RJDatePicker.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RJControls\RJDragControl.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RJControls\RJDropdownMenu.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RJControls\RJImageColorOverlay.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RJControls\RJLabel.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RJControls\RJMenuButton.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RJControls\RJMenuIcon.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RJControls\RJPanel.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RJControls\RJPictureBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RJControls\RJProgressBar.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RJControls\RJRadioButton.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RJControls\RJTextBox.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RJControls\RJToggleButton.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RJControls\RJTrackBar.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RJForms\Private\RJMessageForm.Designer.vb">
+      <DependentUpon>RJMessageForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="RJForms\Private\RJMessageForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RJForms\RJBaseForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RJForms\RJChildForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RJForms\RJMainForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RJForms\RJMessageBox.vb" />
+    <Compile Include="RJForms\RJPrintForm.Designer.vb">
+      <DependentUpon>RJPrintForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="RJForms\RJPrintForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RJForms\RJSettingsForm.Designer.vb">
+      <DependentUpon>RJSettingsForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="RJForms\RJSettingsForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Settings.vb" />
+    <Compile Include="Settings\RJColors.vb" />
+    <Compile Include="Settings\SettingsManager.vb" />
+    <Compile Include="Settings\UIAppearance.vb" />
+    <Compile Include="Settings\UIAppearanceSettings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>UIAppearanceSettings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\UIStyle.vb" />
+    <Compile Include="Settings\UITheme.vb" />
+    <Compile Include="TestAndDemo\FormCommonControls.Designer.vb">
+      <DependentUpon>FormCommonControls.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndDemo\FormCommonControls.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestAndDemo\FormComponentControls.Designer.vb">
+      <DependentUpon>FormComponentControls.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndDemo\FormComponentControls.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestAndDemo\FormContainerControls.Designer.vb">
+      <DependentUpon>FormContainerControls.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndDemo\FormContainerControls.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestAndDemo\FormCustomer.Designer.vb">
+      <DependentUpon>FormCustomer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndDemo\FormCustomer.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestAndDemo\FormCustomerMaintenance.Designer.vb">
+      <DependentUpon>FormCustomerMaintenance.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndDemo\FormCustomerMaintenance.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestAndDemo\FormDashboard_ .Designer.vb">
+      <DependentUpon>FormDashboard_ .vb</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndDemo\FormDashboard_ .vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FormConfiguracoesSolicitacoes.Designer.vb">
+      <DependentUpon>FormConfiguracoesSolicitacoes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FormConfiguracoesSolicitacoes.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FormDashboard.Designer.vb">
+      <DependentUpon>FormDashboard.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FormDashboard.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestAndDemo\FormDataControls.Designer.vb">
+      <DependentUpon>FormDataControls.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndDemo\FormDataControls.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestAndDemo\FormMenuControls.Designer.vb">
+      <DependentUpon>FormMenuControls.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndDemo\FormMenuControls.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestAndDemo\FormProductMaintenance.Designer.vb">
+      <DependentUpon>FormProductMaintenance.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndDemo\FormProductMaintenance.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestAndDemo\FormProducts.Designer.vb">
+      <DependentUpon>FormProducts.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndDemo\FormProducts.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestAndDemo\FormRJBaseDoc.Designer.vb">
+      <DependentUpon>FormRJBaseDoc.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndDemo\FormRJBaseDoc.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestAndDemo\FormRJChildDoc.Designer.vb">
+      <DependentUpon>FormRJChildDoc.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndDemo\FormRJChildDoc.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestAndDemo\FormRJMainDoc.Designer.vb">
+      <DependentUpon>FormRJMainDoc.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndDemo\FormRJMainDoc.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestAndDemo\FormSalesOrder.Designer.vb">
+      <DependentUpon>FormSalesOrder.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndDemo\FormSalesOrder.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestAndDemo\FormSpecialControls.Designer.vb">
+      <DependentUpon>FormSpecialControls.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndDemo\FormSpecialControls.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestAndDemo\FormUserControls.Designer.vb">
+      <DependentUpon>FormUserControls.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndDemo\FormUserControls.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestAndDemo\FormUserProfile.Designer.vb">
+      <DependentUpon>FormUserProfile.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TestAndDemo\FormUserProfile.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BLL\BensBLL.vb" />
+    <Compile Include="UI\FormAdministracao.Designer.vb">
+      <DependentUpon>FormAdministracao.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FormAdministracao.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FormBensMoveis.Designer.vb">
+      <DependentUpon>FormBensMoveis.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FormBensMoveis.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FormConfiguracoes.Designer.vb">
+      <DependentUpon>FormConfiguracoes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FormConfiguracoes.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FormDependencias.Designer.vb">
+      <DependentUpon>FormDependencias.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FormDependencias.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FormIgrejas.Designer.vb">
+      <DependentUpon>FormIgrejas.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FormIgrejas.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FormIgrejasCad.Designer.vb">
+      <DependentUpon>FormIgrejasCad.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FormIgrejasCad.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FormInfo.Designer.vb">
+      <DependentUpon>FormInfo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FormInfo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FormInventarioCelular.Designer.vb">
+      <DependentUpon>FormInventarioCelular.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FormInventarioCelular.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FormInventarioEtiquetas.Designer.vb">
+      <DependentUpon>FormInventarioEtiquetas.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FormInventarioEtiquetas.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FormInventarioFinalizado.Designer.vb">
+      <DependentUpon>FormInventarioFinalizado.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FormInventarioFinalizado.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FormInventarioPendencias.Designer.vb">
+      <DependentUpon>FormInventarioPendencias.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FormInventarioPendencias.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FormInventarios.Designer.vb">
+      <DependentUpon>FormInventarios.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FormInventarios.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FormInventarioLeitorScanner.Designer.vb">
+      <DependentUpon>FormInventarioLeitorScanner.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FormInventarioLeitorScanner.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FormSetores.Designer.vb">
+      <DependentUpon>FormSetores.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FormSetores.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FormSincronizar.Designer.vb">
+      <DependentUpon>FormSincronizar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FormSincronizar.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FormStatus.Designer.vb">
+      <DependentUpon>FormStatus.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FormStatus.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FormToken.Designer.vb">
+      <DependentUpon>FormToken.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FormToken.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Relatorios\FormInventarioRelatorioFinal.Designer.vb">
+      <DependentUpon>FormInventarioRelatorioFinal.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Relatorios\FormInventarioRelatorioFinal.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Relatorios\FormRelatorios.Designer.vb">
+      <DependentUpon>FormRelatorios.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Relatorios\FormRelatorios.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Utils\ColorEditor.vb" />
+    <Compile Include="Utils\ConnectionFactory.vb" />
+    <Compile Include="Utils\EmailHelper.vb" />
+    <Compile Include="Utils\ExportacaoHelper.vb" />
+    <Compile Include="Utils\FuncoesGerais.vb" />
+    <Compile Include="Utils\Logger.vb" />
+    <Compile Include="Utils\RoundedControl.vb" />
+    <Compile Include="Utils\SyncHelper.vb" />
+    <Compile Include="Utils\VarGlob.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="LoginFormDemo.resx">
+      <DependentUpon>LoginFormDemo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFormDemo.resx">
+      <DependentUpon>MainFormDemo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RJForms\Private\RJMessageForm.resx">
+      <DependentUpon>RJMessageForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RJForms\RJPrintForm.resx">
+      <DependentUpon>RJPrintForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RJForms\RJSettingsForm.resx">
+      <DependentUpon>RJSettingsForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestAndDemo\FormCommonControls.resx">
+      <DependentUpon>FormCommonControls.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestAndDemo\FormComponentControls.resx">
+      <DependentUpon>FormComponentControls.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestAndDemo\FormContainerControls.resx">
+      <DependentUpon>FormContainerControls.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestAndDemo\FormCustomer.resx">
+      <DependentUpon>FormCustomer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestAndDemo\FormCustomerMaintenance.resx">
+      <DependentUpon>FormCustomerMaintenance.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestAndDemo\FormDashboard_ .resx">
+      <DependentUpon>FormDashboard_ .vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FormConfiguracoesSolicitacoes.resx">
+      <DependentUpon>FormConfiguracoesSolicitacoes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FormDashboard.resx">
+      <DependentUpon>FormDashboard.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestAndDemo\FormDataControls.resx">
+      <DependentUpon>FormDataControls.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestAndDemo\FormMenuControls.resx">
+      <DependentUpon>FormMenuControls.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestAndDemo\FormProductMaintenance.resx">
+      <DependentUpon>FormProductMaintenance.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestAndDemo\FormProducts.resx">
+      <DependentUpon>FormProducts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestAndDemo\FormRJBaseDoc.resx">
+      <DependentUpon>FormRJBaseDoc.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestAndDemo\FormRJChildDoc.resx">
+      <DependentUpon>FormRJChildDoc.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestAndDemo\FormRJMainDoc.resx">
+      <DependentUpon>FormRJMainDoc.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestAndDemo\FormSalesOrder.resx">
+      <DependentUpon>FormSalesOrder.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestAndDemo\FormSpecialControls.resx">
+      <DependentUpon>FormSpecialControls.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestAndDemo\FormUserControls.resx">
+      <DependentUpon>FormUserControls.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestAndDemo\FormUserProfile.resx">
+      <DependentUpon>FormUserProfile.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FormAdministracao.resx">
+      <DependentUpon>FormAdministracao.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FormBensMoveis.resx">
+      <DependentUpon>FormBensMoveis.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FormConfiguracoes.resx">
+      <DependentUpon>FormConfiguracoes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FormDependencias.resx">
+      <DependentUpon>FormDependencias.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FormIgrejas.resx">
+      <DependentUpon>FormIgrejas.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FormIgrejasCad.resx">
+      <DependentUpon>FormIgrejasCad.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FormInfo.resx">
+      <DependentUpon>FormInfo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FormInventarioCelular.resx">
+      <DependentUpon>FormInventarioCelular.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FormInventarioEtiquetas.resx">
+      <DependentUpon>FormInventarioEtiquetas.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FormInventarioFinalizado.resx">
+      <DependentUpon>FormInventarioFinalizado.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FormInventarioPendencias.resx">
+      <DependentUpon>FormInventarioPendencias.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FormInventarios.resx">
+      <DependentUpon>FormInventarios.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FormInventarioLeitorScanner.resx">
+      <DependentUpon>FormInventarioLeitorScanner.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FormSetores.resx">
+      <DependentUpon>FormSetores.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FormSincronizar.resx">
+      <DependentUpon>FormSincronizar.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FormStatus.resx">
+      <DependentUpon>FormStatus.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FormToken.resx">
+      <DependentUpon>FormToken.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Relatorios\FormInventarioRelatorioFinal.resx">
+      <DependentUpon>FormInventarioRelatorioFinal.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Relatorios\FormRelatorios.resx">
+      <DependentUpon>FormRelatorios.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Relatorios\RelInventarioFinal.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Files\License.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Banco.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Banco_.db" />
+    <None Include="Files\SIBEM_Manual.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Oracle.DataAccess.Common.Configuration.Section.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Oracle.ManagedDataAccess.Client.Configuration.Section.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Resources\Logo.bmp" />
+    <None Include="Resources\SIBEM_Logo_Cinza_Claro.png" />
+    <None Include="Resources\SIBEM_LogoCinza_Escuro.png" />
+    <None Include="Resources\SIBEM_Logo_Branco.png" />
+    <None Include="Resources\CCB_Logo_Reduzido.png" />
+    <None Include="Resources\CCB_Logo_fundo_claro.png" />
+    <None Include="Resources\CCB_Logo_funco_escuro.png" />
+    <None Include="Resources\correto.png" />
+    <Content Include="Resources\Enviar.png" />
+    <None Include="Resources\incorreto.png" />
+    <Content Include="Resources\Receber.png" />
+    <Content Include="SIBEM.ico" />
+    <Content Include="SQLite.Interop.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="My Project\app.manifest" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\DataSources\InventarioDetalhesDTO.datasource" />
+    <None Include="My Project\DataSources\InventariosDTO.datasource" />
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="App.config" />
+    <None Include="packages.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Settings\UIAppearanceSettings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>UIAppearanceSettings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="SIBEM_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.8">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.8 %28x86 e x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ModernUI-M1.ico" />
+    <None Include="Resources\CloseDark.png" />
+    <None Include="Resources\userProfile.png" />
+    <None Include="Resources\RestoreWhite.png" />
+    <None Include="Resources\RestoreDark.png" />
+    <None Include="Resources\MinimizeWhite.png" />
+    <None Include="Resources\MinimizeDark.png" />
+    <None Include="Resources\MaximizeWhite.png" />
+    <None Include="Resources\MaximizeDark.png" />
+    <None Include="Resources\logoultimate.png" />
+    <None Include="Resources\CloseWhite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PublishFile Include="Banco.db">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>DataFile</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="Banco_.db">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este projeto faz referência a pacotes do NuGet que não estão presentes neste computador. Use a Restauração de Pacotes do NuGet para baixá-los.  Para obter mais informações, consulte http://go.microsoft.com/fwlink/?LinkID=322105. O arquivo ausente é {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.SqlServer.Types.160.1000.6\build\net462\Microsoft.SqlServer.Types.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.SqlServer.Types.160.1000.6\build\net462\Microsoft.SqlServer.Types.props'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" />
+  <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
