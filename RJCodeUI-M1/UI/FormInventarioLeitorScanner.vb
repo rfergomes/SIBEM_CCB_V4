@@ -70,10 +70,11 @@ Public Class FormInventarioLeitorScanner
                 Dim Inventario As InventariosDTO = inventarioBLL.BuscarPorId(VarGlob.Id_Inventario_Ativo)
                 Dim InventarioDetalhes As InventarioDetalhesDTO = inventarioDetalhesBLL.BuscarPorId(Etiqueta)
 
-                Dim Id_igreja As String = VarGlob.Id_Inventario_Ativo.Substring(0, 6).ToString()
+                Dim Id_igreja As String = VarGlob.Inventario.Id_Igreja
                 If BemMovel IsNot Nothing Then
                     If InventarioDetalhes IsNot Nothing Then
                         If BemMovel.Id_igreja = Id_igreja Then
+                            InventarioDetalhes.Id_inventario = VarGlob.Id_Inventario_Ativo
                             InventarioDetalhes.Bem = String.Empty
                             InventarioDetalhes.Dependencia = String.Empty
                             InventarioDetalhes.Estado = "OK"

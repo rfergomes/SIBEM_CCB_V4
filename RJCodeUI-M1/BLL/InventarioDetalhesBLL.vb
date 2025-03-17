@@ -26,7 +26,7 @@ Public Class InventarioDetalhesBLL
         End Try
     End Function
 
-    Public Sub Excluir(inventarioDetalhesId As Integer)
+    Public Sub Excluir(inventarioDetalhesId As String)
         Try
             ' Validação do ID do InventarioDetalhes (opcional)
             inventarioDetalhesDAL.Delete(inventarioDetalhesId)
@@ -101,6 +101,10 @@ Public Class InventarioDetalhesBLL
                 Case "LISTA PENDENTES"
                     condicao.Clear()
                     condicao.Append($" AND acao='PENDENTE' AND (id_bem LIKE '%{TextoPesquisa}%' OR bem LIKE '%{TextoPesquisa}%')")
+
+                Case "LISTA RESOLVIDOS"
+                    condicao.Clear()
+                    condicao.Append($" AND situacao <> 'OK' AND acao NOT IN('OK','PENDENTE')")
 
                 Case "LISTA PENDENTES TODOS"
                     condicao.Clear()

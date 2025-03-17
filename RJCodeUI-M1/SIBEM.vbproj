@@ -715,6 +715,12 @@
     <Compile Include="UI\FormInventarioPendencias.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="UI\FormInventarioResponsaveis.Designer.vb">
+      <DependentUpon>FormInventarioResponsaveis.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FormInventarioResponsaveis.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UI\FormInventarios.Designer.vb">
       <DependentUpon>FormInventarios.vb</DependentUpon>
     </Compile>
@@ -884,6 +890,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\FormInventarioPendencias.resx">
       <DependentUpon>FormInventarioPendencias.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FormInventarioResponsaveis.resx">
+      <DependentUpon>FormInventarioResponsaveis.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\FormInventarios.resx">
       <DependentUpon>FormInventarios.vb</DependentUpon>

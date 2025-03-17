@@ -26,10 +26,15 @@ Public Class FormInventarioPendencias
 #Region "Load e Configuração do DataGridView"
     Private Sub LoadBensMoveis()
         Dim inventarioDetalhesBLL As New InventarioDetalhesBLL(SQLite)
-        Dim Pendencias As List(Of InventarioDetalhesDTO) = If(ChkTodasPendencias.Checked,
-            inventarioDetalhesBLL.BuscarTodos(TxtPesquisar.Text, "LISTA PENDENTES TODOS"),
-            inventarioDetalhesBLL.BuscarTodos(TxtPesquisar.Text, "LISTA PENDENTES"))
-
+        Dim Consulta As String
+        If ChkTodasPendencias.Checked Then
+            Consulta = "LISTA PENDENTES TODOS"
+        ElseIf ChkResolvidas.Checked Then
+            Consulta = "LISTA RESOLVIDOS"
+        Else
+            Consulta = "LISTA PENDENTES"
+        End If
+        Dim Pendencias As List(Of InventarioDetalhesDTO) = inventarioDetalhesBLL.BuscarTodos(TxtPesquisar.Text, Consulta)
         ConfigurarDataGridView(Pendencias)
         LblTotalListado.Text = $"{Pendencias.Count} Bens Pendentes"
     End Sub
@@ -111,13 +116,32 @@ Public Class FormInventarioPendencias
     End Sub
 #End Region
 
+
 #Region "Eventos de Pesquisa e Filtro"
+    Private Sub BtnLimparFiltros_Click(sender As Object, e As EventArgs) Handles BtnLimparFiltros.Click
+        ChkResolvidas.Checked = False
+        ChkTodasPendencias.Checked = False
+        LoadBensMoveis()
+    End Sub
+
     Private Sub TxtPesquisar_OnTextChange(sender As Object, e As EventArgs) Handles TxtPesquisar.OnTextChange
         LoadBensMoveis()
     End Sub
 
-    Private Sub ChkTodasPendencias_Click(sender As Object, e As EventArgs) Handles ChkTodasPendencias.Click
-        LoadBensMoveis()
+    Private Sub ChkResolvidas_CheckedChanged(sender As Object, e As EventArgs) Handles ChkResolvidas.CheckedChanged
+        If ChkResolvidas.Checked Then
+            ChkTodasPendencias.Checked = False
+            LoadBensMoveis()
+        End If
+
+    End Sub
+
+    Private Sub ChkTodasPendencias_CheckedChanged(sender As Object, e As EventArgs) Handles ChkTodasPendencias.CheckedChanged
+        If ChkTodasPendencias.Checked Then
+            ChkResolvidas.Checked = False
+            LoadBensMoveis()
+        End If
+
     End Sub
 #End Region
 
@@ -125,6 +149,7 @@ Public Class FormInventarioPendencias
     Private Sub RbtImprimir_Click(sender As Object, e As EventArgs) Handles RbtImprimir.Click
         DefinirAcao("IMPRIMIR", "BEM SEM ETIQUETA", Fixar:=True, habilitarCampos:=False)
         TxtObservacoes.Enabled = True
+        CboDependencias.Enabled = False
     End Sub
 
     Private Sub RbtAlterar_Click(sender As Object, e As EventArgs) Handles RbtAlterar.Click
@@ -134,7 +159,6 @@ Public Class FormInventarioPendencias
     Private Sub RbtNovo_Click(sender As Object, e As EventArgs) Handles RbtNovo.Click
         DefinirAcao("CADASTRAR", "CARTA DE DOAÇÃO ", Fixar:=False, habilitarCampos:=True)
         With CboDependencias
-            .Enabled = True
             .SelectedIndex = -1
             .Text = String.Empty
         End With
@@ -143,11 +167,18 @@ Public Class FormInventarioPendencias
     Private Sub RbtExcluir_Click(sender As Object, e As EventArgs) Handles RbtExcluir.Click
         DefinirAcao("EXCLUIR", "BAIXAR: ", Fixar:=True, habilitarCampos:=False)
         TxtObservacoes.Enabled = True
+        CboDependencias.Enabled = False
     End Sub
 
     Private Sub RbtTransferir_Click(sender As Object, e As EventArgs) Handles RbtTransferir.Click
         DefinirAcao("TRANSFERIR", "TRANSFERIDO PARA: ", Fixar:=True, habilitarCampos:=False)
         TxtObservacoes.Enabled = True
+        CboDependencias.Enabled = False
+    End Sub
+
+    Private Sub RbtBipar_CheckedChanged(sender As Object, e As EventArgs) Handles RbtBipar.CheckedChanged
+        DefinirAcao("ENCONTRADO", "", Fixar:=True, habilitarCampos:=False)
+        CboDependencias.Enabled = False
     End Sub
 
     Private Sub DefinirAcao(acaoTexto As String, observacaoTexto As String, Fixar As Boolean, habilitarCampos As Boolean)
@@ -160,6 +191,7 @@ Public Class FormInventarioPendencias
                 LimparCampos()
                 DgvBensPendentes.ClearSelection()
                 TxtBemMovel.Enabled = habilitarCampos
+                CboDependencias.Enabled = habilitarCampos
                 TxtObservacoes.Enabled = habilitarCampos
             Else
                 TxtObservacoes.Text = observacaoTexto
@@ -193,8 +225,11 @@ Public Class FormInventarioPendencias
                 If Acao <> "CADASTRAR" Then
                     For Each Linha As DataGridViewRow In DgvBensPendentes.SelectedRows
                         Dim Id_Bem As String = Linha.Cells(2).Value.ToString()
+
                         Bem = inventarioDetalhesBLL.BuscarPorId(Id_Bem)
-                        Bem.Acao = Acao
+                        Bem.Id_inventario = VarGlob.Inventario.Id
+                        Bem.Acao = If(Acao = "ENCONTRADO", "OK", Acao)
+                        Bem.Estado = If(Acao = "ENCONTRADO", "OK", "PENDENTE")
                         Bem.Bem = String.Empty
                         Bem.Id_dependencia = String.Empty
                         Bem.Observacao = SanitizeString(TxtObservacoes.Text)
@@ -207,10 +242,12 @@ Public Class FormInventarioPendencias
             ElseIf DgvBensPendentes.SelectedRows.Count = 1 Then
                     If Not String.IsNullOrEmpty(LblEtiqueta.Text) Then
                         Dim Id_Bem As String = LblEtiqueta.Text
-                        Bem = inventarioDetalhesBLL.BuscarPorId(Id_Bem)
-                        Bem.Acao = Acao
-                        Bem.Bem = String.Empty
-                        Bem.Id_dependencia = String.Empty
+                    Bem = inventarioDetalhesBLL.BuscarPorId(Id_Bem)
+                    Bem.Id_inventario = VarGlob.Inventario.Id
+                    Bem.Acao = If(Acao = "ENCONTRADO", "OK", Acao)
+                    Bem.Estado = If(Acao = "ENCONTRADO", "OK", "PENDENTE")
+                    Bem.Bem = String.Empty
+                    Bem.Id_dependencia = String.Empty
                         Bem.Observacao = SanitizeString(TxtObservacoes.Text)
                         inventarioDetalhesBLL.Atualizar(Bem)
                     Else
@@ -328,6 +365,7 @@ Public Class FormInventarioPendencias
         Dim numeroAleatorio As String = New Random().Next(0, Math.Pow(10, digitosRestantes) - 1).ToString("D" & digitosRestantes)
         Return $"{prefixo}{numeroAleatorio}"
     End Function
+
 
 
 

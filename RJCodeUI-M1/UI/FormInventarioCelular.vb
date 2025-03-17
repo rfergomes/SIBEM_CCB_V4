@@ -5,6 +5,7 @@ Imports FontAwesome.Sharp
 Imports Microsoft.Reporting.WinForms
 Imports Microsoft.Vbe.Interop
 Imports System.Runtime.InteropServices
+Imports DynamicData
 
 Public Class FormInventarioCelular
     Private ReadOnly igrejaBLL As IgrejasBLL
@@ -14,6 +15,7 @@ Public Class FormInventarioCelular
     Private ReadOnly banco As ConnectionFactory
     Private rowIndex As Integer = 0
     Private colIndex As Integer = 0
+    Private Processado As Boolean = False
 
     Public Sub New()
 
@@ -53,7 +55,7 @@ Public Class FormInventarioCelular
             If openFileDialog.ShowDialog() = DialogResult.OK Then
                 ' Exibe o caminho do arquivo selecionado no TextBox
                 TxtArquivo.Text = openFileDialog.FileName
-
+                Processado = False
                 Dim caminhoArquivo As String = openFileDialog.FileName
                 Dim delimitador As String = DetectarDelimitador(caminhoArquivo) ' Detecta o delimitador automaticamente
                 Dim tabela As DataTable = LerArquivoParaDataTable(caminhoArquivo, delimitador) ' Lê o arquivo e converte para DataTable
@@ -101,7 +103,7 @@ Public Class FormInventarioCelular
 
         Try
             Using leitor As New StreamReader(caminhoArquivo)
-                Dim cabecalho As String = leitor.ReadLine() ' Lê a primeira linha (cabeçalho)
+                Dim cabecalho As String = leitor.ReadLine().Replace("""", "") ' Lê a primeira linha (cabeçalho)
                 If String.IsNullOrEmpty(cabecalho) Then Return Nothing
 
                 ' Cria as colunas do DataTable com base no cabeçalho
@@ -112,7 +114,7 @@ Public Class FormInventarioCelular
 
                 ' Lê as linhas subsequentes e adiciona ao DataTable
                 While Not leitor.EndOfStream
-                    Dim linha As String = leitor.ReadLine()
+                    Dim linha As String = leitor.ReadLine().Replace("""", "")
                     If Not String.IsNullOrEmpty(linha) Then
                         Dim valores As String() = linha.Split(delimitador)
                         tabela.Rows.Add(valores)
@@ -229,7 +231,7 @@ Public Class FormInventarioCelular
                 End If
                 cont += 1
             Next
-
+            Processado = True
             ' Exibe os valores obtidos
             RJMessageBox.Show($"Processo finalizado!", "Resultado", MessageBoxButtons.OK, MessageBoxIcon.Information)
         Else
@@ -266,15 +268,19 @@ Public Class FormInventarioCelular
         Else
             PicStatus.Image = My.Resources.incorreto
             BtnImportar.Visible = False
-            Card1.Visible = False
-            Card2.Visible = False
-            Card4.Visible = False
+            If Not Processado Then
+                Card1.Visible = False
+                Card2.Visible = False
+                Card4.Visible = False
+                Card3.Visible = False
+            End If
             RjProgressBar1.Visible = False
-        End If
+            End If
     End Sub
 
     Private Function ProcessarDados(CodigoBarras As String) As String
-        Dim Retorno As String = String.Empty
+        Dim Retorno As String
+
         Try
             'Buscando dados dos objetos
             Dim BemMovel As BensDTO = bensBLL.BuscarPorId(CodigoBarras)
@@ -299,16 +305,15 @@ Public Class FormInventarioCelular
                         End If
                         Retorno = If(InventarioDetalhes.Contagem > 1, "Repetido", "Localizado")
                     Else
-                        Dim InventarioDetalhe As New InventarioDetalhesDTO With {
-                            .Id_inventario = VarGlob.Id_Inventario_Ativo,
-                            .Id_Bem = CodigoBarras,
-                            .Estado = "PENDENTE",
-                            .Acao = "TRANSFERIR",
-                            .Observacao = $"TRANSFERIR DE: {Id_igreja}. BEM DE OUTRA IGREJA",
-                            .Contagem = 1
-                            }
+                        InventarioDetalhes.Id_inventario = VarGlob.Inventario.Id
+                        InventarioDetalhes.Bem = String.Empty
+                        InventarioDetalhes.Dependencia = String.Empty
+                        InventarioDetalhes.Estado = "PENDENTE"
+                        InventarioDetalhes.Acao = "TRANSFERIR"
+                        InventarioDetalhes.Observacao = $"TRANSFERIR DE: [{Id_igreja}]. BEM DE OUTRA IGREJA"
+                        InventarioDetalhes.Contagem = InventarioDetalhes.Contagem + 1
 
-                        inventarioDetalhesBLL.Inserir(InventarioDetalhe)
+                        inventarioDetalhesBLL.Atualizar(InventarioDetalhes)
                         Inventario.Bens_Inicial = CInt(Inventario.Bens_Inicial) + 1
                         inventarioBLL.Atualizar(Inventario)
                         Retorno = "De Outra Igreja"
@@ -321,6 +326,8 @@ Public Class FormInventarioCelular
                             .Id_Bem = CodigoBarras,
                             .Estado = "OK",
                             .Acao = "OK",
+                            .Bem = String.Empty,
+                            .Id_dependencia = String.Empty,
                             .Contagem = 1
                             }
 
@@ -336,6 +343,8 @@ Public Class FormInventarioCelular
                             .Id_Bem = CodigoBarras,
                             .Estado = "PENDENTE",
                             .Acao = "TRANSFERIR",
+                            .Bem = String.Empty,
+                            .Id_dependencia = String.Empty,
                             .Observacao = $"TRANSFERIR DE: {Id_igreja}. BEM DE OUTRA IGREJA",
                             .Contagem = 1
                             }

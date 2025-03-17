@@ -23,9 +23,9 @@ Partial Class FormInventarioPendencias
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.BtnLimparFiltros = New PROJETOBASE.RJButton()
         Me.TxtPesquisar = New PROJETOBASE.RJTextBox()
         Me.RjLabel21 = New PROJETOBASE.RJLabel()
@@ -47,6 +47,7 @@ Partial Class FormInventarioPendencias
         Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.RbtBipar = New PROJETOBASE.RJRadioButton()
         Me.BtnSalvar = New PROJETOBASE.RJButton()
         Me.ChkFixar = New PROJETOBASE.RJCheckBox()
         Me.RbtExcluir = New PROJETOBASE.RJRadioButton()
@@ -68,6 +69,7 @@ Partial Class FormInventarioPendencias
         Me.RjLabel10 = New PROJETOBASE.RJLabel()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.ChkResolvidas = New PROJETOBASE.RJCheckBox()
         Me._pnlClientArea.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         CType(Me.DgvBensPendentes, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -79,6 +81,7 @@ Partial Class FormInventarioPendencias
         '_pnlClientArea
         '
         Me._pnlClientArea.BackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(245, Byte), Integer), CType(CType(249, Byte), Integer))
+        Me._pnlClientArea.Controls.Add(Me.ChkResolvidas)
         Me._pnlClientArea.Controls.Add(Me.GroupBox1)
         Me._pnlClientArea.Controls.Add(Me.ChkTodasPendencias)
         Me._pnlClientArea.Controls.Add(Me.GroupBox3)
@@ -436,13 +439,13 @@ Partial Class FormInventarioPendencias
         Me.DgvBensPendentes.ColumnHeaderFont = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DgvBensPendentes.ColumnHeaderHeight = 40
         Me.DgvBensPendentes.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.WhiteSmoke
-        DataGridViewCellStyle1.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DgvBensPendentes.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.WhiteSmoke
+        DataGridViewCellStyle4.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgvBensPendentes.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
         Me.DgvBensPendentes.ColumnHeadersHeight = 40
         Me.DgvBensPendentes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.DgvBensPendentes.ColumnHeaderTextColor = System.Drawing.Color.WhiteSmoke
@@ -459,27 +462,27 @@ Partial Class FormInventarioPendencias
         Me.DgvBensPendentes.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.DgvBensPendentes.RowHeaderColor = System.Drawing.Color.WhiteSmoke
         Me.DgvBensPendentes.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.WhiteSmoke
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(73, Byte), Integer), CType(CType(101, Byte), Integer), CType(CType(108, Byte), Integer))
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DgvBensPendentes.RowHeadersDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.WhiteSmoke
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(73, Byte), Integer), CType(CType(101, Byte), Integer), CType(CType(108, Byte), Integer))
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DgvBensPendentes.RowHeadersDefaultCellStyle = DataGridViewCellStyle5
         Me.DgvBensPendentes.RowHeadersVisible = False
         Me.DgvBensPendentes.RowHeadersWidth = 25
         Me.DgvBensPendentes.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DgvBensPendentes.RowHeight = 25
         Me.DgvBensPendentes.RowsColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(252, Byte), Integer), CType(CType(253, Byte), Integer))
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(252, Byte), Integer), CType(CType(253, Byte), Integer))
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
-        DataGridViewCellStyle3.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(73, Byte), Integer), CType(CType(101, Byte), Integer), CType(CType(108, Byte), Integer))
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.WhiteSmoke
-        Me.DgvBensPendentes.RowsDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(252, Byte), Integer), CType(CType(253, Byte), Integer))
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
+        DataGridViewCellStyle6.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(73, Byte), Integer), CType(CType(101, Byte), Integer), CType(CType(108, Byte), Integer))
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.WhiteSmoke
+        Me.DgvBensPendentes.RowsDefaultCellStyle = DataGridViewCellStyle6
         Me.DgvBensPendentes.RowsTextColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
         Me.DgvBensPendentes.RowTemplate.Height = 25
         Me.DgvBensPendentes.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(73, Byte), Integer), CType(CType(101, Byte), Integer), CType(CType(108, Byte), Integer))
@@ -504,6 +507,7 @@ Partial Class FormInventarioPendencias
         '
         Me.GroupBox2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox2.Controls.Add(Me.RbtBipar)
         Me.GroupBox2.Controls.Add(Me.BtnSalvar)
         Me.GroupBox2.Controls.Add(Me.ChkFixar)
         Me.GroupBox2.Controls.Add(Me.RbtExcluir)
@@ -518,6 +522,25 @@ Partial Class FormInventarioPendencias
         Me.GroupBox2.TabIndex = 158
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Ações"
+        '
+        'RbtBipar
+        '
+        Me.RbtBipar.AutoSize = True
+        Me.RbtBipar.CheckedColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
+        Me.RbtBipar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.RbtBipar.Customizable = False
+        Me.RbtBipar.Font = New System.Drawing.Font("Verdana", 9.5!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RbtBipar.ForeColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
+        Me.RbtBipar.Location = New System.Drawing.Point(205, 23)
+        Me.RbtBipar.MinimumSize = New System.Drawing.Size(0, 21)
+        Me.RbtBipar.Name = "RbtBipar"
+        Me.RbtBipar.Padding = New System.Windows.Forms.Padding(10, 0, 0, 0)
+        Me.RbtBipar.Size = New System.Drawing.Size(118, 21)
+        Me.RbtBipar.TabIndex = 2
+        Me.RbtBipar.TabStop = True
+        Me.RbtBipar.Text = "Encontrado"
+        Me.RbtBipar.UnCheckedColor = System.Drawing.Color.FromArgb(CType(CType(165, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(165, Byte), Integer))
+        Me.RbtBipar.UseVisualStyleBackColor = True
         '
         'BtnSalvar
         '
@@ -543,7 +566,7 @@ Partial Class FormInventarioPendencias
         Me.BtnSalvar.Size = New System.Drawing.Size(98, 31)
         Me.BtnSalvar.SkinBorderColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
         Me.BtnSalvar.Style = PROJETOBASE.ControlStyle.Glass
-        Me.BtnSalvar.TabIndex = 131
+        Me.BtnSalvar.TabIndex = 7
         Me.BtnSalvar.Text = "SALVAR"
         Me.BtnSalvar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.BtnSalvar.UseVisualStyleBackColor = False
@@ -565,7 +588,7 @@ Partial Class FormInventarioPendencias
         Me.ChkFixar.Padding = New System.Windows.Forms.Padding(10, 0, 0, 0)
         Me.ChkFixar.Size = New System.Drawing.Size(67, 21)
         Me.ChkFixar.Style = PROJETOBASE.ControlStyle.Glass
-        Me.ChkFixar.TabIndex = 2
+        Me.ChkFixar.TabIndex = 6
         Me.ChkFixar.Text = "Fixar"
         Me.ChkFixar.UseVisualStyleBackColor = True
         '
@@ -577,12 +600,12 @@ Partial Class FormInventarioPendencias
         Me.RbtExcluir.Customizable = False
         Me.RbtExcluir.Font = New System.Drawing.Font("Verdana", 9.5!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RbtExcluir.ForeColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
-        Me.RbtExcluir.Location = New System.Drawing.Point(17, 54)
+        Me.RbtExcluir.Location = New System.Drawing.Point(205, 50)
         Me.RbtExcluir.MinimumSize = New System.Drawing.Size(0, 21)
         Me.RbtExcluir.Name = "RbtExcluir"
         Me.RbtExcluir.Padding = New System.Windows.Forms.Padding(10, 0, 0, 0)
         Me.RbtExcluir.Size = New System.Drawing.Size(84, 21)
-        Me.RbtExcluir.TabIndex = 1
+        Me.RbtExcluir.TabIndex = 5
         Me.RbtExcluir.TabStop = True
         Me.RbtExcluir.Text = "Excluir"
         Me.RbtExcluir.UnCheckedColor = System.Drawing.Color.FromArgb(CType(CType(165, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(165, Byte), Integer))
@@ -596,12 +619,12 @@ Partial Class FormInventarioPendencias
         Me.RbtAlterar.Customizable = False
         Me.RbtAlterar.Font = New System.Drawing.Font("Verdana", 9.5!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RbtAlterar.ForeColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
-        Me.RbtAlterar.Location = New System.Drawing.Point(223, 27)
+        Me.RbtAlterar.Location = New System.Drawing.Point(7, 50)
         Me.RbtAlterar.MinimumSize = New System.Drawing.Size(0, 21)
         Me.RbtAlterar.Name = "RbtAlterar"
         Me.RbtAlterar.Padding = New System.Windows.Forms.Padding(10, 0, 0, 0)
         Me.RbtAlterar.Size = New System.Drawing.Size(85, 21)
-        Me.RbtAlterar.TabIndex = 1
+        Me.RbtAlterar.TabIndex = 3
         Me.RbtAlterar.TabStop = True
         Me.RbtAlterar.Text = "Alterar"
         Me.RbtAlterar.UnCheckedColor = System.Drawing.Color.FromArgb(CType(CType(165, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(165, Byte), Integer))
@@ -615,12 +638,12 @@ Partial Class FormInventarioPendencias
         Me.RbtTransferir.Customizable = False
         Me.RbtTransferir.Font = New System.Drawing.Font("Verdana", 9.5!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RbtTransferir.ForeColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
-        Me.RbtTransferir.Location = New System.Drawing.Point(107, 54)
+        Me.RbtTransferir.Location = New System.Drawing.Point(93, 50)
         Me.RbtTransferir.MinimumSize = New System.Drawing.Size(0, 21)
         Me.RbtTransferir.Name = "RbtTransferir"
         Me.RbtTransferir.Padding = New System.Windows.Forms.Padding(10, 0, 0, 0)
         Me.RbtTransferir.Size = New System.Drawing.Size(105, 21)
-        Me.RbtTransferir.TabIndex = 0
+        Me.RbtTransferir.TabIndex = 4
         Me.RbtTransferir.TabStop = True
         Me.RbtTransferir.Text = "Transferir"
         Me.RbtTransferir.UnCheckedColor = System.Drawing.Color.FromArgb(CType(CType(165, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(165, Byte), Integer))
@@ -634,7 +657,7 @@ Partial Class FormInventarioPendencias
         Me.RbtNovo.Customizable = False
         Me.RbtNovo.Font = New System.Drawing.Font("Verdana", 9.5!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RbtNovo.ForeColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
-        Me.RbtNovo.Location = New System.Drawing.Point(17, 27)
+        Me.RbtNovo.Location = New System.Drawing.Point(7, 23)
         Me.RbtNovo.MinimumSize = New System.Drawing.Size(0, 21)
         Me.RbtNovo.Name = "RbtNovo"
         Me.RbtNovo.Padding = New System.Windows.Forms.Padding(10, 0, 0, 0)
@@ -653,12 +676,12 @@ Partial Class FormInventarioPendencias
         Me.RbtImprimir.Customizable = False
         Me.RbtImprimir.Font = New System.Drawing.Font("Verdana", 9.5!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RbtImprimir.ForeColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
-        Me.RbtImprimir.Location = New System.Drawing.Point(107, 27)
+        Me.RbtImprimir.Location = New System.Drawing.Point(93, 23)
         Me.RbtImprimir.MinimumSize = New System.Drawing.Size(0, 21)
         Me.RbtImprimir.Name = "RbtImprimir"
         Me.RbtImprimir.Padding = New System.Windows.Forms.Padding(10, 0, 0, 0)
         Me.RbtImprimir.Size = New System.Drawing.Size(98, 21)
-        Me.RbtImprimir.TabIndex = 0
+        Me.RbtImprimir.TabIndex = 1
         Me.RbtImprimir.TabStop = True
         Me.RbtImprimir.Text = "Imprimir"
         Me.RbtImprimir.UnCheckedColor = System.Drawing.Color.FromArgb(CType(CType(165, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(165, Byte), Integer))
@@ -690,7 +713,7 @@ Partial Class FormInventarioPendencias
         Me.ChkTodasPendencias.Font = New System.Drawing.Font("Verdana", 9.5!)
         Me.ChkTodasPendencias.ForeColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
         Me.ChkTodasPendencias.IconColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
-        Me.ChkTodasPendencias.Location = New System.Drawing.Point(408, 18)
+        Me.ChkTodasPendencias.Location = New System.Drawing.Point(401, 31)
         Me.ChkTodasPendencias.MinimumSize = New System.Drawing.Size(0, 21)
         Me.ChkTodasPendencias.Name = "ChkTodasPendencias"
         Me.ChkTodasPendencias.Padding = New System.Windows.Forms.Padding(10, 0, 0, 0)
@@ -883,6 +906,27 @@ Partial Class FormInventarioPendencias
         '
         Me.ErrorProvider1.ContainerControl = Me
         '
+        'ChkResolvidas
+        '
+        Me.ChkResolvidas.AutoSize = True
+        Me.ChkResolvidas.BorderColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
+        Me.ChkResolvidas.BorderSize = 1
+        Me.ChkResolvidas.Check = False
+        Me.ChkResolvidas.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.ChkResolvidas.Customizable = False
+        Me.ChkResolvidas.Font = New System.Drawing.Font("Verdana", 9.5!)
+        Me.ChkResolvidas.ForeColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
+        Me.ChkResolvidas.IconColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
+        Me.ChkResolvidas.Location = New System.Drawing.Point(401, 6)
+        Me.ChkResolvidas.MinimumSize = New System.Drawing.Size(0, 21)
+        Me.ChkResolvidas.Name = "ChkResolvidas"
+        Me.ChkResolvidas.Padding = New System.Windows.Forms.Padding(10, 0, 0, 0)
+        Me.ChkResolvidas.Size = New System.Drawing.Size(104, 21)
+        Me.ChkResolvidas.Style = PROJETOBASE.ControlStyle.Glass
+        Me.ChkResolvidas.TabIndex = 171
+        Me.ChkResolvidas.Text = "Resolvidos"
+        Me.ChkResolvidas.UseVisualStyleBackColor = True
+        '
         'FormInventarioPendencias
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -951,4 +995,6 @@ Partial Class FormInventarioPendencias
     Friend WithEvents TxtBemMovel As RJTextBox
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents ErrorProvider1 As ErrorProvider
+    Friend WithEvents RbtBipar As RJRadioButton
+    Friend WithEvents ChkResolvidas As RJCheckBox
 End Class

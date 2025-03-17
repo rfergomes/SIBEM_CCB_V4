@@ -115,19 +115,12 @@ Public Class InventarioDetalhesDAL
                 End If
             End If
 
-            'If ColumnExists(reader, "id_inventario") AndAlso Not reader.IsDBNull(reader.GetOrdinal("id_inventario")) Then
-            '    inventario_detalhes.Bem = reader.GetString(reader.GetOrdinal("id_inventario"))
-            'End If
-
             If ColumnExists(reader, "id_inventario") AndAlso Not reader.IsDBNull(reader.GetOrdinal("id_inventario")) Then
                 If reader.GetFieldType(reader.GetOrdinal("id_inventario")) = GetType(String) Then
                     inventario_detalhes.Id_inventario = reader.GetString(reader.GetOrdinal("id_inventario"))
                 End If
             End If
 
-            'If ColumnExists(reader, "id_bem") AndAlso Not reader.IsDBNull(reader.GetOrdinal("id_bem")) Then
-            '    inventario_detalhes.Id_Bem = reader.GetString(reader.GetOrdinal("id_bem"))
-            'End If
 
             If ColumnExists(reader, "id_bem") AndAlso Not reader.IsDBNull(reader.GetOrdinal("id_bem")) Then
                 If reader.GetFieldType(reader.GetOrdinal("id_bem")) = GetType(Int64) Then
@@ -138,10 +131,6 @@ Public Class InventarioDetalhesDAL
             If ColumnExists(reader, "bem") AndAlso Not reader.IsDBNull(reader.GetOrdinal("bem")) Then
                 inventario_detalhes.Bem = reader.GetString(reader.GetOrdinal("bem"))
             End If
-
-            'If ColumnExists(reader, "id_dependencia") AndAlso Not reader.IsDBNull(reader.GetOrdinal("id_dependencia")) Then
-            '    inventario_detalhes.Id_dependencia = reader.GetString(reader.GetOrdinal("id_dependencia"))
-            'End If
 
             If ColumnExists(reader, "id_dependencia") AndAlso Not reader.IsDBNull(reader.GetOrdinal("id_dependencia")) Then
                 If reader.GetFieldType(reader.GetOrdinal("id_dependencia")) = GetType(Int64) Then
