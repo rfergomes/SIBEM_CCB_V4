@@ -971,7 +971,7 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-    <None Include="Files\App.config" />
+    <None Include="App.config" />
     <None Include="packages.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
