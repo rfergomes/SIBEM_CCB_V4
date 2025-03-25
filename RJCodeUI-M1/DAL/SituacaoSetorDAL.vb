@@ -27,7 +27,7 @@ Public Class SituacaoSetorDAL
         Throw New NotImplementedException()
     End Function
 
-    Public Overrides Function GetByIdList(statusId As Integer) As List(Of SituacaoSetorDTO)
+    Public Overrides Function GetByIdList(statusId As String) As List(Of SituacaoSetorDTO)
         Throw New NotImplementedException()
     End Function
 
@@ -36,7 +36,7 @@ Public Class SituacaoSetorDAL
         Return BuscarLista(Tabela, columns, condicao)
     End Function
 
-    Public Overrides Function GetAllDt() As DataTable
+    Public Overrides Function GetAllDt(Optional condicao As String = "") As DataTable
         Throw New NotImplementedException()
     End Function
 

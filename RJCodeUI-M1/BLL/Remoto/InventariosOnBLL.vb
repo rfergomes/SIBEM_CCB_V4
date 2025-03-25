@@ -74,7 +74,7 @@ Public Class InventariosOnBLL
                 condicao.Append($" AND setor = '{Setor}'")
             End If
             If Not String.IsNullOrEmpty(Abertos) Then ' Verifica se o valor de Ativos é válido
-                condicao.Append($" AND situacao = '{Abertos}'")
+                condicao.Append($" AND situacao = '{Abertos}' OR situacao = 'Reaberto'")
             End If
             If Not String.IsNullOrEmpty(TextoPesquisa) Then
                 condicao.Append($" AND (id_inventario LIKE '%{TextoPesquisa}%' OR igreja LIKE '%{TextoPesquisa}%')")

@@ -39,7 +39,7 @@ Public Class SetoresDAL
         Return BuscarDataTable(TabelaViews, columns, $"AND cod_setor = {setoresId}  AND id_admlc={VarGlob.SistemaAtivo.Id_Admlc}")
     End Function
 
-    Public Overrides Function GetByIdList(setoresId As Integer) As List(Of SetoresDTO)
+    Public Overrides Function GetByIdList(setoresId As String) As List(Of SetoresDTO)
         Dim columns As New Dictionary(Of String, Object)()
         Return BuscarLista(TabelaViews, columns, $"AND cod_setor = {setoresId}  AND id_admlc='{VarGlob.SistemaAtivo.Id_Admlc}' ORDER BY cod_setor")
     End Function
@@ -49,9 +49,9 @@ Public Class SetoresDAL
         Return BuscarLista(TabelaViews, columns, $"{condicao} AND id_admlc = '{VarGlob.SistemaAtivo.Id_Admlc}' ORDER BY cod_setor")
     End Function
 
-    Public Overrides Function GetAllDt() As DataTable
+    Public Overrides Function GetAllDt(Optional condicao As String = "") As DataTable
         Dim columns As New Dictionary(Of String, Object)()
-        Return BuscarDataTable(TabelaViews, columns, $" AND id_admlc = {VarGlob.SistemaAtivo.Id_Admlc} ORDER BY cod_setor")
+        Return BuscarDataTable(TabelaViews, columns, $"{condicao} AND id_admlc={VarGlob.SistemaAtivo.Id_Admlc}")
     End Function
 
     Public Overrides Function GetById(idSetor As String) As SetoresDTO

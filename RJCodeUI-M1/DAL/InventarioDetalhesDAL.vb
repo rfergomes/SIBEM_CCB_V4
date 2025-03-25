@@ -60,7 +60,7 @@ Public Class InventarioDetalhesDAL
         Return BuscarDataTable(TabelaViews, columns, $"AND id_bem = {Id_Bem} AND id_inventario = '{VarGlob.Id_Inventario_Ativo}'")
     End Function
 
-    Public Overrides Function GetByIdList(Id_Bem As Integer) As List(Of InventarioDetalhesDTO)
+    Public Overrides Function GetByIdList(Id_Bem As String) As List(Of InventarioDetalhesDTO)
         Dim columns As New Dictionary(Of String, Object)()
         Return BuscarLista(TabelaViews, columns, $"AND id_bem = {Id_Bem} AND id_inventario = '{VarGlob.Id_Inventario_Ativo}'")
     End Function
@@ -75,7 +75,7 @@ Public Class InventarioDetalhesDAL
         Return BuscarLista(If(String.IsNullOrEmpty(Tabela), TabelaViews, Tabela), columns, $"{condicao} ")
     End Function
 
-    Public Overrides Function GetAllDt() As DataTable
+    Public Overrides Function GetAllDt(Optional condicao As String = "") As DataTable
         Dim columns As New Dictionary(Of String, Object)()
         Return BuscarDataTable(TabelaViews, columns, "")
     End Function
@@ -111,7 +111,7 @@ Public Class InventarioDetalhesDAL
             ' Verifica o campo "id_detalhe"
             If ColumnExists(reader, "id_detalhe") AndAlso Not reader.IsDBNull(reader.GetOrdinal("id_detalhe")) Then
                 If reader.GetFieldType(reader.GetOrdinal("id_detalhe")) = GetType(Int64) Then
-                    inventario_detalhes.Id = reader.GetInt64(reader.GetOrdinal("id_detalhe"))
+                    inventario_detalhes.Id = reader.GetInt32(reader.GetOrdinal("id_detalhe"))
                 End If
             End If
 
@@ -123,8 +123,8 @@ Public Class InventarioDetalhesDAL
 
 
             If ColumnExists(reader, "id_bem") AndAlso Not reader.IsDBNull(reader.GetOrdinal("id_bem")) Then
-                If reader.GetFieldType(reader.GetOrdinal("id_bem")) = GetType(Int64) Then
-                    inventario_detalhes.Id_Bem = reader.GetInt64(reader.GetOrdinal("id_bem"))
+                If reader.GetFieldType(reader.GetOrdinal("id_bem")) = GetType(String) Then
+                    inventario_detalhes.Id_Bem = reader.GetString(reader.GetOrdinal("id_bem"))
                 End If
             End If
 

@@ -3,13 +3,6 @@
   <Author>Rodrigo Fernando Gomes Lima</Author>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="ReportViewerInventario">
-      <ConnectionProperties>
-        <DataProvider>System.Data.DataSet</DataProvider>
-        <ConnectString>/* Local Connection */</ConnectString>
-      </ConnectionProperties>
-      <rd:DataSourceID>ad34e962-1b4e-11ee-be56-0242ac120002</rd:DataSourceID>
-    </DataSource>
     <DataSource Name="PROJETOBASE">
       <ConnectionProperties>
         <DataProvider>System.Data.DataSet</DataProvider>
@@ -49,8 +42,16 @@
           <DataField>Bens_Pendentes</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
+        <Field Name="Cod_Setor">
+          <DataField>Cod_Setor</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="Data">
           <DataField>Data</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Data_Alteracao">
+          <DataField>Data_Alteracao</DataField>
           <rd:TypeName>System.DateTime</rd:TypeName>
         </Field>
         <Field Name="Duracao">
@@ -59,14 +60,10 @@
         </Field>
         <Field Name="Id">
           <DataField>Id</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Id_Igreja">
           <DataField>Id_Igreja</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Id_Setor">
-          <DataField>Id_Setor</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Igreja">
@@ -105,7 +102,7 @@
       <rd:DataSetInfo>
         <rd:DataSetName>PROJETOBASE</rd:DataSetName>
         <rd:TableName>InventariosDTO</rd:TableName>
-        <rd:ObjectDataSourceType>PROJETOBASE.InventariosDTO, SIBEM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
+        <rd:ObjectDataSourceType>PROJETOBASE.InventariosDTO, SIBEM, Version=4.0.0.5, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
       </rd:DataSetInfo>
     </DataSet>
     <DataSet Name="InventarioDetalhes">
@@ -162,7 +159,80 @@
       <rd:DataSetInfo>
         <rd:DataSetName>PROJETOBASE</rd:DataSetName>
         <rd:TableName>InventarioDetalhesDTO</rd:TableName>
-        <rd:ObjectDataSourceType>PROJETOBASE.InventarioDetalhesDTO, SIBEM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
+        <rd:ObjectDataSourceType>PROJETOBASE.InventarioDetalhesDTO, SIBEM, Version=4.0.0.5, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
+      </rd:DataSetInfo>
+    </DataSet>
+    <DataSet Name="DtsSistema">
+      <Query>
+        <DataSourceName>PROJETOBASE</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="Adm_Local">
+          <DataField>Adm_Local</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Adm_Regional">
+          <DataField>Adm_Regional</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Ativo">
+          <DataField>Ativo</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Cidade">
+          <DataField>Cidade</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CNPJ">
+          <DataField>CNPJ</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Id">
+          <DataField>Id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Id_Admlc">
+          <DataField>Id_Admlc</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Id_Admrg">
+          <DataField>Id_Admrg</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Id_Status">
+          <DataField>Id_Status</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Razao_Social">
+          <DataField>Razao_Social</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Setor_Definido">
+          <DataField>Setor_Definido</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Status">
+          <DataField>Status</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Token">
+          <DataField>Token</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Token_Validado">
+          <DataField>Token_Validado</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="UF">
+          <DataField>UF</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>PROJETOBASE</rd:DataSetName>
+        <rd:TableName>SistemaDTO</rd:TableName>
+        <rd:ObjectDataSourceType>PROJETOBASE.SistemaDTO, SIBEM, Version=4.0.0.5, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>
@@ -903,7 +973,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>0.71038cm</Top>
+              <Top>0.42816cm</Top>
               <Left>5.61123cm</Left>
               <Height>0.65292cm</Height>
               <Width>14.39504cm</Width>
@@ -982,55 +1052,6 @@
                 </Border>
               </Style>
             </Image>
-            <Textbox Name="adm_regional">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value xml:space="preserve"> </Value>
-                      <Style>
-                        <FontFamily>Verdana</FontFamily>
-                        <FontSize>8pt</FontSize>
-                      </Style>
-                    </TextRun>
-                    <TextRun>
-                      <Value>=Parameters!administracao.Value</Value>
-                      <Style>
-                        <FontFamily>Verdana</FontFamily>
-                        <FontSize>8pt</FontSize>
-                      </Style>
-                    </TextRun>
-                    <TextRun>
-                      <Value xml:space="preserve"> </Value>
-                      <Style>
-                        <FontFamily>Verdana</FontFamily>
-                        <FontSize>8pt</FontSize>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Right</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>adm_regional</rd:DefaultName>
-              <Top>1.39857cm</Top>
-              <Left>5.61123cm</Left>
-              <Height>0.5cm</Height>
-              <Width>14.39504cm</Width>
-              <ZIndex>4</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
             <Textbox Name="depto">
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
@@ -1038,7 +1059,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>Patrimônio de Bens Móveis </Value>
+                      <Value>Patrimônio - Bens Móveis</Value>
                       <Style>
                         <FontFamily>Verdana</FontFamily>
                         <FontSize>8pt</FontSize>
@@ -1051,11 +1072,11 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>depto</rd:DefaultName>
-              <Top>2.39857cm</Top>
+              <Top>2.35651cm</Top>
               <Left>10.35806cm</Left>
-              <Height>0.5cm</Height>
+              <Height>0.46838cm</Height>
               <Width>9.64821cm</Width>
-              <ZIndex>5</ZIndex>
+              <ZIndex>4</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -1071,7 +1092,7 @@
               <Left>0.17965cm</Left>
               <Height>0cm</Height>
               <Width>19.85308cm</Width>
-              <ZIndex>6</ZIndex>
+              <ZIndex>5</ZIndex>
               <Style>
                 <Border>
                   <Color>DimGray</Color>
@@ -1103,7 +1124,7 @@
               <Left>0.24417cm</Left>
               <Height>0.6cm</Height>
               <Width>14.07934cm</Width>
-              <ZIndex>7</ZIndex>
+              <ZIndex>6</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -1140,7 +1161,7 @@
               <Left>4.70322cm</Left>
               <Height>0.6cm</Height>
               <Width>2.46697cm</Width>
-              <ZIndex>8</ZIndex>
+              <ZIndex>7</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -1175,7 +1196,7 @@
               <Left>7.4574cm</Left>
               <Height>0.6cm</Height>
               <Width>1.38121cm</Width>
-              <ZIndex>9</ZIndex>
+              <ZIndex>8</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -1208,7 +1229,7 @@
               <Left>0.20505cm</Left>
               <Height>0.6cm</Height>
               <Width>0.9387cm</Width>
-              <ZIndex>10</ZIndex>
+              <ZIndex>9</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -1243,7 +1264,7 @@
               <Left>3.25851cm</Left>
               <Height>0.6cm</Height>
               <Width>1.38121cm</Width>
-              <ZIndex>11</ZIndex>
+              <ZIndex>10</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -1280,7 +1301,7 @@
               <Left>8.91446cm</Left>
               <Height>0.6cm</Height>
               <Width>2.43449cm</Width>
-              <ZIndex>12</ZIndex>
+              <ZIndex>11</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -1315,7 +1336,7 @@
               <Left>11.51901cm</Left>
               <Height>0.6cm</Height>
               <Width>1.38121cm</Width>
-              <ZIndex>13</ZIndex>
+              <ZIndex>12</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -1352,7 +1373,7 @@
               <Left>12.99675cm</Left>
               <Height>0.6cm</Height>
               <Width>2.43449cm</Width>
-              <ZIndex>14</ZIndex>
+              <ZIndex>13</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -1371,7 +1392,7 @@
                   <TextRuns>
                     <TextRun>
                       <Label>Setor</Label>
-                      <Value>="Setor: " &amp; First(Fields!Id_Setor.Value, "DtsInventarios") &amp; " - " &amp;First(Fields!Setor.Value, "DtsInventarios")</Value>
+                      <Value>="Setor: " &amp; First(Fields!Cod_Setor.Value, "DtsInventarios") &amp; " - " &amp;First(Fields!Setor.Value, "DtsInventarios")</Value>
                       <Style>
                         <FontFamily>verdana</FontFamily>
                         <FontWeight>SemiBold</FontWeight>
@@ -1384,11 +1405,11 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Setor</rd:DefaultName>
-              <Top>3.97482cm</Top>
-              <Left>14.4999cm</Left>
+              <Top>4.00967cm</Top>
+              <Left>14.52636cm</Left>
               <Height>0.6cm</Height>
               <Width>5.50637cm</Width>
-              <ZIndex>15</ZIndex>
+              <ZIndex>14</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -1407,10 +1428,11 @@
                   <TextRuns>
                     <TextRun>
                       <Label>Resultado</Label>
-                      <Value>="Resultado: " &amp; Parameters!Resultado.Value</Value>
+                      <Value>=Sum(Fields!Bens_Lidos.Value, "DtsInventarios")/Sum(Fields!Bens_Final.Value, "DtsInventarios")</Value>
                       <Style>
                         <FontFamily>verdana</FontFamily>
                         <FontWeight>SemiBold</FontWeight>
+                        <Format>0.00%</Format>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -1424,7 +1446,7 @@
               <Left>15.71895cm</Left>
               <Height>0.6cm</Height>
               <Width>4.28732cm</Width>
-              <ZIndex>16</ZIndex>
+              <ZIndex>15</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -1435,21 +1457,16 @@
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
-            <Textbox Name="cnpj">
+            <Textbox Name="Adm_Regional">
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=Parameters!cnpj.Value</Value>
+                      <Value>=First(Fields!Adm_Regional.Value, "DtsSistema") &amp; " / " &amp; First(Fields!Adm_Local.Value, "DtsSistema")</Value>
                       <Style>
-                        <FontSize>8pt</FontSize>
-                      </Style>
-                    </TextRun>
-                    <TextRun>
-                      <Value xml:space="preserve"> </Value>
-                      <Style>
+                        <FontFamily>Verdana</FontFamily>
                         <FontSize>8pt</FontSize>
                       </Style>
                     </TextRun>
@@ -1459,10 +1476,45 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <rd:DefaultName>cnpj</rd:DefaultName>
-              <Top>1.89857cm</Top>
+              <rd:DefaultName>Adm_Regional</rd:DefaultName>
+              <Top>1.54702cm</Top>
               <Left>10.35806cm</Left>
-              <Height>0.5cm</Height>
+              <Height>0.46838cm</Height>
+              <Width>9.64821cm</Width>
+              <ZIndex>16</ZIndex>
+              <ToolTip>Administração</ToolTip>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="CNPJ">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>="CNPJ: " &amp; First(Fields!CNPJ.Value, "DtsSistema") &amp; " - IE.: ISENTO"</Value>
+                      <Style>
+                        <FontFamily>Verdana</FontFamily>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>1.94947cm</Top>
+              <Left>10.35806cm</Left>
+              <Height>0.46838cm</Height>
               <Width>9.64821cm</Width>
               <ZIndex>17</ZIndex>
               <Style>
@@ -1827,51 +1879,10 @@
       </Page>
     </ReportSection>
   </ReportSections>
-  <ReportParameters>
-    <ReportParameter Name="administracao">
-      <DataType>String</DataType>
-      <AllowBlank>true</AllowBlank>
-      <Prompt>ReportParameter1</Prompt>
-      <ValidValues>
-        <DataSetReference>
-          <DataSetName>DtsInventarios</DataSetName>
-          <ValueField>Id</ValueField>
-          <LabelField>Id</LabelField>
-        </DataSetReference>
-      </ValidValues>
-    </ReportParameter>
-    <ReportParameter Name="Resultado">
-      <DataType>String</DataType>
-      <AllowBlank>true</AllowBlank>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="cnpj">
-      <DataType>String</DataType>
-      <AllowBlank>true</AllowBlank>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
-  </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>4</NumberOfColumns>
       <NumberOfRows>3</NumberOfRows>
-      <CellDefinitions>
-        <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>0</RowIndex>
-          <ParameterName>administracao</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>2</RowIndex>
-          <ParameterName>Resultado</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>3</ColumnIndex>
-          <RowIndex>2</RowIndex>
-          <ParameterName>cnpj</ParameterName>
-        </CellDefinition>
-      </CellDefinitions>
     </GridLayoutDefinition>
   </ReportParametersLayout>
   <EmbeddedImages>

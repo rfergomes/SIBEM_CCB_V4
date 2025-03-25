@@ -37,7 +37,7 @@
         Return BuscarDataTable(TabelaViews, columns, $"ANDid_bem = {bensId}")
     End Function
 
-    Public Overrides Function GetByIdList(bensId As Integer) As List(Of BensDTO)
+    Public Overrides Function GetByIdList(bensId As String) As List(Of BensDTO)
         Dim columns As New Dictionary(Of String, Object)()
         Return BuscarLista(TabelaViews, columns, $"AND id_bem = {bensId}")
     End Function
@@ -47,7 +47,7 @@
         Return BuscarLista(TabelaViews, columns, condicao)
     End Function
 
-    Public Overrides Function GetAllDt() As DataTable
+    Public Overrides Function GetAllDt(Optional condicao As String = "") As DataTable
         Dim columns As New Dictionary(Of String, Object)()
         Return BuscarDataTable(TabelaViews, columns, "")
     End Function

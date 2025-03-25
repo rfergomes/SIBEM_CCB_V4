@@ -12,6 +12,7 @@ Public Class FormBensMoveis
     Private logger As New Logger()
     Private SQLite As New ConnectionFactory()
     Private MySQL As New ConnectionFactory(DatabaseType.MySQL)
+    Private Log As New Logger
 
     Public Sub New()
 
@@ -80,6 +81,7 @@ Public Class FormBensMoveis
 
         Catch ex As Exception
             RJMessageBox.Show($"Ocorreu um erro durante a importação: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Log.WriteLog($"Bens Móveis | Botão Importar | {ex.Message}")
         End Try
     End Sub
 
@@ -130,6 +132,7 @@ Public Class FormBensMoveis
             RJMessageBox.Show("Dados importados com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information)
         Catch ex As Exception
             RJMessageBox.Show($"Erro ao ler CSV: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Log.WriteLog($"Bens Móveis | LerCSV | {ex.Message}")
         End Try
     End Sub
 
@@ -165,12 +168,14 @@ Public Class FormBensMoveis
                     .Range("A1:AZ1").SpecialCells(4).EntireColumn.Delete()
                     .Range("C1;E1:F1;H1:K1").EntireColumn.Delete()
                     BarraProgresso.Value = CInt((40 / 100) * 100)
+                    Application.DoEvents()
                     xlPasta.Save()
                 ElseIf .Range("A1").Text = "Código" And .Range("B1").Text = "" And .Range("C1").Text = "" And .Range("D1").Text = "Nome" Then
                     .Range("A1:A1000").SpecialCells(4).EntireRow.Delete()
                     .Range("A1:AZ1").SpecialCells(4).EntireColumn.Delete()
                     .Range("C1;E1:F1;H1:K1").EntireColumn.Delete()
                     BarraProgresso.Value = CInt((40 / 100) * 100)
+                    Application.DoEvents()
                     xlPasta.Save()
                 End If
                 .Cells.EntireColumn.AutoFit()
@@ -252,6 +257,7 @@ Public Class FormBensMoveis
         Catch ex As Exception
             BarraProgresso.Visible = False
             RJMessageBox.Show($"Erro ao ler Excel: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Log.WriteLog($"Bens Móveis | LerExcelr | {ex.Message}")
         Finally
             If xlPlanilha1 IsNot Nothing Then Marshal.ReleaseComObject(xlPlanilha1)
             If xlPasta IsNot Nothing Then

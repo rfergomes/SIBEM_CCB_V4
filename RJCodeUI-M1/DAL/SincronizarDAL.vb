@@ -44,7 +44,7 @@
         Return BuscarDataTable(Tabela, columns, $"AND id_sincronizar = {sincronizarId}")
     End Function
 
-    Public Overrides Function GetByIdList(sincronizarId As Integer) As List(Of SincronizarDTO)
+    Public Overrides Function GetByIdList(sincronizarId As String) As List(Of SincronizarDTO)
         Dim columns As New Dictionary(Of String, Object)()
         Return BuscarLista(Tabela, columns, $"AND id_sincronizar = {sincronizarId}")
     End Function
@@ -54,7 +54,7 @@
         Return BuscarLista(Tabela, columns, condicao)
     End Function
 
-    Public Overrides Function GetAllDt() As DataTable
+    Public Overrides Function GetAllDt(Optional condicao As String = "") As DataTable
         Dim columns As New Dictionary(Of String, Object)()
         Return BuscarDataTable(Tabela, columns, "")
     End Function

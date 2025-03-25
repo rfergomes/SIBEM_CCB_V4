@@ -196,4 +196,29 @@ Friend Module FuncoesGerais
         Return $"{primeiroNome} {inicialSegundoNome}"
     End Function
 
+    Public Function ConvertToDataTable(Of T)(ByVal data As List(Of T)) As DataTable
+        Dim dt As New DataTable()
+
+        ' Se a lista estiver vazia, retorna um DataTable vazio
+        If data Is Nothing OrElse data.Count = 0 Then Return dt
+
+        ' Criar colunas baseado nas propriedades do objeto
+        Dim props = GetType(T).GetProperties()
+        For Each prop In props
+            dt.Columns.Add(prop.Name, If(Nullable.GetUnderlyingType(prop.PropertyType), prop.PropertyType))
+        Next
+
+        ' Preencher as linhas com os valores dos objetos
+        For Each item In data
+            Dim row = dt.NewRow()
+            For Each prop In props
+                row(prop.Name) = If(prop.GetValue(item, Nothing), DBNull.Value)
+            Next
+            dt.Rows.Add(row)
+        Next
+
+        Return dt
+    End Function
+
+
 End Module

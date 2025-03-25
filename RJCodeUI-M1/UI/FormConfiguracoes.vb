@@ -12,6 +12,7 @@ Public Class FormConfiguracoes
     Private MySQL_SYS As New ConnectionFactory(DatabaseType.MySQL_SYS)
     Private rowIndex As Integer = 0
     Private Id_Solicitacao As String
+    Private Log As New Logger
 
     Sub New()
 
@@ -116,6 +117,7 @@ Public Class FormConfiguracoes
             LimparCampos()
         Catch ex As Exception
             RJMessageBox.Show($"Falha ao salvar dados de credencial{vbNewLine}{ex.Message}", "Falha", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Log.WriteLog($"CONFIGURAÇÕES | Botão Salvar | {ex.Message}")
         End Try
     End Sub
 

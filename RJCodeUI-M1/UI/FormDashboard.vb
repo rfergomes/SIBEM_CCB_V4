@@ -155,24 +155,29 @@ Public Class FormDashboard
             .Columns("bens_importado").Visible = False
             .Columns("inventario_teste").Visible = False
             .Columns("cod_setor").Visible = False
+            .Columns("id_admlc").Visible = False
+            .Columns("data_alteracao").Visible = False
 
             ' Definir os cabeçalhos das colunas visíveis
             .Columns("id").HeaderText = "Inventário"
             .Columns("data").HeaderText = "Data"
             .Columns("igreja").HeaderText = "Igreja"
             .Columns("setor").HeaderText = "Setor"
+            .Columns("siga_ok").HeaderText = "Siga Pendente"
 
             ' Definindo a largura das colunas
             .Columns("id").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
             .Columns("data").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
             .Columns("igreja").AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
             .Columns("setor").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+            .Columns("siga_ok").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
 
             ' Ordenação das colunas
             .Columns("id").DisplayIndex = 0    ' Inventário na primeira posição
             .Columns("data").DisplayIndex = 1 ' Data na segunda posição
             .Columns("igreja").DisplayIndex = 2 ' Igreja na terceira posição
             .Columns("setor").DisplayIndex = 3 ' Setor na quarta posição
+            .Columns("siga_ok").DisplayIndex = 4 ' Siga Ok na quinta posição
 
             ' Permitir ordenação de colunas pelo usuário
             .AllowUserToOrderColumns = True

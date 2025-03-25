@@ -29,7 +29,7 @@ Public Class DashboardDAL
         Throw New NotImplementedException()
     End Function
 
-    Public Overrides Function GetByIdList(statusId As Integer) As List(Of DashboardDTO)
+    Public Overrides Function GetByIdList(statusId As String) As List(Of DashboardDTO)
         Throw New NotImplementedException()
     End Function
 
@@ -37,7 +37,7 @@ Public Class DashboardDAL
         Throw New NotImplementedException()
     End Function
 
-    Public Overrides Function GetAllDt() As DataTable
+    Public Overrides Function GetAllDt(Optional condicao As String = "") As DataTable
         Throw New NotImplementedException()
     End Function
 

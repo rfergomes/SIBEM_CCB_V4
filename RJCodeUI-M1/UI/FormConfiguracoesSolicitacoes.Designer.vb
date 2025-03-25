@@ -22,9 +22,9 @@ Partial Class FormConfiguracoesSolicitacoes
     'Não o modifique usando o editor de códigos.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.RjLabel1 = New PROJETOBASE.RJLabel()
         Me.TxtNome = New PROJETOBASE.RJTextBox()
         Me.RjLabel4 = New PROJETOBASE.RJLabel()
@@ -56,17 +56,23 @@ Partial Class FormConfiguracoesSolicitacoes
         Me.TxtToken = New PROJETOBASE.RJTextBox()
         Me.lblNumberItems = New PROJETOBASE.RJLabel()
         Me.BtnWhatsApp = New PROJETOBASE.RJButton()
+        Me.DgvTokens = New System.Windows.Forms.DataGridView()
+        Me.Token = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Administracao = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Status = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me._pnlClientArea.SuspendLayout()
         Me.RjPanel1.SuspendLayout()
         CType(Me.DgvAdmlc, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RjPanel2.SuspendLayout()
         Me.RjPanel3.SuspendLayout()
+        CType(Me.DgvTokens, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         '_pnlClientArea
         '
         Me._pnlClientArea.BackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(245, Byte), Integer), CType(CType(249, Byte), Integer))
         Me._pnlClientArea.Controls.Add(Me.BtnWhatsApp)
+        Me._pnlClientArea.Controls.Add(Me.TxtToken)
         Me._pnlClientArea.Controls.Add(Me.lblNumberItems)
         Me._pnlClientArea.Controls.Add(Me.RjPanel3)
         Me._pnlClientArea.Controls.Add(Me.BtnBloquear)
@@ -480,13 +486,13 @@ Partial Class FormConfiguracoesSolicitacoes
         Me.DgvAdmlc.ColumnHeaderFont = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DgvAdmlc.ColumnHeaderHeight = 40
         Me.DgvAdmlc.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle13.BackColor = System.Drawing.Color.MediumPurple
-        DataGridViewCellStyle13.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle13.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle13.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
-        DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DgvAdmlc.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.MediumPurple
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle4.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgvAdmlc.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
         Me.DgvAdmlc.ColumnHeadersHeight = 40
         Me.DgvAdmlc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.DgvAdmlc.ColumnHeaderTextColor = System.Drawing.Color.White
@@ -501,27 +507,27 @@ Partial Class FormConfiguracoesSolicitacoes
         Me.DgvAdmlc.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.DgvAdmlc.RowHeaderColor = System.Drawing.Color.WhiteSmoke
         Me.DgvAdmlc.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle14.BackColor = System.Drawing.Color.WhiteSmoke
-        DataGridViewCellStyle14.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle14.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(213, Byte), Integer), CType(CType(199, Byte), Integer), CType(CType(241, Byte), Integer))
-        DataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DgvAdmlc.RowHeadersDefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.WhiteSmoke
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(213, Byte), Integer), CType(CType(199, Byte), Integer), CType(CType(241, Byte), Integer))
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DgvAdmlc.RowHeadersDefaultCellStyle = DataGridViewCellStyle5
         Me.DgvAdmlc.RowHeadersVisible = False
         Me.DgvAdmlc.RowHeadersWidth = 25
         Me.DgvAdmlc.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DgvAdmlc.RowHeight = 26
         Me.DgvAdmlc.RowsColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(252, Byte), Integer), CType(CType(253, Byte), Integer))
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(252, Byte), Integer), CType(CType(253, Byte), Integer))
-        DataGridViewCellStyle15.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle15.ForeColor = System.Drawing.Color.Gray
-        DataGridViewCellStyle15.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
-        DataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(213, Byte), Integer), CType(CType(199, Byte), Integer), CType(CType(241, Byte), Integer))
-        DataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.Gray
-        Me.DgvAdmlc.RowsDefaultCellStyle = DataGridViewCellStyle15
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(252, Byte), Integer), CType(CType(253, Byte), Integer))
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Gray
+        DataGridViewCellStyle6.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(213, Byte), Integer), CType(CType(199, Byte), Integer), CType(CType(241, Byte), Integer))
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Gray
+        Me.DgvAdmlc.RowsDefaultCellStyle = DataGridViewCellStyle6
         Me.DgvAdmlc.RowsTextColor = System.Drawing.Color.Gray
         Me.DgvAdmlc.RowTemplate.Height = 26
         Me.DgvAdmlc.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(213, Byte), Integer), CType(CType(199, Byte), Integer), CType(CType(241, Byte), Integer))
@@ -630,7 +636,7 @@ Partial Class FormConfiguracoesSolicitacoes
         Me.BtnLiberar.IconColor = System.Drawing.Color.FromArgb(CType(CType(137, Byte), Integer), CType(CType(184, Byte), Integer), CType(CType(129, Byte), Integer))
         Me.BtnLiberar.IconFont = FontAwesome.Sharp.IconFont.[Auto]
         Me.BtnLiberar.IconSize = 24
-        Me.BtnLiberar.Location = New System.Drawing.Point(7, 404)
+        Me.BtnLiberar.Location = New System.Drawing.Point(568, 420)
         Me.BtnLiberar.Name = "BtnLiberar"
         Me.BtnLiberar.Size = New System.Drawing.Size(132, 30)
         Me.BtnLiberar.SkinBorderColor = System.Drawing.Color.FromArgb(CType(CType(137, Byte), Integer), CType(CType(184, Byte), Integer), CType(CType(129, Byte), Integer))
@@ -659,7 +665,7 @@ Partial Class FormConfiguracoesSolicitacoes
         Me.BtnBloquear.IconColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.BtnBloquear.IconFont = FontAwesome.Sharp.IconFont.[Auto]
         Me.BtnBloquear.IconSize = 24
-        Me.BtnBloquear.Location = New System.Drawing.Point(145, 404)
+        Me.BtnBloquear.Location = New System.Drawing.Point(706, 420)
         Me.BtnBloquear.Name = "BtnBloquear"
         Me.BtnBloquear.Size = New System.Drawing.Size(145, 30)
         Me.BtnBloquear.SkinBorderColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(0, Byte), Integer))
@@ -674,11 +680,11 @@ Partial Class FormConfiguracoesSolicitacoes
         '
         Me.RjPanel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(205, Byte), Integer), CType(CType(212, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.RjPanel3.BorderRadius = 0
-        Me.RjPanel3.Controls.Add(Me.TxtToken)
+        Me.RjPanel3.Controls.Add(Me.DgvTokens)
         Me.RjPanel3.Customizable = False
         Me.RjPanel3.Location = New System.Drawing.Point(7, 311)
         Me.RjPanel3.Name = "RjPanel3"
-        Me.RjPanel3.Size = New System.Drawing.Size(526, 67)
+        Me.RjPanel3.Size = New System.Drawing.Size(526, 127)
         Me.RjPanel3.TabIndex = 34
         '
         'TxtToken
@@ -691,7 +697,7 @@ Partial Class FormConfiguracoesSolicitacoes
         Me.TxtToken.BorderSize = 0
         Me.TxtToken.Font = New System.Drawing.Font("Verdana", 14.0!)
         Me.TxtToken.ForeColor = System.Drawing.Color.Green
-        Me.TxtToken.Location = New System.Drawing.Point(3, 11)
+        Me.TxtToken.Location = New System.Drawing.Point(539, 378)
         Me.TxtToken.MultiLine = True
         Me.TxtToken.Name = "TxtToken"
         Me.TxtToken.Padding = New System.Windows.Forms.Padding(10, 7, 10, 7)
@@ -699,7 +705,7 @@ Partial Class FormConfiguracoesSolicitacoes
         Me.TxtToken.PlaceHolderColor = System.Drawing.Color.DarkGray
         Me.TxtToken.PlaceHolderText = "Gerar Token"
         Me.TxtToken.ScrollBars = System.Windows.Forms.ScrollBars.None
-        Me.TxtToken.Size = New System.Drawing.Size(520, 38)
+        Me.TxtToken.Size = New System.Drawing.Size(388, 36)
         Me.TxtToken.Style = PROJETOBASE.TextBoxStyle.MatteBorder
         Me.TxtToken.TabIndex = 0
         '
@@ -736,7 +742,7 @@ Partial Class FormConfiguracoesSolicitacoes
         Me.BtnWhatsApp.IconColor = System.Drawing.Color.FromArgb(CType(CType(93, Byte), Integer), CType(CType(177, Byte), Integer), CType(CType(150, Byte), Integer))
         Me.BtnWhatsApp.IconFont = FontAwesome.Sharp.IconFont.[Auto]
         Me.BtnWhatsApp.IconSize = 32
-        Me.BtnWhatsApp.Location = New System.Drawing.Point(296, 404)
+        Me.BtnWhatsApp.Location = New System.Drawing.Point(857, 420)
         Me.BtnWhatsApp.Name = "BtnWhatsApp"
         Me.BtnWhatsApp.Size = New System.Drawing.Size(37, 30)
         Me.BtnWhatsApp.SkinBorderColor = System.Drawing.Color.FromArgb(CType(CType(93, Byte), Integer), CType(CType(177, Byte), Integer), CType(CType(150, Byte), Integer))
@@ -746,6 +752,44 @@ Partial Class FormConfiguracoesSolicitacoes
         Me.BtnWhatsApp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.BtnWhatsApp.UseVisualStyleBackColor = False
         Me.BtnWhatsApp.Visible = False
+        '
+        'DgvTokens
+        '
+        Me.DgvTokens.AllowUserToDeleteRows = False
+        Me.DgvTokens.AllowUserToOrderColumns = True
+        Me.DgvTokens.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
+        Me.DgvTokens.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DgvTokens.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Token, Me.Administracao, Me.Status})
+        Me.DgvTokens.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DgvTokens.Location = New System.Drawing.Point(0, 0)
+        Me.DgvTokens.MultiSelect = False
+        Me.DgvTokens.Name = "DgvTokens"
+        Me.DgvTokens.ReadOnly = True
+        Me.DgvTokens.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DgvTokens.Size = New System.Drawing.Size(526, 127)
+        Me.DgvTokens.TabIndex = 1
+        '
+        'Token
+        '
+        Me.Token.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Token.HeaderText = "Token"
+        Me.Token.Name = "Token"
+        Me.Token.ReadOnly = True
+        '
+        'Administracao
+        '
+        Me.Administracao.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Administracao.HeaderText = "Administração"
+        Me.Administracao.Name = "Administracao"
+        Me.Administracao.ReadOnly = True
+        '
+        'Status
+        '
+        Me.Status.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.Status.HeaderText = "Status"
+        Me.Status.Name = "Status"
+        Me.Status.ReadOnly = True
+        Me.Status.Width = 50
         '
         'FormConfiguracoesSolicitacoes
         '
@@ -766,6 +810,7 @@ Partial Class FormConfiguracoesSolicitacoes
         CType(Me.DgvAdmlc, System.ComponentModel.ISupportInitialize).EndInit()
         Me.RjPanel2.ResumeLayout(False)
         Me.RjPanel3.ResumeLayout(False)
+        CType(Me.DgvTokens, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -801,4 +846,8 @@ Partial Class FormConfiguracoesSolicitacoes
     Friend WithEvents lblNumberItems As RJLabel
     Friend WithEvents TxtToken As RJTextBox
     Friend WithEvents BtnWhatsApp As RJButton
+    Friend WithEvents DgvTokens As DataGridView
+    Friend WithEvents Token As DataGridViewTextBoxColumn
+    Friend WithEvents Administracao As DataGridViewTextBoxColumn
+    Friend WithEvents Status As DataGridViewCheckBoxColumn
 End Class

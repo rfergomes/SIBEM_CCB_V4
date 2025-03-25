@@ -5,6 +5,7 @@
     Private ServidoresBLL As New ServidoresBLL
     Private SQLite As New ConnectionFactory()
     Private MySQL As New ConnectionFactory(DatabaseType.MySQL)
+    Private Log As New Logger
 
     Sub New()
 
@@ -51,6 +52,7 @@
             Environment.Exit(0)
         Catch ex As Exception
             RJMessageBox.Show($"Não foi possível trocar administração.{vbNewLine & ex.Message}", "Falha", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Log.WriteLog($"Inventário | Botão Salvar | {ex.Message}")
         End Try
     End Sub
 

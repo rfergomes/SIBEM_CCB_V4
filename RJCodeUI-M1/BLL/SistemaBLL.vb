@@ -57,6 +57,15 @@ Public Class SistemaBLL
         End Try
     End Function
 
+    Public Function BuscarListaPorId(sistemaId As String) As List(Of SistemaDTO)
+        Try
+            ' Validação do ID do inventarios (opcional)
+            Return sistemaDAL.GetByIdList(sistemaId)
+        Catch ex As Exception
+            Throw New Exception("Erro ao buscar Inventário." & vbNewLine & ex.Message, ex)
+        End Try
+    End Function
+
     Public Function BuscarTodos(Optional Filtro As String = "") As List(Of SistemaDTO)
         Try
             ' Verifica se foi fornecido algum filtro
@@ -82,5 +91,15 @@ Public Class SistemaBLL
         Return Nothing
     End Function
 
+    Public Function BuscarAtivo() As SistemaDTO
+        Try
+            Dim lista As List(Of SistemaDTO)
+            lista = sistemaDAL.GetAllList()
+            Return lista.FirstOrDefault(Function(t) t.Id_Status = 1)
+        Catch ex As Exception
+            MsgBox("Erro ao buscar dados do Sistema Ativo." & vbNewLine & ex.ToString() & vbNewLine & ex.Message, MsgBoxStyle.Critical, ex.TargetSite.ToString)
+        End Try
+        Return Nothing
+    End Function
 
 End Class

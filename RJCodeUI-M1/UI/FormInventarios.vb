@@ -114,6 +114,10 @@ Public Class FormInventarios
         LoadPageDatagridView()
     End Sub
 
+    Private Sub TggSiga_Ok_CheckedChanged(sender As Object, e As EventArgs) Handles TggSiga_Ok.CheckedChanged
+        LoadPageDatagridView()
+    End Sub
+
     Private Sub TxtPesquisar_OnTextChange(sender As Object, e As EventArgs) Handles TxtPesquisar.OnTextChange
         LoadPageDatagridView()
     End Sub
@@ -132,7 +136,7 @@ Public Class FormInventarios
         If LblInventario.Text <> String.Empty Then
             VarGlob.Id_Inventario_Ativo = LblInventario.Text
             Dim Inventario As InventariosDTO = inventariosBLL.BuscarPorId(VarGlob.Id_Inventario_Ativo)
-            Inventario.Situacao = "Aberto"
+            Inventario.Situacao = "Reaberto"
             inventariosBLL.Atualizar(Inventario)
             VarGlob.Inventario = Inventario
             TabControl1.SelectedTab = TabPage4_Inventario
@@ -156,6 +160,13 @@ Public Class FormInventarios
             RJMessageBox.Show("Por favor, selecione um inventário dinalizado da lista")
         End If
 
+    End Sub
+
+    Private Sub BtnSigaOk_Click(sender As Object, e As EventArgs) Handles BtnSigaOk.Click
+        Dim Inventario As InventariosDTO = inventariosBLL.BuscarPorId(LblInventario.Text)
+        Inventario.Siga_Ok = False
+        inventariosBLL.Atualizar(Inventario)
+        LoadPageDatagridView()
     End Sub
 
     Private Sub LoadComboSetor(Optional itemSelecionado As String = "")
@@ -225,6 +236,7 @@ Public Class FormInventarios
             Dim ano As String = If(CboAno IsNot Nothing, SanitizeString(CboAno.Text), String.Empty)
             Dim setor As String = If(CboSetor IsNot Nothing, SanitizeString(CboSetor.Text), String.Empty)
             Dim Abertos As String = If(TggAbertos.CheckState = CheckState.Checked, "Aberto", String.Empty)
+            Dim Siga_OK As Boolean = If(TggSiga_Ok.CheckState = CheckState.Checked, 1, 0)
             Dim pesquisar As String = SanitizeString(TxtPesquisar.Text)
 
 
@@ -238,7 +250,7 @@ Public Class FormInventarios
 
             ' Busca os dados de acordo com o filtro (se houver)
 
-            inventariosLista.AddRange(inventariosBLL.BuscarTodos(ano, setor, Abertos, pesquisar))
+            inventariosLista.AddRange(inventariosBLL.BuscarTodos(ano, setor, Abertos, Siga_OK, pesquisar))
 
             ' Define o DataSource apenas com as colunas que você quer exibir
             DgvInventarios.AutoGenerateColumns = False
@@ -269,6 +281,13 @@ Public Class FormInventarios
                 .Visible = False
             }
 
+            Dim colSiga_Ok As New DataGridViewTextBoxColumn With {
+                .DataPropertyName = "siga_ok",  ' Verifique se "Setor" é o nome correto da propriedade
+                .HeaderText = "Siga Pendente",
+                .Name = "siga_ok",
+                .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+            }
+
             Dim colStatus As New DataGridViewTextBoxColumn With {
                 .DataPropertyName = "situacao",  ' Verifique se "Setor" é o nome correto da propriedade
                 .HeaderText = "Status",
@@ -277,7 +296,7 @@ Public Class FormInventarios
             }
 
             ' Adiciona as colunas criadas ao DataGridView
-            DgvInventarios.Columns.AddRange(New DataGridViewColumn() {colId, colIgreja, colIdSetor, colStatus})
+            DgvInventarios.Columns.AddRange(New DataGridViewColumn() {colId, colIgreja, colIdSetor, colSiga_Ok, colStatus})
 
             ' Vincula a lista ao DataGridView
             DgvInventarios.DataSource = inventariosLista
@@ -289,13 +308,19 @@ Public Class FormInventarios
     End Sub
 
     Private Sub DgvInventarios_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles DgvInventarios.CellFormatting
-        If e.ColumnIndex = 2 AndAlso e.RowIndex >= 0 Then ' Verifica se é a coluna correta e a linha válida
-            Dim linha = CStr(e.Value) ' Converte o valor para string, pois pode ser null
-            If linha = "BONFIM" Then
-                DgvInventarios.Rows(e.RowIndex).DefaultCellStyle.ForeColor = Color.Red
+        If e.ColumnIndex = 3 AndAlso e.RowIndex >= 0 Then ' Verifica se é a coluna correta e a linha válida
+            Dim linha = e.Value ' Converte o valor para string, pois pode ser null
+            If linha = True Then
+                DgvInventarios.Rows(e.RowIndex).DefaultCellStyle.ForeColor = Color.FromArgb(210, 80, 60)
             Else
                 ' Limpa a cor de fundo se não for "4B"
-                DgvInventarios.Rows(e.RowIndex).DefaultCellStyle.ForeColor = Color.Empty
+                DgvInventarios.Rows(e.RowIndex).DefaultCellStyle.ForeColor = Color.FromArgb(3, 61, 96)
+            End If
+            ' Verifica se a célula pertence à coluna "Siga Pendente"
+            If e.Value IsNot Nothing Then
+                ' Converte True/False para "Sim"/"Não"
+                e.Value = If(CBool(e.Value), "Sim", "Não")
+                e.FormattingApplied = True
             End If
         End If
     End Sub
@@ -316,6 +341,7 @@ Public Class FormInventarios
 
                     ' Verifica se os dados do inventário não são nulos antes de continuar
                     If DadosInventario IsNot Nothing Then
+                        If DadosInventario.Siga_Ok = True Then BtnSigaOk.Enabled = True Else BtnSigaOk.Enabled = False
                         ' Popula os TextBoxs com os valores das células da linha selecionada
                         LblInventario.Text = DadosInventario.Id.ToString()
                         LblData.Text = DadosInventario.Data.ToString("dd/MM/yyyy")
@@ -403,6 +429,7 @@ Public Class FormInventarios
             CboSetor.Texts = String.Empty
             TxtPesquisar.Text = String.Empty
             TggAbertos.Activated = False
+            TggSiga_Ok.Activated = False
             DgvInventarios.ClearSelection()
         End If
         BtnNovo.Enabled = True
@@ -452,6 +479,7 @@ Public Class FormInventarios
                 Catch ex As Exception
                     ' Exibe erro caso a exclusão falhe
                     RJMessageBox.Show("Erro ao excluir registro: " & ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    logger.WriteLog($"Excluir Registro - {ex.Message}")
                 End Try
             End If
 
@@ -628,19 +656,21 @@ Public Class FormInventarios
         If Not ValidarControle(TxtInventariantes, ErrorProvider1) Then Return
 
         Id_igreja = DgvIgrejas.SelectedRows(0).Cells("Id").Value.ToString()
-        Dim Responsaveis As String = SanitizeString(TxtResponsaveis.Text)
-        Dim Inventariantes As String = SanitizeString(TxtInventariantes.Text)
+        Dim Responsaveis As String = TxtResponsaveis.Text
+        Dim Inventariantes As String = TxtInventariantes.Text
         Dim Teste As Boolean = ChkTeste.Checked
         Dim Inventario As New InventariosDTO With {
             .Id_Igreja = Id_igreja,
-            .Responsaveis = Responsaveis,
-            .Inventariantes = Inventariantes,
+            .Responsaveis = Responsaveis.ToUpper,
+            .Inventariantes = Inventariantes.ToUpper,
             .Situacao = "Aberto",
             .Bens_Importado = False,
             .Inventario_Teste = Teste,
             .Data = Now().ToString("yyyy-MM-dd HH:mm:ss"),
             .Inicio = Now().ToString("yyyy-MM-dd HH:mm:ss"),
-            .Termino = Now().ToString("yyyy-MM-dd HH:mm:ss")
+            .Termino = Now().ToString("yyyy-MM-dd HH:mm:ss"),
+            .Id_AdmLc = VarGlob.SistemaAtivo.Id_Admlc,
+            .Siga_Ok = 1
         }
 
         Try
@@ -658,6 +688,7 @@ Public Class FormInventarios
 
         Catch ex As Exception
             RJMessageBox.Show("Falha ao incluir Inventário" & vbNewLine & ex.Message)
+            logger.WriteLog($"Inventário | Botão Salvar | {ex.Message}")
         End Try
 
     End Sub
@@ -734,7 +765,7 @@ Public Class FormInventarios
 
         Try
             ' Inicializa a barra de progresso
-            With BarraProgresso
+            With Me.BarraProgresso
                 .Visible = True
                 .Minimum = 0
                 .Maximum = 100
@@ -743,6 +774,9 @@ Public Class FormInventarios
 
             ' Inicia o Excel e abre o arquivo
             xlApp = CreateObject("Excel.Application")
+            xlApp.DisplayAlerts = False ' Inibe mensagens de alerta
+            xlApp.ScreenUpdating = False ' Melhora o desempenho desativando a atualização da tela
+
             xlPasta = xlApp.Workbooks.Open(ArquivoOrigem)
             xlPlanilha1 = xlPasta.Worksheets(1)
 
@@ -756,17 +790,23 @@ Public Class FormInventarios
                 xlPlanilha1.Cells.WrapText = False
                 xlPlanilha1.Cells.MergeCells = False
                 xlPlanilha1.Range("A:A").SpecialCells(4).EntireRow.Delete() ' -4123 corresponde a xlCellTypeBlanks
-                xlPlanilha1.Range("A1:AZ1").SpecialCells(4).EntireColumn.Delete() ' -4123 corresponde a xlCellTypeBlanks
+                xlPlanilha1.Range("A1:AZ1").SpecialCells(4).EntireColumn.Delete()
                 xlPlanilha1.Range("C1;E1:F1;H1:K1").EntireColumn.Delete()
             ElseIf xlPlanilha1.Range("A1").Text = "Código" AndAlso xlPlanilha1.Range("D1").Text = "Nome" Then
                 ' Limpa e organiza a planilha para o segundo formato
-                xlPlanilha1.Range("A:A").SpecialCells(4).EntireRow.Delete() ' -4123 corresponde a xlCellTypeBlanks
+                xlPlanilha1.Range("A:A").SpecialCells(4).EntireRow.Delete()
                 xlPlanilha1.Range("A1:AZ1").SpecialCells(4).EntireColumn.Delete()
                 xlPlanilha1.Range("C1;E1:F1;H1:K1").EntireColumn.Delete()
             End If
-            xlPasta.Save()
+
             xlPlanilha1.Cells.EntireColumn.AutoFit()
             xlPlanilha1.Cells.EntireRow.AutoFit()
+            xlPasta.Save()
+
+            ' Restaura as configurações
+            xlApp.DisplayAlerts = True
+            xlApp.ScreenUpdating = True
+
 
             ' Configuração do DataGridView
             Dim listaBens As New List(Of BensDTO)
@@ -808,7 +848,7 @@ Public Class FormInventarios
 
                 Dim bem As New BensDTO With {
                 .Id = IdBem,
-.Descricao = Descricao,
+                .Descricao = Descricao,
                 .Id_igreja = Id_igreja,
                 .Id_Dependencia = If(Id_Dependencia IsNot Nothing, Id_Dependencia.Id, 0),
                 .Dependencia = If(Id_Dependencia IsNot Nothing, Id_Dependencia.Descricao, String.Empty),
@@ -841,6 +881,7 @@ Public Class FormInventarios
             TabControl1.SelectedIndex = 3
         Catch ex As Exception
             RJMessageBox.Show($"Erro ao ler Excel: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            logger.WriteLog($"Inventário | Importar Bens | {ex.Message}")
         Finally
             ' Liberação de recursos
             BarraProgresso.Visible = False
@@ -891,39 +932,39 @@ Public Class FormInventarios
 
 #Region "########## TAB INVENTÁRIO ##############"
 
-    Private Sub TxtInventarioPesquisar_OnTextChange(sender As Object, e As EventArgs)
+    Private Sub TxtInventarioPesquisar_OnTextChange(sender As Object, e As EventArgs) Handles TxtInventarioPesquisar.OnTextChange
         LoadPageDatagridViewInventarioBens(TxtInventarioPesquisar.Text, CboInventarioConsultas.Text)
     End Sub
 
-    Private Sub CboInventarioConsultas_OnSelectedIndexChanged(sender As Object, e As EventArgs)
+    Private Sub CboInventarioConsultas_OnSelectedIndexChanged(sender As Object, e As EventArgs) Handles CboInventarioConsultas.OnSelectedIndexChanged
         LoadPageDatagridViewInventarioBens(TxtInventarioPesquisar.Text, CboInventarioConsultas.Text)
     End Sub
 
-    Private Sub BtnInventarioLimpar_Click(sender As Object, e As EventArgs)
+    Private Sub BtnInventarioLimpar_Click(sender As Object, e As EventArgs) Handles BtnInventarioLimpar.Click
         TxtInventarioPesquisar.Clear()
         CboInventarioConsultas.Text = String.Empty
         LoadPageDatagridViewInventarioBens()
     End Sub
 
-    Private Sub BtnInventarioScanner_Click_1(sender As Object, e As EventArgs)
+    Private Sub BtnInventarioScanner_Click_1(sender As Object, e As EventArgs) Handles BtnInventarioScanner.Click
         Dim Form As Form = New FormInventarioLeitorScanner()
         Form.ShowDialog()
         AtualizaEstatisticas()
         LoadPageDatagridViewInventarioBens()
     End Sub
 
-    Private Sub BtnInventarioDadosCelular_Click(sender As Object, e As EventArgs)
+    Private Sub BtnInventarioDadosCelular_Click(sender As Object, e As EventArgs) Handles BtnInventarioDadosCelular.Click
         Dim Form As Form = New FormInventarioCelular()
         Form.ShowDialog()
         AtualizaEstatisticas()
-        LoadDataGridInventarioBens()
+        LoadPageDatagridViewInventarioBens()
     End Sub
 
-    Private Sub BtnInventarioPendencias_Click_1(sender As Object, e As EventArgs)
+    Private Sub BtnInventarioPendencias_Click_1(sender As Object, e As EventArgs) Handles BtnInventarioPendencias.Click
         Dim Form As Form = New FormInventarioPendencias()
         Form.ShowDialog()
         AtualizaEstatisticas()
-        LoadDataGridInventarioBens()
+        LoadPageDatagridViewInventarioBens()
     End Sub
 
     Private Sub BtnInventarioAtualizarDados_Click(sender As Object, e As EventArgs) Handles BtnInventarioAtualizarDados.Click
@@ -942,41 +983,17 @@ Public Class FormInventarios
     Private Sub BtnInventarioFinalizar_Click(sender As Object, e As EventArgs) Handles BtnInventarioFinalizar.Click
         Dim InventarioBLL As New InventariosBLL(SQLite)
         Dim Inventario As InventariosDTO = InventarioBLL.BuscarPorId(VarGlob.Id_Inventario_Ativo)
+        Dim Situacao As String = Inventario.Situacao
         If Inventario IsNot Nothing Then
             Inventario.Situacao = "Finalizado"
             If Inventario.Termino = Inventario.Inicio Then Inventario.Termino = Now.ToString("yyyy-MM-dd HH:mm:ss")
             InventarioBLL.Atualizar(Inventario)
-            If Inventario.Inventario_Teste = False Then ReplicarDados(SyncOrigem.Enviar, "inventarios", Inventario.Id, "Inserir")
             FormDashboard.AtualizarDashboard()
+            Dim Form As Form = New FormInventarioFinalizado(Inventario, Situacao)
+            Form.ShowDialog()
         End If
 
-        Dim Form As Form = New FormInventarioFinalizado
-        Form.ShowDialog()
-        'VarGlob.Id_Inventario_Ativo = 0
         TabControl1.SelectedIndex = 0
-    End Sub
-
-    Private Sub LoadDataGridInventarioBens(Optional TextoPesquisar As String = "", Optional Consulta As String = "")
-        Dim inventarioDetalhesBLL As New InventarioDetalhesBLL(SQLite)
-        Dim Dados As List(Of InventarioDetalhesDTO) = inventarioDetalhesBLL.BuscarTodos(SanitizeString(TextoPesquisar))
-        Dim DadosFiltrados As List(Of InventarioDetalhesDTO) = Nothing
-
-        Select Case (Consulta)
-            Case ""
-                DadosFiltrados = Dados.Where(Function(item) item.Acao = "PENDENTE").ToList()
-            Case ""
-
-            Case ""
-
-            Case ""
-
-            Case ""
-
-            Case Else
-
-        End Select
-
-
     End Sub
 
     Public Sub LoadPageDatagridViewInventarioBens(Optional TextoPesquisar As String = "", Optional Consulta As String = "")
@@ -1128,7 +1145,7 @@ Public Class FormInventarios
         LblDgvInventarioBensTotal.Text = detalhesLista.Count & " item(ns)"
     End Sub
 
-    Private Sub DgvInventarioBens_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs)
+    Private Sub DgvInventarioBens_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles DgvInventarioBens.CellFormatting
         'Console.WriteLine("Coluna: " & e.ColumnIndex.ToString)
 
         ' Verifica se é a coluna "PENDENTE" (coluna de índice 6) e uma linha válida
@@ -1158,7 +1175,7 @@ Public Class FormInventarios
         End If
     End Sub
 
-    Private Sub DgvInventarioBens_CellMouseUp(sender As Object, e As DataGridViewCellMouseEventArgs)
+    Private Sub DgvInventarioBens_CellMouseUp(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DgvInventarioBens.CellMouseUp
         If e.Button = MouseButtons.Right Then
             Try
                 ' Verifica se a linha e a célula são válidas antes de selecionar
@@ -1331,8 +1348,6 @@ Public Class FormInventarios
         End Try
     End Sub
 
-
-
     Private Sub ToolStripMenuExcel_Click(sender As Object, e As EventArgs) Handles ToolStripMenuExcel.Click
         ExportarParaExcel(DgvInventarioBens)
     End Sub
@@ -1395,6 +1410,34 @@ Public Class FormInventarios
 
 #End Region
 
+#Region "Esconder/Mostrar Menu Lateral"
+    Private Sub BtnMenuLateral_Click(sender As Object, e As EventArgs) Handles BtnMenuLateral.Click
+        If PnlInventarioEsquerdo.Width > 0 Then
+            Timer1.Enabled = True
+        Else
+            Timer2.Enabled = True
+        End If
+    End Sub
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        If PnlInventarioEsquerdo.Width > 0 Then
+            PnlInventarioEsquerdo.Width -= 40
+        Else
+            Timer1.Enabled = False
+        End If
+        Refresh()
+    End Sub
+
+    Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles Timer2.Tick
+        If PnlInventarioEsquerdo.Width < 225 Then
+            PnlInventarioEsquerdo.Width += 40
+        Else
+            Timer2.Enabled = False
+        End If
+        Refresh()
+    End Sub
+#End Region
+
 #Region "########## FUNCOES GERAIS ##############"
 
     ' Função auxiliar para obter e processar valores da célula
@@ -1410,6 +1453,11 @@ Public Class FormInventarios
         End If
         Return defaultValue
     End Function
+
+
+
+
+
 
 #End Region 'FUNCOES GERAIS
 

@@ -29,6 +29,8 @@ Public Class InventariosDAL
             {"situacao", inventarios.Situacao},
             {"bens_importado", inventarios.Bens_Importado},
             {"teste", inventarios.Inventario_Teste},
+            {"id_admlc", VarGlob.SistemaAtivo.Id_Admlc},
+            {"siga_ok", inventarios.Siga_Ok},
             {"data_alter", Now.ToString("yyyy-MM-dd HH:mm:ss")}
         }
         Return Inserir(Tabela, columns)
@@ -56,6 +58,8 @@ Public Class InventariosDAL
             {"situacao", inventarios.Situacao},
             {"bens_importado", inventarios.Bens_Importado},
             {"teste", inventarios.Inventario_Teste},
+            {"id_admlc", VarGlob.SistemaAtivo.Id_Admlc},
+            {"siga_ok", inventarios.Siga_Ok},
             {"data_alter", Now.ToString("yyyy-MM-dd HH:mm:ss")}
         }
         Atualizar(Tabela, columns, $"AND id_inventario = '{inventarios.Id}'")
@@ -72,19 +76,19 @@ Public Class InventariosDAL
         Return BuscarDataTable(TabelaViews, columns, $"AND id_inventario = {inventariosId}")
     End Function
 
-    Public Overrides Function GetByIdList(inventariosId As Integer) As List(Of InventariosDTO)
+    Public Overrides Function GetByIdList(inventariosId As String) As List(Of InventariosDTO)
         Dim columns As New Dictionary(Of String, Object)()
-        Return BuscarLista(TabelaViews, columns, $"AND id_inventario = {inventariosId}")
+        Return BuscarLista(TabelaViews, columns, $"AND id_inventario = '{inventariosId}'")
     End Function
 
     Public Overrides Function GetAllList(Optional condicao As String = "") As List(Of InventariosDTO)
         Dim columns As New Dictionary(Of String, Object)()
-        Return BuscarLista(TabelaViews, columns, $"{condicao}")
+        Return BuscarLista(TabelaViews, columns, $"{condicao} AND id_admlc = {VarGlob.SistemaAtivo.Id_Admlc}")
     End Function
 
-    Public Overrides Function GetAllDt() As DataTable
+    Public Overrides Function GetAllDt(Optional condicao As String = "") As DataTable
         Dim columns As New Dictionary(Of String, Object)()
-        Return BuscarDataTable(TabelaViews, columns, "")
+        Return BuscarDataTable(TabelaViews, columns, condicao)
     End Function
 
     Public Overrides Function GetByPart(part As String) As InventariosDTO
@@ -105,7 +109,7 @@ Public Class InventariosDAL
 
     Public Function GetYearList() As List(Of List(Of String))
         Dim columns As New Dictionary(Of String, Object)()
-        Return BuscarListaStrings("lista_anos", columns, "")
+        Return BuscarListaStrings("lista_anos", columns, $" id_admlc = {VarGlob.SistemaAtivo.Id_Admlc}")
     End Function
 
     Protected Overrides Function ConvertFromReader(reader As Common.DbDataReader) As InventariosDTO
@@ -205,6 +209,14 @@ Public Class InventariosDAL
 
             If ColumnExists(reader, "teste") AndAlso Not reader.IsDBNull(reader.GetOrdinal("teste")) Then
                 inventarios.Inventario_Teste = reader.GetBoolean(reader.GetOrdinal("teste"))
+            End If
+
+            If ColumnExists(reader, "id_admlc") AndAlso Not reader.IsDBNull(reader.GetOrdinal("id_admlc")) Then
+                inventarios.Id_AdmLc = reader.GetBoolean(reader.GetOrdinal("id_admlc"))
+            End If
+
+            If ColumnExists(reader, "siga_ok") AndAlso Not reader.IsDBNull(reader.GetOrdinal("siga_ok")) Then
+                inventarios.Siga_Ok = reader.GetInt64(reader.GetOrdinal("siga_ok"))
             End If
 
             If ColumnExists(reader, "data_alter") AndAlso Not reader.IsDBNull(reader.GetOrdinal("data_alter")) Then

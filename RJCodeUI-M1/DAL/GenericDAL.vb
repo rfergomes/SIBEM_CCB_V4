@@ -60,8 +60,10 @@ Public MustInherit Class GenericDAL(Of T As {Class, New})
         End Using
     End Sub
 
-    Protected Function BuscarDataTable(tableName As String, columns As Dictionary(Of String, Object), Optional condition As String = "1") As DataTable
-        SQL = $"SELECT {String.Join(", ", columns.Select(Function(col) $"{col.Key}"))} FROM {tableName} WHERE {condition} "
+    Protected Function BuscarDataTable(tableName As String, columns As Dictionary(Of String, Object), Optional condition As String = "") As DataTable
+        Dim Colunas As String = IIf(columns.Count > 0, String.Join(", ", columns.Select(Function(col) $"{col.Key}")), "*")
+        SQL = $"SELECT {Colunas} FROM {tableName} WHERE 1 {condition}"
+
         Dim dataTable As New DataTable()
 
         Using connection As IDbConnection = connectionFactory.GetConnection()
@@ -212,11 +214,11 @@ Public MustInherit Class GenericDAL(Of T As {Class, New})
     End Function
 
     Public MustOverride Function GetByPart(part As String) As T
-    Public MustOverride Function GetAllDt() As DataTable
+    Public MustOverride Function GetAllDt(Optional condicao As String = "") As DataTable
     Public MustOverride Function GetAllList(Optional condicao As String = "") As List(Of T)
     Public MustOverride Function GetById(id As String) As T
     Public MustOverride Function GetByIdDt(id As Integer) As DataTable
-    Public MustOverride Function GetByIdList(id As Integer) As List(Of T)
+    Public MustOverride Function GetByIdList(id As String) As List(Of T)
     Public MustOverride Function Insert(item As T) As Long
     Public MustOverride Sub Update(item As T)
     Public MustOverride Sub Delete(id As String)

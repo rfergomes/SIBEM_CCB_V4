@@ -16,7 +16,7 @@
     End Sub
 
     Private Sub getResponsaveis()
-        Dim Inventario As InventariosDTO = inventariosBLL.BuscarPorId(VarGlob.Inventario.Id)
+        Dim Inventario As InventariosDTO = inventariosBLL.BuscarPorId(VarGlob.Id_Inventario_Ativo)
 
         If Inventario IsNot Nothing Then
             TxtResponsaveis.Text = Inventario.Responsaveis
@@ -27,11 +27,11 @@
     End Sub
 
     Private Sub BtnSalvar_Click(sender As Object, e As EventArgs) Handles BtnSalvar.Click
-        Dim Inventario As InventariosDTO = inventariosBLL.BuscarPorId(VarGlob.Inventario.Id)
+        Dim Inventario As InventariosDTO = inventariosBLL.BuscarPorId(VarGlob.Id_Inventario_Ativo)
 
         If Inventario IsNot Nothing Then
-            Inventario.Responsaveis = SanitizeString(TxtResponsaveis.Text, True)
-            Inventario.Inventariantes = SanitizeString(TxtInventariantes.Text, True)
+            Inventario.Responsaveis = TxtResponsaveis.Text.ToUpper
+            Inventario.Inventariantes = TxtInventariantes.Text.ToUpper
             inventariosBLL.Atualizar(Inventario)
             RJMessageBox.Show("Dados atualizado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information)
             CloseWindow()

@@ -38,7 +38,7 @@
         Return BuscarDataTable(TabelaViews, columns, $"AND cod_setor = {setoresId} AND id_admlc={VarGlob.SistemaAtivo.Id_Admlc}")
     End Function
 
-    Public Overrides Function GetByIdList(setoresId As Integer) As List(Of SetoresOnDTO)
+    Public Overrides Function GetByIdList(setoresId As String) As List(Of SetoresOnDTO)
         Dim columns As New Dictionary(Of String, Object)()
         Return BuscarLista(TabelaViews, columns, $"AND cod_setor = {setoresId} AND id_admlc={VarGlob.SistemaAtivo.Id_Admlc}")
     End Function
@@ -48,7 +48,7 @@
         Return BuscarLista(TabelaViews, columns, $" AND id_admlc = {VarGlob.SistemaAtivo.Id_Admlc}")
     End Function
 
-    Public Overrides Function GetAllDt() As DataTable
+    Public Overrides Function GetAllDt(Optional condicao As String = "") As DataTable
         Dim columns As New Dictionary(Of String, Object)()
         Return BuscarDataTable(TabelaViews, columns, $" AND id_admlc = {VarGlob.SistemaAtivo.Id_Admlc}")
     End Function

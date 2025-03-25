@@ -36,12 +36,12 @@ Public Class BensOnDAL
 
     Public Overrides Function GetByIdDt(bensId As Integer) As DataTable
         Dim columns As New Dictionary(Of String, Object)()
-        Return BuscarDataTable(TabelaViews, columns, $"ANDid_bem = {bensId}")
+        Return BuscarDataTable(TabelaViews, columns, $" AND id_bem = {bensId}")
     End Function
 
-    Public Overrides Function GetByIdList(bensId As Integer) As List(Of BensOnDTO)
+    Public Overrides Function GetByIdList(bensId As String) As List(Of BensOnDTO)
         Dim columns As New Dictionary(Of String, Object)()
-        Return BuscarLista(TabelaViews, columns, $"AND id_bem = {bensId}")
+        Return BuscarLista(TabelaViews, columns, $" AND id_bem = {bensId}")
     End Function
 
     Public Overrides Function GetAllList(Optional condicao As String = "") As List(Of BensOnDTO)
@@ -49,14 +49,14 @@ Public Class BensOnDAL
         Return BuscarLista(TabelaViews, columns, condicao)
     End Function
 
-    Public Overrides Function GetAllDt() As DataTable
+    Public Overrides Function GetAllDt(Optional condicao As String = "") As DataTable
         Dim columns As New Dictionary(Of String, Object)()
         Return BuscarDataTable(TabelaViews, columns, "")
     End Function
 
     Public Overrides Function GetById(id As String) As BensOnDTO
         Dim columns As New Dictionary(Of String, Object)()
-        Dim lista As List(Of BensOnDTO) = BuscarLista(TabelaViews, columns, $"AND id_bem = '{id}' LIMIT 1")
+        Dim lista As List(Of BensOnDTO) = BuscarLista(TabelaViews, columns, $" AND id_bem = '{id}' LIMIT 1")
         Return lista.FirstOrDefault(Function(t) t.Id = id)
     End Function
 
@@ -84,12 +84,8 @@ Public Class BensOnDAL
         End If
 
         If Not reader.IsDBNull(reader.GetOrdinal("id_igreja")) Then
-            bens.Id_igreja = reader.GetInt32(reader.GetOrdinal("id_igreja"))
+            bens.Id_igreja = reader.GetString(reader.GetOrdinal("id_igreja"))
         End If
-
-        'If Not reader.IsDBNull(reader.GetOrdinal("igreja")) Then
-        '    bens.Igreja = reader.GetString(reader.GetOrdinal("igreja"))
-        'End If
 
         If ColumnExists(reader, "igreja") AndAlso Not reader.IsDBNull(reader.GetOrdinal("igreja")) Then
             If reader.GetFieldType(reader.GetOrdinal("igreja")) = GetType(String) Then

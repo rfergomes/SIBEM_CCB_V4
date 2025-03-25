@@ -22,7 +22,7 @@ Public Class InventariosDTO
     Public Property Situacao As String
     Public Property Bens_Importado As Boolean
     Public Property Inventario_Teste As Boolean
+    Public Property Id_AdmLc As Integer
+    Public Property Siga_Ok As Boolean
     Public Property Data_Alteracao As Date
-
-    ' Outros campos do usuário
 End Class

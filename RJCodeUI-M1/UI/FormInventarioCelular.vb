@@ -16,6 +16,7 @@ Public Class FormInventarioCelular
     Private rowIndex As Integer = 0
     Private colIndex As Integer = 0
     Private Processado As Boolean = False
+    Private Log As New Logger
 
     Public Sub New()
 
@@ -51,28 +52,34 @@ Public Class FormInventarioCelular
             openFileDialog.Filter = "Arquivos de Texto|*.txt;*.csv"
             openFileDialog.Title = "Selecione um arquivo de código de barras"
 
-            ' Exibe o diálogo
-            If openFileDialog.ShowDialog() = DialogResult.OK Then
-                ' Exibe o caminho do arquivo selecionado no TextBox
-                TxtArquivo.Text = openFileDialog.FileName
-                Processado = False
-                Dim caminhoArquivo As String = openFileDialog.FileName
-                Dim delimitador As String = DetectarDelimitador(caminhoArquivo) ' Detecta o delimitador automaticamente
-                Dim tabela As DataTable = LerArquivoParaDataTable(caminhoArquivo, delimitador) ' Lê o arquivo e converte para DataTable
+            Try
+                ' Exibe o diálogo
+                If openFileDialog.ShowDialog() = DialogResult.OK Then
+                    ' Exibe o caminho do arquivo selecionado no TextBox
+                    TxtArquivo.Text = openFileDialog.FileName
+                    Processado = False
+                    Dim caminhoArquivo As String = openFileDialog.FileName
+                    Dim delimitador As String = DetectarDelimitador(caminhoArquivo) ' Detecta o delimitador automaticamente
+                    Dim tabela As DataTable = LerArquivoParaDataTable(caminhoArquivo, delimitador) ' Lê o arquivo e converte para DataTable
 
-                If tabela IsNot Nothing Then
-                    ' Popula o DataGridView
-                    With DgvDados
-                        .DataSource = Nothing
-                        .DataSource = tabela
-                    End With
-                    LblTotalLista.Text = $"Total: {DgvDados.Rows.Count} registros"
-                    PopularComboBoxComColunas(DgvDados, CboColunas) ' Popula o ComboBox com as colunas do DataGridView
-                Else
-                    BtnLimpar_Click(sender, e)
-                    MessageBox.Show("Não foi possível importar os dados. Verifique o arquivo.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    If tabela IsNot Nothing Then
+                        ' Popula o DataGridView
+                        With DgvDados
+                            .DataSource = Nothing
+                            .DataSource = tabela
+                        End With
+                        LblTotalLista.Text = $"Total: {DgvDados.Rows.Count} registros"
+                        PopularComboBoxComColunas(DgvDados, CboColunas) ' Popula o ComboBox com as colunas do DataGridView
+                    Else
+                        BtnLimpar_Click(sender, e)
+                        MessageBox.Show("Não foi possível importar os dados. Verifique o arquivo.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End If
                 End If
-            End If
+            Catch ex As Exception
+                RJMessageBox.Show($"Falha ao importar dados: {ex.Message}", "Falha", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Log.WriteLog($"LEITOR CELULAR | Botão Localizar | {ex.Message}")
+            End Try
+
         End Using
     End Sub
 
@@ -122,7 +129,8 @@ Public Class FormInventarioCelular
                 End While
             End Using
         Catch ex As Exception
-            MessageBox.Show($"Erro ao importar arquivo: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Log.WriteLog($"LEITOR CELULAR | Ler Arquivo Texto | {ex.Message}")
+            Throw New Exception(ex.Message)
             Return Nothing
         End Try
 
@@ -200,40 +208,44 @@ Public Class FormInventarioCelular
                 DgvDados.Columns.Add("Resultado", "Resultado")
             End If
 
-            For Each row As DataGridViewRow In DgvDados.Rows
-                RjProgressBar1.Value = CInt((cont / DgvDados.Rows.Count) * 100)
-                Refresh()
-                ' Verifica se a linha não é uma linha nova
-                If Not row.IsNewRow Then
-                    Dim valor As Object = row.Cells(nomeColunaSelecionada).Value
-                    Dim Resultado = ProcessarDados(valor.ToString())
+            Try
+                For Each row As DataGridViewRow In DgvDados.Rows
+                    RjProgressBar1.Value = CInt((cont / DgvDados.Rows.Count) * 100)
+                    Refresh()
+                    ' Verifica se a linha não é uma linha nova
+                    If Not row.IsNewRow Then
+                        Dim valor As Object = row.Cells(nomeColunaSelecionada).Value
+                        Dim Resultado = ProcessarDados(valor.ToString())
 
-                    Select Case Resultado
-                        Case "OK", "Incluído", "Localizado", "Repetido"
-                            If Resultado = "Repetido" Then
-                                row.DefaultCellStyle.BackColor = Color.FromArgb(255, 192, 128)
-                                LblRepetidos.Text = CInt(LblRepetidos.Text) + 1
-                            Else
-                                row.DefaultCellStyle.BackColor = Color.FromArgb(192, 255, 192)
-                            End If
-                            LblOK.Text = CInt(LblOK.Text) + 1'192; 192; 255
-                        Case "De Outra Igreja"
-                            LblOutraCO.Text = CInt(LblOutraCO.Text) + 1
-                            row.DefaultCellStyle.BackColor = Color.FromArgb(192, 192, 255)
-                        Case valor Is Nothing
-                            LblErros.Text = CInt(LblErros.Text) + 1
-                            row.DefaultCellStyle.BackColor = Color.FromArgb(255, 192, 192)
-                        Case Else
-                            LblErros.Text = CInt(LblErros.Text) + 1
-                            row.DefaultCellStyle.BackColor = Color.FromArgb(255, 192, 192)
-                    End Select
-                    row.Cells("Resultado").Value = Resultado
-                End If
-                cont += 1
-            Next
-            Processado = True
-            ' Exibe os valores obtidos
-            RJMessageBox.Show($"Processo finalizado!", "Resultado", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        Select Case Resultado
+                            Case "OK", "Incluído", "Localizado", "Repetido"
+                                If Resultado = "Repetido" Then
+                                    row.DefaultCellStyle.BackColor = Color.FromArgb(255, 192, 128)
+                                    LblRepetidos.Text = CInt(LblRepetidos.Text) + 1
+                                Else
+                                    row.DefaultCellStyle.BackColor = Color.FromArgb(192, 255, 192)
+                                End If
+                                LblOK.Text = CInt(LblOK.Text) + 1'192; 192; 255
+                            Case "De Outra Igreja"
+                                LblOutraCO.Text = CInt(LblOutraCO.Text) + 1
+                                row.DefaultCellStyle.BackColor = Color.FromArgb(192, 192, 255)
+                            Case valor Is Nothing
+                                LblErros.Text = CInt(LblErros.Text) + 1
+                                row.DefaultCellStyle.BackColor = Color.FromArgb(255, 192, 192)
+                            Case Else
+                                LblErros.Text = CInt(LblErros.Text) + 1
+                                row.DefaultCellStyle.BackColor = Color.FromArgb(255, 192, 192)
+                        End Select
+                        row.Cells("Resultado").Value = Resultado
+                    End If
+                    cont += 1
+                Next
+                Processado = True
+                ' Exibe os valores obtidos
+                RJMessageBox.Show($"Processo finalizado!", "Resultado", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Catch ex As Exception
+                Throw New Exception(ex.Message)
+            End Try
         Else
             RJMessageBox.Show("Não há dados no DataGridView.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         End If

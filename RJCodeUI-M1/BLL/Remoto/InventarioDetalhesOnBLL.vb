@@ -109,7 +109,7 @@ Public Class InventarioDetalhesOnBLL
                     Tabela = "inventario_detalhes"
             End Select
 
-            condicao.Append($" AND id_inventario = {VarGlob.Id_Inventario_Ativo}")
+            condicao.Append($" AND id_inventario = '{VarGlob.Id_Inventario_Ativo}'")
             ' Faz a busca com a condição montada
             Return inventarioDetalhesOnDAL.GetAllListByTable(Tabela, condicao.ToString())
         Catch ex As Exception

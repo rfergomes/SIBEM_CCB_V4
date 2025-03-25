@@ -2,38 +2,34 @@
 'Data:                  28/10/2024
 'Autor:                 Rodrigo Fernando Gomes Lima
 
-Imports Mysqlx.XDevAPI.Relational
 
 Public Class FormInventarioPendencias
 
-    Private SQLite As New ConnectionFactory()
-    Private MySQL As New ConnectionFactory(DatabaseType.MySQL)
+    Private ReadOnly SQLite As New ConnectionFactory()
+    Private ReadOnly MySQL As New ConnectionFactory(DatabaseType.MySQL)
+    Private ReadOnly inventarioDetalhesBLL As New InventarioDetalhesBLL(SQLite)
+    Private ReadOnly dependenciasBLL As New DependenciasBLL(SQLite)
+
     Private Id_Inventario As String
     Private Acao As String = ""
-    Private Dependencia As String
+    'Private Dependencia As String
 
 #Region "Form Events"
     Private Sub FormInventarioPendencias_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Id_Inventario = VarGlob.Id_Inventario_Ativo
+        ComboDependencia()
     End Sub
 
     Private Sub FormInventarioPendencias_Activated(sender As Object, e As EventArgs) Handles Me.Activated
-        ComboDependencia()
         AtualizaDadosAcoes()
     End Sub
 #End Region
 
-#Region "Load e Configuração do DataGridView"
+#Region "Carregamento e Configuração do DataGridView"
     Private Sub LoadBensMoveis()
         Dim inventarioDetalhesBLL As New InventarioDetalhesBLL(SQLite)
-        Dim Consulta As String
-        If ChkTodasPendencias.Checked Then
-            Consulta = "LISTA PENDENTES TODOS"
-        ElseIf ChkResolvidas.Checked Then
-            Consulta = "LISTA RESOLVIDOS"
-        Else
-            Consulta = "LISTA PENDENTES"
-        End If
+        Dim consulta As String = If(ChkTodasPendencias.Checked, "LISTA PENDENTES TODOS",
+                                    If(ChkResolvidas.Checked, "LISTA RESOLVIDOS", "LISTA PENDENTES"))
         Dim Pendencias As List(Of InventarioDetalhesDTO) = inventarioDetalhesBLL.BuscarTodos(TxtPesquisar.Text, Consulta)
         ConfigurarDataGridView(Pendencias)
         LblTotalListado.Text = $"{Pendencias.Count} Bens Pendentes"
@@ -54,15 +50,10 @@ Public Class FormInventarioPendencias
     Private Sub ConfigurarColunasDataGridView()
         ' Configuração das colunas do DataGridView
         With DgvBensPendentes
-            .Columns("id").Visible = False
-            .Columns("id_inventario").Visible = False
-            .Columns("id_dependencia").Visible = False
-            .Columns("dependencia").Visible = False
-            .Columns("estado").Visible = False
-            .Columns("acao").Visible = False
-            .Columns("observacao").Visible = False
-            .Columns("contagem").Visible = False
-            .Columns("qtde").Visible = False
+            Dim colunasOcultas As String() = {"id", "id_inventario", "id_dependencia", "dependencia", "estado", "acao", "observacao", "contagem", "qtde"}
+            For Each coluna As String In colunasOcultas
+                If .Columns.Contains(coluna) Then .Columns(coluna).Visible = False
+            Next
             .Columns("Id_bem").HeaderText = "Etiqueta"
             .Columns("bem").HeaderText = "Bem Móvel"
             .Columns("bem").AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
@@ -86,22 +77,25 @@ Public Class FormInventarioPendencias
 
                 ' Verifica se os dados do inventário não são nulos antes de continuar
                 If Pendentes IsNot Nothing Then
+                    BtnSalvar.Enabled = True
+
                     If RbtNovo.Checked Then
-                        LimparCampos()
+
                         ' Popula os TextBoxs com os valores das células da linha selecionada
                         TxtBemMovel.Text = Pendentes.Bem
                         DgvBensPendentes.ClearSelection()
-                        Dependencia = String.Empty
-                        RbtNovo_Click(sender, e)
+                        'Dependencia = String.Empty
+
                     Else
+                        Dim dependencia As DependenciasDTO = dependenciasBLL.BuscarPorNome(Pendentes.Dependencia)
                         ' Popula os TextBoxs com os valores das células da linha selecionada
                         LblSituacao.Text = Pendentes.Acao
                         LblEtiqueta.Text = Pendentes.Id_Bem
                         TxtBemMovel.Text = Pendentes.Bem
                         LblLeituras.Text = Pendentes.Contagem
-                        TxtObservacoes.Text = Pendentes.Observacao
-                        CboDependencias.Text = Pendentes.Dependencia
-                        Dependencia = Pendentes.Dependencia
+                        TxtObservacoes.Text = If(Not String.IsNullOrEmpty(Pendentes.Observacao), Pendentes.Observacao, TxtObservacoes.Text)
+                        CboDependencias.SelectedValue = dependencia.Id
+                        CboDependencias.Text = dependencia.Descricao
                     End If
                 Else
                     MessageBox.Show("Dados do inventário não encontrados.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -129,35 +123,29 @@ Public Class FormInventarioPendencias
     End Sub
 
     Private Sub ChkResolvidas_CheckedChanged(sender As Object, e As EventArgs) Handles ChkResolvidas.CheckedChanged
-        If ChkResolvidas.Checked Then
-            ChkTodasPendencias.Checked = False
-            LoadBensMoveis()
-        End If
+        If ChkResolvidas.Checked Then ChkTodasPendencias.Checked = False
+        LoadBensMoveis()
 
     End Sub
 
     Private Sub ChkTodasPendencias_CheckedChanged(sender As Object, e As EventArgs) Handles ChkTodasPendencias.CheckedChanged
-        If ChkTodasPendencias.Checked Then
-            ChkResolvidas.Checked = False
-            LoadBensMoveis()
-        End If
+        If ChkTodasPendencias.Checked Then ChkResolvidas.Checked = False
+        LoadBensMoveis()
 
     End Sub
 #End Region
 
 #Region "Eventos dos Botões de Ação"
     Private Sub RbtImprimir_Click(sender As Object, e As EventArgs) Handles RbtImprimir.Click
-        DefinirAcao("IMPRIMIR", "BEM SEM ETIQUETA", Fixar:=True, habilitarCampos:=False)
-        TxtObservacoes.Enabled = True
-        CboDependencias.Enabled = False
+        DefinirAcao("IMPRIMIR", "BEM SEM ETIQUETA", Fixar:=True)
     End Sub
 
     Private Sub RbtAlterar_Click(sender As Object, e As EventArgs) Handles RbtAlterar.Click
-        DefinirAcao("ALTERAR", "CORRIGIR: ", Fixar:=True, habilitarCampos:=True)
+        DefinirAcao("ALTERAR", "CORRIGIR: ", Fixar:=True)
     End Sub
 
     Private Sub RbtNovo_Click(sender As Object, e As EventArgs) Handles RbtNovo.Click
-        DefinirAcao("CADASTRAR", "CARTA DE DOAÇÃO ", Fixar:=False, habilitarCampos:=True)
+        DefinirAcao("CADASTRAR", "CARTA DE DOAÇÃO ", Fixar:=False)
         With CboDependencias
             .SelectedIndex = -1
             .Text = String.Empty
@@ -165,120 +153,157 @@ Public Class FormInventarioPendencias
     End Sub
 
     Private Sub RbtExcluir_Click(sender As Object, e As EventArgs) Handles RbtExcluir.Click
-        DefinirAcao("EXCLUIR", "BAIXAR: ", Fixar:=True, habilitarCampos:=False)
-        TxtObservacoes.Enabled = True
-        CboDependencias.Enabled = False
+        DefinirAcao("EXCLUIR", "BAIXAR: ", Fixar:=True)
     End Sub
 
     Private Sub RbtTransferir_Click(sender As Object, e As EventArgs) Handles RbtTransferir.Click
-        DefinirAcao("TRANSFERIR", "TRANSFERIDO PARA: ", Fixar:=True, habilitarCampos:=False)
-        TxtObservacoes.Enabled = True
-        CboDependencias.Enabled = False
+        DefinirAcao("TRANSFERIR", "TRANSFERIDO PARA: ", Fixar:=True)
     End Sub
 
-    Private Sub RbtBipar_CheckedChanged(sender As Object, e As EventArgs) Handles RbtBipar.CheckedChanged
-        DefinirAcao("ENCONTRADO", "", Fixar:=True, habilitarCampos:=False)
-        CboDependencias.Enabled = False
+    Private Sub RbtBipar_Click(sender As Object, e As EventArgs) Handles RbtBipar.Click
+        DefinirAcao("ENCONTRADO", "", Fixar:=True)
     End Sub
 
-    Private Sub DefinirAcao(acaoTexto As String, observacaoTexto As String, Fixar As Boolean, habilitarCampos As Boolean)
+    Private Sub DefinirAcao(acaoTexto As String, observacaoTexto As String, Fixar As Boolean)
         Acao = acaoTexto
-        BtnSalvar.Enabled = True
         ChkFixar.Enabled = Fixar
         ChkFixar.Checked = Fixar
+        TxtObservacoes.Text = observacaoTexto
+        BtnSalvar.Enabled = True
+        DesabilitarCampos()
+
         If DgvBensPendentes.SelectedRows.Count > 0 Then
-            If Acao = "CADASTRAR" Then
-                LimparCampos()
-                DgvBensPendentes.ClearSelection()
-                TxtBemMovel.Enabled = habilitarCampos
-                CboDependencias.Enabled = habilitarCampos
-                TxtObservacoes.Enabled = habilitarCampos
-            Else
-                TxtObservacoes.Text = observacaoTexto
-                TxtObservacoes.Enabled = habilitarCampos
-                TxtBemMovel.Enabled = habilitarCampos
-                CboDependencias.Enabled = habilitarCampos
-                TxtObservacoes.Focus()
-            End If
+            Select Case Acao
+                Case "CADASTRAR"
+                    LblEtiqueta.Text = String.Empty
+                    DgvBensPendentes.ClearSelection()
+                    TxtBemMovel.Enabled = True
+                    CboDependencias.Enabled = True
+                    TxtObservacoes.Enabled = True
+                    CboDependencias.Focus()
+                Case "IMPRIMIR", "TRANFERIR", "EXCLUIR"
+                    TxtObservacoes.Enabled = True
+                    TxtObservacoes.Focus()
+                Case "ALTERAR"
+                    TxtBemMovel.Enabled = True
+                    CboDependencias.Enabled = True
+                    TxtObservacoes.Enabled = True
+                    TxtObservacoes.Focus()
+            End Select
         Else
             If Acao = "CADASTRAR" Then
-                TxtBemMovel.Enabled = habilitarCampos
-                TxtObservacoes.Enabled = habilitarCampos
+                LblEtiqueta.Text = String.Empty
+                DgvBensPendentes.ClearSelection()
+                TxtBemMovel.Enabled = True
+                TxtBemMovel.Text = String.Empty
+                CboDependencias.Enabled = True
+                TxtObservacoes.Enabled = True
+                TxtBemMovel.Focus()
             Else
+                BtnSalvar.Enabled = False
+                TxtBemMovel.Text = String.Empty
+                CboDependencias.Text = String.Empty
                 RJMessageBox.Show($"Para {Acao} primeiro selecione um item da lista")
             End If
         End If
-
     End Sub
+
+
 #End Region
 
 #Region "Botão Salvar e Checkbox Fixar"
 
     Private Sub BtnSalvar_Click(sender As Object, e As EventArgs) Handles BtnSalvar.Click
+
+        ' Verificar se a ação foi selecionada
+        If String.IsNullOrEmpty(Acao) Then
+            RJMessageBox.Show("Selecione uma opção de Ação!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+        End If
+
+        ' Criar instâncias das BLLs necessárias
         Dim inventarioDetalhesBLL As New InventarioDetalhesBLL(SQLite)
         Dim dependenciasBLL As New DependenciasBLL(SQLite)
-        Dim Bem As InventarioDetalhesDTO
-        Dim Depend As DependenciasDTO = dependenciasBLL.BuscarPorNome(Dependencia)
 
-        If Not String.IsNullOrEmpty(Acao) Then
-            If ChkFixar.Checked AndAlso DgvBensPendentes.SelectedRows.Count > 1 Then
-                If Acao <> "CADASTRAR" Then
-                    For Each Linha As DataGridViewRow In DgvBensPendentes.SelectedRows
-                        Dim Id_Bem As String = Linha.Cells(2).Value.ToString()
 
-                        Bem = inventarioDetalhesBLL.BuscarPorId(Id_Bem)
-                        Bem.Id_inventario = VarGlob.Inventario.Id
-                        Bem.Acao = If(Acao = "ENCONTRADO", "OK", Acao)
-                        Bem.Estado = If(Acao = "ENCONTRADO", "OK", "PENDENTE")
-                        Bem.Bem = String.Empty
-                        Bem.Id_dependencia = String.Empty
-                        Bem.Observacao = SanitizeString(TxtObservacoes.Text)
-                        inventarioDetalhesBLL.Atualizar(Bem)
-                    Next
-                    ChkFixar.Checked = False
-                Else
-                    RJMessageBox.Show("Não é possível cadastrar em Lote", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                End If
-            ElseIf DgvBensPendentes.SelectedRows.Count = 1 Then
-                    If Not String.IsNullOrEmpty(LblEtiqueta.Text) Then
-                        Dim Id_Bem As String = LblEtiqueta.Text
-                    Bem = inventarioDetalhesBLL.BuscarPorId(Id_Bem)
-                    Bem.Id_inventario = VarGlob.Inventario.Id
-                    Bem.Acao = If(Acao = "ENCONTRADO", "OK", Acao)
-                    Bem.Estado = If(Acao = "ENCONTRADO", "OK", "PENDENTE")
-                    Bem.Bem = String.Empty
-                    Bem.Id_dependencia = String.Empty
-                        Bem.Observacao = SanitizeString(TxtObservacoes.Text)
-                        inventarioDetalhesBLL.Atualizar(Bem)
-                    Else
-                        RJMessageBox.Show("Selecione um item da lista")
-                    End If
-                ElseIf Acao = "CADASTRAR" Then
-                    Dim BemNovo As New InventarioDetalhesDTO With {
-                            .Id_inventario = VarGlob.Id_Inventario_Ativo,
-                            .Id_Bem = GerarIdUnico(VarGlob.Id_Inventario_Ativo),
-                            .Estado = "PENDENTE",
-                            .Acao = "CADASTRAR",
-                            .Bem = TxtBemMovel.Text,
-                            .Id_dependencia = Depend.Id,
-                            .Observacao = SanitizeString(TxtObservacoes.Text),
-                            .Contagem = 1
-                        }
-                    If Not ValidarControle(TxtBemMovel, ErrorProvider1) Then Return
-                    If Not ValidarControle(CboDependencias, ErrorProvider1) Then Return
 
-                    inventarioDetalhesBLL.Inserir(BemNovo)
-                Else
-                    RJMessageBox.Show("Selecione um item da lista")
+        ' Obter observação sanitizada apenas uma vez
+        Dim observacaoSanitizada As String = SanitizeString(TxtObservacoes.Text)
+
+        ' Caso a ação envolva atualização de itens selecionados
+        If ChkFixar.Checked AndAlso DgvBensPendentes.SelectedRows.Count > 1 Then
+            If Acao = "CADASTRAR" Then
+                RJMessageBox.Show("Não é possível salvar as pendências selecionadas", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                Exit Sub
             End If
+
+            ' Atualizar múltiplos bens
+            For Each Linha As DataGridViewRow In DgvBensPendentes.SelectedRows
+                Dim Id_Bem As String = Linha.Cells(2).Value.ToString()
+                AtualizarBem(Id_Bem, inventarioDetalhesBLL, observacaoSanitizada)
+            Next
+
+            RJMessageBox.Show($"{DgvBensPendentes.SelectedRows.Count} Pendências do tipo {Acao} foram salvas com sucesso!", "Dados Salvo", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            ChkFixar.Checked = False
+
+            ' Atualizar um único bem
+        ElseIf DgvBensPendentes.SelectedRows.Count = 1 Then
+            If Not String.IsNullOrEmpty(LblEtiqueta.Text) Then
+                AtualizarBem(LblEtiqueta.Text, inventarioDetalhesBLL, observacaoSanitizada)
+            Else
+                RJMessageBox.Show("Selecione um item da lista", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Exit Sub
+            End If
+
+            ' Cadastrar um novo bem
+        ElseIf Acao = "CADASTRAR" Then
+            ' Validações antes da inserção
+            If Not ValidarControle(TxtBemMovel, ErrorProvider1) OrElse Not ValidarControle(CboDependencias, ErrorProvider1) Then
+                Exit Sub
+            End If
+
+            ' Obter dependência selecionada
+            Dim Depend As DependenciasDTO = dependenciasBLL.BuscarPorNome(CboDependencias.Text)
+
+            Dim BemNovo As New InventarioDetalhesDTO With {
+            .Id_inventario = VarGlob.Id_Inventario_Ativo,
+            .Id_Bem = GerarIdUnico(VarGlob.Id_Inventario_Ativo),
+            .Estado = "PENDENTE",
+            .Acao = "CADASTRAR",
+            .Bem = TxtBemMovel.Text,
+            .Id_dependencia = Depend.Id,
+            .Observacao = observacaoSanitizada,
+            .Contagem = 1
+        }
+
+            inventarioDetalhesBLL.Inserir(BemNovo)
+
         Else
-            RJMessageBox.Show("Selecione uma opção de Ação!")
+            RJMessageBox.Show("Selecione um item da lista", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
         End If
+
+        ' Atualizar UI
         LimparCampos()
         LoadBensMoveis()
         AtualizaDadosAcoes()
-        If ChkFixar.Checked Then BtnSalvar.Enabled = True
+        BtnSalvar.Enabled = ChkFixar.Checked
     End Sub
+
+    Private Sub AtualizarBem(idBem As String, bll As InventarioDetalhesBLL, observacao As String)
+        Dim Bem As InventarioDetalhesDTO = bll.BuscarPorId(idBem)
+        Dim Depend As DependenciasDTO = dependenciasBLL.BuscarPorNome(CboDependencias.Text)
+
+        Bem.Id_inventario = VarGlob.Id_Inventario_Ativo
+        Bem.Acao = If(Acao = "ENCONTRADO", "OK", Acao)
+        Bem.Estado = If(Acao = "ENCONTRADO", "OK", "PENDENTE")
+        Bem.Id_dependencia = If(Depend IsNot Nothing, Depend.Id, "")
+        Bem.Bem = String.Empty
+        Bem.Observacao = observacao
+
+        bll.Atualizar(Bem)
+    End Sub
+
 
     Private Sub ChkFixar_CheckedChanged(sender As Object, e As EventArgs) Handles ChkFixar.CheckedChanged
         ' Verifica se há uma linha selecionada no DataGridView
@@ -302,24 +327,17 @@ Public Class FormInventarioPendencias
 
 #Region "Métodos Auxiliares"
     Private Sub LimparCampos()
-        ' Limpar campos e resetar controles
         LblSituacao.ResetText()
         LblEtiqueta.ResetText()
-        LblLeituras.ResetText()
         TxtObservacoes.Text = String.Empty
-        TxtObservacoes.Enabled = False
-        CboDependencias.SelectedIndex = -1
         TxtBemMovel.Enabled = False
         TxtBemMovel.Text = String.Empty
+        CboDependencias.SelectedIndex = -1
+        TxtObservacoes.Enabled = False
+
         If Not ChkFixar.Checked Then
             Acao = String.Empty
-            RbtAlterar.Checked = False
-            RbtExcluir.Checked = False
-            RbtImprimir.Checked = False
-            RbtNovo.Checked = False
-            RbtTransferir.Checked = False
         End If
-        BtnSalvar.Enabled = False
     End Sub
 
     Private Sub LimparEdicao()
@@ -335,26 +353,34 @@ Public Class FormInventarioPendencias
         'DgvBensPendentes.ClearSelection()
     End Sub
 
+    Private Sub DesabilitarCampos()
+        TxtBemMovel.Enabled = False
+        CboDependencias.Enabled = False
+        TxtObservacoes.Enabled = False
+    End Sub
+
     Private Sub ComboDependencia()
-        Dim dependenciasBLL As New DependenciasBLL(SQLite)
-        Dim dependencias = dependenciasBLL.BuscarTodos()
-        CboDependencias.DataSource = dependencias
+        Dim Dependencias As DataTable = ConvertToDataTable(dependenciasBLL.BuscarTodos())
+        CboDependencias.DataSource = Dependencias
         CboDependencias.DisplayMember = "Descricao"
         CboDependencias.ValueMember = "Id"
         CboDependencias.SelectedIndex = -1
     End Sub
 
     Private Sub AtualizaDadosAcoes()
-        Dim Detalhes = New InventarioDetalhesBLL(SQLite)
-        Dim ListaAcoes As List(Of List(Of String)) = Detalhes.BuscarAcoes()
+        Try
+            Dim ListaAcoes As List(Of List(Of String)) = inventarioDetalhesBLL.BuscarAcoes()
+            If ListaAcoes IsNot Nothing AndAlso ListaAcoes.Count > 0 Then
+                LblInfoImprimir.Text = ListaAcoes(0)(2)
+                LblInfoAlterar.Text = ListaAcoes(0)(3)
+                LblInfoNovo.Text = ListaAcoes(0)(4)
+                LblInfoExcluir.Text = ListaAcoes(0)(5)
+                LblInfoTransferir.Text = ListaAcoes(0)(6)
+            End If
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
 
-        If ListaAcoes IsNot Nothing Then
-            LblInfoImprimir.Text = ListaAcoes.Item(0).Item(2).ToString()
-            LblInfoAlterar.Text = ListaAcoes.Item(0).Item(3).ToString()
-            LblInfoNovo.Text = ListaAcoes.Item(0).Item(4).ToString()
-            LblInfoExcluir.Text = ListaAcoes.Item(0).Item(5).ToString()
-            LblInfoTransferir.Text = ListaAcoes.Item(0).Item(6).ToString()
-        End If
     End Sub
 
     Private Function GerarIdUnico(prefixo As String) As String
@@ -365,10 +391,6 @@ Public Class FormInventarioPendencias
         Dim numeroAleatorio As String = New Random().Next(0, Math.Pow(10, digitosRestantes) - 1).ToString("D" & digitosRestantes)
         Return $"{prefixo}{numeroAleatorio}"
     End Function
-
-
-
-
 #End Region
 
 End Class

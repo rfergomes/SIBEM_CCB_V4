@@ -72,7 +72,7 @@ Public Class IgrejasDAL
         Return BuscarDataTable(TabelaViews, columns, $"AND id_igreja = {igrejasId} AND id_admlc = {VarGlob.SistemaAtivo.Id_Admlc}")
     End Function
 
-    Public Overrides Function GetByIdList(igrejasId As Integer) As List(Of IgrejasDTO)
+    Public Overrides Function GetByIdList(igrejasId As String) As List(Of IgrejasDTO)
         Dim columns As New Dictionary(Of String, Object)()
         Return BuscarLista(TabelaViews, columns, $"AND id_igreja = {igrejasId} AND id_admlc = {VarGlob.SistemaAtivo.Id_Admlc}")
     End Function
@@ -82,7 +82,7 @@ Public Class IgrejasDAL
         Return BuscarLista(TabelaViews, columns, $"{condicao}")
     End Function
 
-    Public Overrides Function GetAllDt() As DataTable
+    Public Overrides Function GetAllDt(Optional condicao As String = "") As DataTable
         Dim columns As New Dictionary(Of String, Object)()
         Return BuscarDataTable(TabelaViews, columns, $"AND id_admlc = {VarGlob.SistemaAtivo.Id_Admlc}")
     End Function

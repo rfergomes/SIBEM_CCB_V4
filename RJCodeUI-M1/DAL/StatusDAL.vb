@@ -32,7 +32,7 @@ Public Class StatusDAL
         Return BuscarDataTable(Tabela, columns, $"AND id_status = {statusId}")
     End Function
 
-    Public Overrides Function GetByIdList(statusId As Integer) As List(Of StatusDTO)
+    Public Overrides Function GetByIdList(statusId As String) As List(Of StatusDTO)
         Dim columns As New Dictionary(Of String, Object)()
         Return BuscarLista(Tabela, columns, $"AND id_status = {statusId}")
     End Function
@@ -42,7 +42,7 @@ Public Class StatusDAL
         Return BuscarLista(Tabela, columns, condicao)
     End Function
 
-    Public Overrides Function GetAllDt() As DataTable
+    Public Overrides Function GetAllDt(Optional condicao As String = "") As DataTable
         Dim columns As New Dictionary(Of String, Object)()
         Return BuscarDataTable(Tabela, columns, "")
     End Function

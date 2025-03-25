@@ -80,13 +80,13 @@ Partial Class FormInventarioEtiquetas
         '
         Me.RjLabel1.AutoSize = True
         Me.RjLabel1.Cursor = System.Windows.Forms.Cursors.Arrow
-        Me.RjLabel1.Font = New System.Drawing.Font("Verdana", 14.0!)
+        Me.RjLabel1.Font = New System.Drawing.Font("Verdana", 16.0!)
         Me.RjLabel1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
         Me.RjLabel1.LinkLabel = False
         Me.RjLabel1.Location = New System.Drawing.Point(180, 8)
         Me.RjLabel1.Name = "RjLabel1"
-        Me.RjLabel1.Size = New System.Drawing.Size(298, 23)
-        Me.RjLabel1.Style = PROJETOBASE.LabelStyle.Title
+        Me.RjLabel1.Size = New System.Drawing.Size(346, 26)
+        Me.RjLabel1.Style = PROJETOBASE.LabelStyle.Custom
         Me.RjLabel1.TabIndex = 1
         Me.RjLabel1.Text = "ETIQUETAS PARA IMPRESSÃO"
         Me.RjLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -95,7 +95,7 @@ Partial Class FormInventarioEtiquetas
         '
         Me.LblIgreja.Cursor = System.Windows.Forms.Cursors.Arrow
         Me.LblIgreja.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!)
-        Me.LblIgreja.ForeColor = System.Drawing.Color.FromArgb(CType(CType(99, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(99, Byte), Integer))
+        Me.LblIgreja.ForeColor = System.Drawing.Color.FromArgb(CType(CType(2, Byte), Integer), CType(CType(46, Byte), Integer), CType(CType(72, Byte), Integer))
         Me.LblIgreja.LinkLabel = False
         Me.LblIgreja.Location = New System.Drawing.Point(38, 44)
         Me.LblIgreja.Name = "LblIgreja"

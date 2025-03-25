@@ -30,6 +30,7 @@ Public Class InventariosOnDAL
             {"bens_final", inventarios.Bens_Final},
             {"bens_importado", inventarios.Bens_Importado},
             {"teste", inventarios.Inventario_Teste},
+            {"siga_ok", inventarios.Siga_Ok},
             {"pdf", inventarios.Pdf},
             {"id_admlc", inventarios.Id_Admlc},
             {"data_alter", Now.ToString("yyyy-MM-dd HH:mm:ss")}
@@ -59,6 +60,7 @@ Public Class InventariosOnDAL
             {"bens_final", inventarios.Bens_Final},
             {"bens_importado", inventarios.Bens_Importado},
             {"teste", inventarios.Inventario_Teste},
+            {"siga_ok", inventarios.Siga_Ok},
             {"pdf", inventarios.Pdf},
             {"id_admlc", inventarios.Id_Admlc},
             {"data_alter", Now.ToString("yyyy-MM-dd HH:mm:ss")}
@@ -77,7 +79,7 @@ Public Class InventariosOnDAL
         Return BuscarDataTable(TabelaViews, columns, $"AND id_inventario = {inventariosId}")
     End Function
 
-    Public Overrides Function GetByIdList(inventariosId As Integer) As List(Of InventariosOnDTO)
+    Public Overrides Function GetByIdList(inventariosId As String) As List(Of InventariosOnDTO)
         Dim columns As New Dictionary(Of String, Object)()
         Return BuscarLista(TabelaViews, columns, $"AND id_inventario = {inventariosId}")
     End Function
@@ -87,7 +89,7 @@ Public Class InventariosOnDAL
         Return BuscarLista(TabelaViews, columns, $"{condicao}")
     End Function
 
-    Public Overrides Function GetAllDt() As DataTable
+    Public Overrides Function GetAllDt(Optional condicao As String = "") As DataTable
         Dim columns As New Dictionary(Of String, Object)()
         Return BuscarDataTable(TabelaViews, columns, "")
     End Function
@@ -125,8 +127,8 @@ Public Class InventariosOnDAL
             ' Verifica o campo "id_inventario"
 
             If ColumnExists(reader, "id_inventario") AndAlso Not reader.IsDBNull(reader.GetOrdinal("id_inventario")) Then
-                If reader.GetFieldType(reader.GetOrdinal("id_inventario")) = GetType(Int32) Then
-                    inventarios.Id = reader.GetInt32(reader.GetOrdinal("id_inventario"))
+                If reader.GetFieldType(reader.GetOrdinal("id_inventario")) = GetType(String) Then
+                    inventarios.Id = reader.GetString(reader.GetOrdinal("id_inventario"))
                 End If
             End If
 
@@ -218,6 +220,10 @@ Public Class InventariosOnDAL
 
             If ColumnExists(reader, "teste") AndAlso Not reader.IsDBNull(reader.GetOrdinal("teste")) Then
                 inventarios.Inventario_Teste = reader.GetBoolean(reader.GetOrdinal("teste"))
+            End If
+
+            If ColumnExists(reader, "siga_ok") AndAlso Not reader.IsDBNull(reader.GetOrdinal("siga_ok")) Then
+                inventarios.Siga_Ok = reader.GetBoolean(reader.GetOrdinal("siga_ok"))
             End If
 
             If ColumnExists(reader, "pdf") AndAlso Not reader.IsDBNull(reader.GetOrdinal("pdf")) Then

@@ -1,9 +1,6 @@
 ﻿'Última Atualização:    25/11/2024
-'Data:                  21/11/2024
+'Data:                  24/03/2025
 'Autor:                 Rodrigo Fernando Gomes Lima
-
-Imports System.Threading
-Imports System.Windows.Media
 
 Public Class FormSincronizar
     Private SQLite As New ConnectionFactory
@@ -22,6 +19,7 @@ Public Class FormSincronizar
     Private BensMoveisOnBLL As BensOnBLL
     Private SetoresBLL As SetoresBLL
     Private SetoresOnBLL As SetoresOnBLL
+    Private Log As New Logger
     'Private SetoresOn As SetoresOnBLL
 
     Sub New()
@@ -53,18 +51,23 @@ Public Class FormSincronizar
         RjPanelEstatistica.Visible = False
         LblProgress.Visible = True ' Exibe o GIF de carregamento
 
-        Dim Sync As Boolean = Await Task.Run(Function() ChecarDados())
+        ' Executa apenas `ChecarDadosRemotos()` na thread separada
+        Dim sync As Boolean = Await Task.Run(Function()
+                                                 ChecarDadosRemotos()
+                                                 Return True
+                                             End Function)
 
-        If Sync Then
-            BtnSincronizar.Enabled = True
-        Else
-            BtnSincronizar.Enabled = False
-        End If
-
-        RjPanel3.Visible = False
-        RjPanelEstatistica.Visible = True
-        LblProgress.Visible = False ' Oculta o GIF após o término do processo
+        ' Agora, atualiza os Labels na UI Thread
+        Invoke(Sub()
+                   Dim resultado = AtualizarLabels()
+                   BtnSincronizar.Enabled = resultado
+                   RjPanel3.Visible = False
+                   RjPanelEstatistica.Visible = True
+                   LblProgress.Visible = False ' Oculta o GIF após o término do processo
+               End Sub)
     End Sub
+
+
 
 
     Private Sub BtnSincronizar_Click(sender As Object, e As EventArgs) Handles BtnSincronizar.Click
@@ -116,6 +119,7 @@ Public Class FormSincronizar
                     labelMap(tabela).Item2.Text = 0 ' Atualizar "REMOTO RECEBER"
                     Status = False
                 End If
+                Refresh()
             Next
         Else
             ' Inicializar todas as Labels com "0"
@@ -171,13 +175,13 @@ Public Class FormSincronizar
                         }
 
                         ' ENVIAR INVENTÁRIO
-                        If InventOn IsNot Nothing AndAlso InventOn.Id > 0 Then
+                        If InventOn IsNot Nothing AndAlso InventOn.Id <> "" Then
                             InventOnBLL.Atualizar(Invent)
                         Else
                             InventOnBLL.Inserir(Invent)
                         End If
 
-                        Dim Detalhes As List(Of InventarioDetalhesDTO) = InventDetalhesBLL.BuscarTodos(Consultas:="BENS PENDENTES")
+                        Dim Detalhes As List(Of InventarioDetalhesDTO) = InventDetalhesBLL.BuscarTodos()
                         If Detalhes IsNot Nothing Then
                             With RjProgressBar2
                                 .Visible = True
@@ -202,7 +206,7 @@ Public Class FormSincronizar
                                     .Contagem = Detalhe.Contagem
                                 }
                                 Dim InventDetalheOn As InventarioDetalhesOnDTO = InventDetalhesOnBLL.BuscarPorId(Detalhe.Id_Bem)
-                                If InventDetalheOn IsNot Nothing AndAlso InventDetalheOn.Id_Bem > 0 Then
+                                If InventDetalheOn IsNot Nothing AndAlso InventDetalheOn.Id_Bem <> "" Then
                                     InventDetalhesOnBLL.Atualizar(IDetalhe)
                                 Else
                                     InventDetalhesOnBLL.Inserir(IDetalhe)
@@ -544,11 +548,12 @@ Public Class FormSincronizar
                                 .Bens_Novos = Inventario.Bens_Novos,
                                 .Bens_Final = Inventario.Bens_Final,
                                 .Bens_Importado = Inventario.Bens_Importado,
-                                .Inventario_Teste = Inventario.Inventario_Teste
+                                .Inventario_Teste = Inventario.Inventario_Teste,
+                                .Id_AdmLc = Inventario.Id_Admlc
                             }
 
                             ' RECEBER INVENTÁRIO
-                            If Invent IsNot Nothing AndAlso Invent.Id > 0 Then
+                            If Invent IsNot Nothing AndAlso Invent.Id <> "" Then
                                 InventBLL.Atualizar(InventSync)
                             Else
                                 InventBLL.Inserir(InventSync)
@@ -579,7 +584,7 @@ Public Class FormSincronizar
                                             .Contagem = Detalhe.Contagem
                                         }
                                     Dim InventDetalhe As InventarioDetalhesDTO = InventDetalhesBLL.BuscarPorId(Detalhe.Id_Bem)
-                                    If InventDetalhe IsNot Nothing AndAlso InventDetalhe.Id_Bem > 0 Then
+                                    If InventDetalhe IsNot Nothing AndAlso InventDetalhe.Id_Bem <> "" Then
                                         InventDetalhesBLL.Atualizar(IDetalhe)
                                     Else
                                         InventDetalhesBLL.Inserir(IDetalhe)
@@ -628,6 +633,7 @@ Public Class FormSincronizar
             End If
         Catch ex As Exception
             RJMessageBox.Show(ex.Message, "Falha", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Log.WriteLog($"SINCRONIZAR | Receber Dados | {ex.Message}")
         Finally
             LblMsgTitulo.Text = "DADOS SINCRONIZADOS!"
             LblMsgDescricao.ResetText()

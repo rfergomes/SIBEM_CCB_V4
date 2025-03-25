@@ -23,24 +23,25 @@ Partial Class FormInventarios
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormInventarios))
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1_Home = New System.Windows.Forms.TabPage()
         Me.RjPanel1 = New PROJETOBASE.RJPanel()
         Me.BtnRelatorio = New PROJETOBASE.RJButton()
         Me.BtnEtiqueta = New PROJETOBASE.RJButton()
+        Me.BtnSigaOk = New PROJETOBASE.RJButton()
         Me.BtnReabrir = New PROJETOBASE.RJButton()
         Me.BtnNovo = New PROJETOBASE.RJButton()
         Me.LblSetor = New PROJETOBASE.RJLabel()
@@ -71,6 +72,8 @@ Partial Class FormInventarios
         Me.RjLabel2 = New PROJETOBASE.RJLabel()
         Me.RjLabel15 = New PROJETOBASE.RJLabel()
         Me.RjPanel2 = New PROJETOBASE.RJPanel()
+        Me.TggSiga_Ok = New PROJETOBASE.RJToggleButton()
+        Me.RjLabel16 = New PROJETOBASE.RJLabel()
         Me.lblNumberItems = New PROJETOBASE.RJLabel()
         Me.BtnLimparFiltros = New PROJETOBASE.RJButton()
         Me.DgvInventarios = New PROJETOBASE.RJDataGridView()
@@ -108,8 +111,8 @@ Partial Class FormInventarios
         Me.CboSetorNovo = New PROJETOBASE.RJComboBox()
         Me.RjLabel1 = New PROJETOBASE.RJLabel()
         Me.TabPage3_Importar = New System.Windows.Forms.TabPage()
-        Me.LblTotalImportado = New PROJETOBASE.RJLabel()
         Me.BarraProgresso = New PROJETOBASE.RJProgressBar()
+        Me.LblTotalImportado = New PROJETOBASE.RJLabel()
         Me.DgvImportBens = New PROJETOBASE.RJDataGridView()
         Me.RjPanel6 = New PROJETOBASE.RJPanel()
         Me.LblImportId_igreja = New PROJETOBASE.RJLabel()
@@ -179,6 +182,8 @@ Partial Class FormInventarios
         Me.ToolStripMenuCelula = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuLinha = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuTudo = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
         Me._pnlClientArea.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1_Home.SuspendLayout()
@@ -245,6 +250,7 @@ Partial Class FormInventarios
         Me.RjPanel1.BorderRadius = 0
         Me.RjPanel1.Controls.Add(Me.BtnRelatorio)
         Me.RjPanel1.Controls.Add(Me.BtnEtiqueta)
+        Me.RjPanel1.Controls.Add(Me.BtnSigaOk)
         Me.RjPanel1.Controls.Add(Me.BtnReabrir)
         Me.RjPanel1.Controls.Add(Me.BtnNovo)
         Me.RjPanel1.Controls.Add(Me.LblSetor)
@@ -299,9 +305,9 @@ Partial Class FormInventarios
         Me.BtnRelatorio.IconColor = System.Drawing.Color.White
         Me.BtnRelatorio.IconFont = FontAwesome.Sharp.IconFont.[Auto]
         Me.BtnRelatorio.IconSize = 32
-        Me.BtnRelatorio.Location = New System.Drawing.Point(266, 422)
+        Me.BtnRelatorio.Location = New System.Drawing.Point(142, 424)
         Me.BtnRelatorio.Name = "BtnRelatorio"
-        Me.BtnRelatorio.Size = New System.Drawing.Size(109, 54)
+        Me.BtnRelatorio.Size = New System.Drawing.Size(109, 52)
         Me.BtnRelatorio.SkinBorderColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
         Me.BtnRelatorio.Style = PROJETOBASE.ControlStyle.Solid
         Me.BtnRelatorio.TabIndex = 60
@@ -329,9 +335,9 @@ Partial Class FormInventarios
         Me.BtnEtiqueta.IconColor = System.Drawing.Color.White
         Me.BtnEtiqueta.IconFont = FontAwesome.Sharp.IconFont.[Auto]
         Me.BtnEtiqueta.IconSize = 32
-        Me.BtnEtiqueta.Location = New System.Drawing.Point(152, 422)
+        Me.BtnEtiqueta.Location = New System.Drawing.Point(28, 424)
         Me.BtnEtiqueta.Name = "BtnEtiqueta"
-        Me.BtnEtiqueta.Size = New System.Drawing.Size(99, 54)
+        Me.BtnEtiqueta.Size = New System.Drawing.Size(99, 52)
         Me.BtnEtiqueta.SkinBorderColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
         Me.BtnEtiqueta.Style = PROJETOBASE.ControlStyle.Solid
         Me.BtnEtiqueta.TabIndex = 60
@@ -339,6 +345,36 @@ Partial Class FormInventarios
         Me.BtnEtiqueta.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.BtnEtiqueta.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         Me.BtnEtiqueta.UseVisualStyleBackColor = False
+        '
+        'BtnSigaOk
+        '
+        Me.BtnSigaOk.BackColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
+        Me.BtnSigaOk.BorderRadius = 5
+        Me.BtnSigaOk.BorderSize = 1
+        Me.BtnSigaOk.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.BtnSigaOk.Design = PROJETOBASE.ButtonDesign.Metro
+        Me.BtnSigaOk.Enabled = False
+        Me.BtnSigaOk.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(212, Byte), Integer))
+        Me.BtnSigaOk.FlatAppearance.BorderSize = 0
+        Me.BtnSigaOk.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(57, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.BtnSigaOk.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(54, Byte), Integer), CType(CType(84, Byte), Integer))
+        Me.BtnSigaOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BtnSigaOk.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnSigaOk.ForeColor = System.Drawing.Color.White
+        Me.BtnSigaOk.IconChar = FontAwesome.Sharp.IconChar.ChevronDown
+        Me.BtnSigaOk.IconColor = System.Drawing.Color.White
+        Me.BtnSigaOk.IconFont = FontAwesome.Sharp.IconFont.[Auto]
+        Me.BtnSigaOk.IconSize = 32
+        Me.BtnSigaOk.Location = New System.Drawing.Point(266, 424)
+        Me.BtnSigaOk.Name = "BtnSigaOk"
+        Me.BtnSigaOk.Size = New System.Drawing.Size(109, 52)
+        Me.BtnSigaOk.SkinBorderColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
+        Me.BtnSigaOk.Style = PROJETOBASE.ControlStyle.Solid
+        Me.BtnSigaOk.TabIndex = 60
+        Me.BtnSigaOk.Text = "SIGA OK"
+        Me.BtnSigaOk.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.BtnSigaOk.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        Me.BtnSigaOk.UseVisualStyleBackColor = False
         '
         'BtnReabrir
         '
@@ -797,6 +833,8 @@ Partial Class FormInventarios
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.RjPanel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(205, Byte), Integer), CType(CType(212, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.RjPanel2.BorderRadius = 0
+        Me.RjPanel2.Controls.Add(Me.TggSiga_Ok)
+        Me.RjPanel2.Controls.Add(Me.RjLabel16)
         Me.RjPanel2.Controls.Add(Me.lblNumberItems)
         Me.RjPanel2.Controls.Add(Me.BtnLimparFiltros)
         Me.RjPanel2.Controls.Add(Me.DgvInventarios)
@@ -815,6 +853,46 @@ Partial Class FormInventarios
         Me.RjPanel2.Size = New System.Drawing.Size(560, 510)
         Me.RjPanel2.TabIndex = 120
         '
+        'TggSiga_Ok
+        '
+        Me.TggSiga_Ok.Activated = False
+        Me.TggSiga_Ok.Appearance = System.Windows.Forms.Appearance.Button
+        Me.TggSiga_Ok.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.TggSiga_Ok.Customizable = True
+        Me.TggSiga_Ok.FlatAppearance.BorderSize = 0
+        Me.TggSiga_Ok.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.TggSiga_Ok.ForeColor = System.Drawing.Color.Transparent
+        Me.TggSiga_Ok.Location = New System.Drawing.Point(317, 28)
+        Me.TggSiga_Ok.MinimumSize = New System.Drawing.Size(45, 20)
+        Me.TggSiga_Ok.Name = "TggSiga_Ok"
+        Me.TggSiga_Ok.OFF_BackBorderColor = System.Drawing.Color.DimGray
+        Me.TggSiga_Ok.OFF_Text = Nothing
+        Me.TggSiga_Ok.OFF_TextColor = System.Drawing.Color.DimGray
+        Me.TggSiga_Ok.OFF_ToggleColor = System.Drawing.Color.DimGray
+        Me.TggSiga_Ok.ON_BackBorderColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
+        Me.TggSiga_Ok.ON_Text = Nothing
+        Me.TggSiga_Ok.ON_TextColor = System.Drawing.Color.FromArgb(CType(CType(132, Byte), Integer), CType(CType(129, Byte), Integer), CType(CType(132, Byte), Integer))
+        Me.TggSiga_Ok.ON_ToggleColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
+        Me.TggSiga_Ok.Size = New System.Drawing.Size(51, 25)
+        Me.TggSiga_Ok.Style = PROJETOBASE.ControlStyle.Glass
+        Me.TggSiga_Ok.TabIndex = 121
+        Me.TggSiga_Ok.Text = "#"
+        Me.TggSiga_Ok.UseVisualStyleBackColor = False
+        '
+        'RjLabel16
+        '
+        Me.RjLabel16.AutoSize = True
+        Me.RjLabel16.Cursor = System.Windows.Forms.Cursors.Arrow
+        Me.RjLabel16.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RjLabel16.ForeColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
+        Me.RjLabel16.LinkLabel = False
+        Me.RjLabel16.Location = New System.Drawing.Point(313, 9)
+        Me.RjLabel16.Name = "RjLabel16"
+        Me.RjLabel16.Size = New System.Drawing.Size(96, 16)
+        Me.RjLabel16.Style = PROJETOBASE.LabelStyle.Custom
+        Me.RjLabel16.TabIndex = 122
+        Me.RjLabel16.Text = "Siga Pendente"
+        '
         'lblNumberItems
         '
         Me.lblNumberItems.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -832,6 +910,7 @@ Partial Class FormInventarios
         '
         'BtnLimparFiltros
         '
+        Me.BtnLimparFiltros.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnLimparFiltros.BackColor = System.Drawing.Color.FromArgb(CType(CType(205, Byte), Integer), CType(CType(212, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.BtnLimparFiltros.BorderRadius = 5
         Me.BtnLimparFiltros.BorderSize = 0
@@ -876,13 +955,13 @@ Partial Class FormInventarios
         Me.DgvInventarios.ColumnHeaderFont = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DgvInventarios.ColumnHeaderHeight = 40
         Me.DgvInventarios.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
-        DataGridViewCellStyle16.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle16.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle16.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
-        DataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DgvInventarios.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle16
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle1.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgvInventarios.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DgvInventarios.ColumnHeadersHeight = 40
         Me.DgvInventarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.DgvInventarios.ColumnHeaderTextColor = System.Drawing.Color.White
@@ -898,27 +977,27 @@ Partial Class FormInventarios
         Me.DgvInventarios.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.DgvInventarios.RowHeaderColor = System.Drawing.Color.WhiteSmoke
         Me.DgvInventarios.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
-        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle17.BackColor = System.Drawing.Color.WhiteSmoke
-        DataGridViewCellStyle17.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle17.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle17.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(73, Byte), Integer), CType(CType(101, Byte), Integer), CType(CType(108, Byte), Integer))
-        DataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DgvInventarios.RowHeadersDefaultCellStyle = DataGridViewCellStyle17
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.WhiteSmoke
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(73, Byte), Integer), CType(CType(101, Byte), Integer), CType(CType(108, Byte), Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DgvInventarios.RowHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.DgvInventarios.RowHeadersVisible = False
         Me.DgvInventarios.RowHeadersWidth = 25
         Me.DgvInventarios.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DgvInventarios.RowHeight = 25
         Me.DgvInventarios.RowsColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(252, Byte), Integer), CType(CType(253, Byte), Integer))
-        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle18.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(252, Byte), Integer), CType(CType(253, Byte), Integer))
-        DataGridViewCellStyle18.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle18.ForeColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
-        DataGridViewCellStyle18.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
-        DataGridViewCellStyle18.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(73, Byte), Integer), CType(CType(101, Byte), Integer), CType(CType(108, Byte), Integer))
-        DataGridViewCellStyle18.SelectionForeColor = System.Drawing.Color.WhiteSmoke
-        Me.DgvInventarios.RowsDefaultCellStyle = DataGridViewCellStyle18
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(252, Byte), Integer), CType(CType(253, Byte), Integer))
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
+        DataGridViewCellStyle3.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(73, Byte), Integer), CType(CType(101, Byte), Integer), CType(CType(108, Byte), Integer))
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.WhiteSmoke
+        Me.DgvInventarios.RowsDefaultCellStyle = DataGridViewCellStyle3
         Me.DgvInventarios.RowsTextColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
         Me.DgvInventarios.RowTemplate.Height = 25
         Me.DgvInventarios.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(73, Byte), Integer), CType(CType(101, Byte), Integer), CType(CType(108, Byte), Integer))
@@ -1048,6 +1127,7 @@ Partial Class FormInventarios
         '
         'RjButton1
         '
+        Me.RjButton1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.RjButton1.BackColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
         Me.RjButton1.BorderRadius = 0
         Me.RjButton1.BorderSize = 1
@@ -1092,6 +1172,7 @@ Partial Class FormInventarios
         'TxtPesquisar
         '
         Me.TxtPesquisar._Customizable = False
+        Me.TxtPesquisar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtPesquisar.BackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(245, Byte), Integer), CType(CType(249, Byte), Integer))
         Me.TxtPesquisar.BorderColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
         Me.TxtPesquisar.BorderFocusColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(120, Byte), Integer))
@@ -1113,6 +1194,7 @@ Partial Class FormInventarios
         '
         'RjLabel7
         '
+        Me.RjLabel7.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.RjLabel7.AutoSize = True
         Me.RjLabel7.Cursor = System.Windows.Forms.Cursors.Arrow
         Me.RjLabel7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1437,13 +1519,13 @@ Partial Class FormInventarios
         Me.DgvIgrejas.ColumnHeaderFont = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DgvIgrejas.ColumnHeaderHeight = 40
         Me.DgvIgrejas.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
-        DataGridViewCellStyle19.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle19.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle19.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
-        DataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DgvIgrejas.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle19
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle4.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgvIgrejas.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
         Me.DgvIgrejas.ColumnHeadersHeight = 40
         Me.DgvIgrejas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.DgvIgrejas.ColumnHeaderTextColor = System.Drawing.Color.White
@@ -1459,26 +1541,26 @@ Partial Class FormInventarios
         Me.DgvIgrejas.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.DgvIgrejas.RowHeaderColor = System.Drawing.Color.WhiteSmoke
         Me.DgvIgrejas.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
-        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle20.BackColor = System.Drawing.Color.WhiteSmoke
-        DataGridViewCellStyle20.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle20.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle20.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(73, Byte), Integer), CType(CType(101, Byte), Integer), CType(CType(108, Byte), Integer))
-        DataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DgvIgrejas.RowHeadersDefaultCellStyle = DataGridViewCellStyle20
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.WhiteSmoke
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(73, Byte), Integer), CType(CType(101, Byte), Integer), CType(CType(108, Byte), Integer))
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DgvIgrejas.RowHeadersDefaultCellStyle = DataGridViewCellStyle5
         Me.DgvIgrejas.RowHeadersVisible = False
         Me.DgvIgrejas.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
         Me.DgvIgrejas.RowHeight = 25
         Me.DgvIgrejas.RowsColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(252, Byte), Integer), CType(CType(253, Byte), Integer))
-        DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle21.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(252, Byte), Integer), CType(CType(253, Byte), Integer))
-        DataGridViewCellStyle21.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle21.ForeColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
-        DataGridViewCellStyle21.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
-        DataGridViewCellStyle21.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(73, Byte), Integer), CType(CType(101, Byte), Integer), CType(CType(108, Byte), Integer))
-        DataGridViewCellStyle21.SelectionForeColor = System.Drawing.Color.WhiteSmoke
-        Me.DgvIgrejas.RowsDefaultCellStyle = DataGridViewCellStyle21
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(252, Byte), Integer), CType(CType(253, Byte), Integer))
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
+        DataGridViewCellStyle6.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(73, Byte), Integer), CType(CType(101, Byte), Integer), CType(CType(108, Byte), Integer))
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.WhiteSmoke
+        Me.DgvIgrejas.RowsDefaultCellStyle = DataGridViewCellStyle6
         Me.DgvIgrejas.RowsTextColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
         Me.DgvIgrejas.RowTemplate.Height = 25
         Me.DgvIgrejas.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(73, Byte), Integer), CType(CType(101, Byte), Integer), CType(CType(108, Byte), Integer))
@@ -1595,8 +1677,8 @@ Partial Class FormInventarios
         '
         'TabPage3_Importar
         '
-        Me.TabPage3_Importar.Controls.Add(Me.LblTotalImportado)
         Me.TabPage3_Importar.Controls.Add(Me.BarraProgresso)
+        Me.TabPage3_Importar.Controls.Add(Me.LblTotalImportado)
         Me.TabPage3_Importar.Controls.Add(Me.DgvImportBens)
         Me.TabPage3_Importar.Controls.Add(Me.RjPanel6)
         Me.TabPage3_Importar.Location = New System.Drawing.Point(4, 24)
@@ -1605,21 +1687,6 @@ Partial Class FormInventarios
         Me.TabPage3_Importar.TabIndex = 2
         Me.TabPage3_Importar.Text = "Importar"
         Me.TabPage3_Importar.UseVisualStyleBackColor = True
-        '
-        'LblTotalImportado
-        '
-        Me.LblTotalImportado.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LblTotalImportado.Cursor = System.Windows.Forms.Cursors.Arrow
-        Me.LblTotalImportado.Font = New System.Drawing.Font("Verdana", 9.5!)
-        Me.LblTotalImportado.ForeColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
-        Me.LblTotalImportado.LinkLabel = False
-        Me.LblTotalImportado.Location = New System.Drawing.Point(374, 469)
-        Me.LblTotalImportado.Name = "LblTotalImportado"
-        Me.LblTotalImportado.Size = New System.Drawing.Size(174, 18)
-        Me.LblTotalImportado.Style = PROJETOBASE.LabelStyle.Normal
-        Me.LblTotalImportado.TabIndex = 143
-        Me.LblTotalImportado.Text = "0"
-        Me.LblTotalImportado.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'BarraProgresso
         '
@@ -1642,6 +1709,21 @@ Partial Class FormInventarios
         Me.BarraProgresso.TabIndex = 125
         Me.BarraProgresso.Visible = False
         '
+        'LblTotalImportado
+        '
+        Me.LblTotalImportado.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.LblTotalImportado.Cursor = System.Windows.Forms.Cursors.Arrow
+        Me.LblTotalImportado.Font = New System.Drawing.Font("Verdana", 9.5!)
+        Me.LblTotalImportado.ForeColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
+        Me.LblTotalImportado.LinkLabel = False
+        Me.LblTotalImportado.Location = New System.Drawing.Point(374, 469)
+        Me.LblTotalImportado.Name = "LblTotalImportado"
+        Me.LblTotalImportado.Size = New System.Drawing.Size(174, 18)
+        Me.LblTotalImportado.Style = PROJETOBASE.LabelStyle.Normal
+        Me.LblTotalImportado.TabIndex = 143
+        Me.LblTotalImportado.Text = "0"
+        Me.LblTotalImportado.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
         'DgvImportBens
         '
         Me.DgvImportBens.AllowUserToAddRows = False
@@ -1662,13 +1744,13 @@ Partial Class FormInventarios
         Me.DgvImportBens.ColumnHeaderFont = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DgvImportBens.ColumnHeaderHeight = 40
         Me.DgvImportBens.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle22.BackColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
-        DataGridViewCellStyle22.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle22.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle22.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
-        DataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DgvImportBens.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle22
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle7.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgvImportBens.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle7
         Me.DgvImportBens.ColumnHeadersHeight = 40
         Me.DgvImportBens.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.DgvImportBens.ColumnHeaderTextColor = System.Drawing.Color.White
@@ -1684,26 +1766,26 @@ Partial Class FormInventarios
         Me.DgvImportBens.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.DgvImportBens.RowHeaderColor = System.Drawing.Color.WhiteSmoke
         Me.DgvImportBens.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
-        DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle23.BackColor = System.Drawing.Color.WhiteSmoke
-        DataGridViewCellStyle23.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle23.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle23.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(73, Byte), Integer), CType(CType(101, Byte), Integer), CType(CType(108, Byte), Integer))
-        DataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DgvImportBens.RowHeadersDefaultCellStyle = DataGridViewCellStyle23
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle8.BackColor = System.Drawing.Color.WhiteSmoke
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle8.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(73, Byte), Integer), CType(CType(101, Byte), Integer), CType(CType(108, Byte), Integer))
+        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DgvImportBens.RowHeadersDefaultCellStyle = DataGridViewCellStyle8
         Me.DgvImportBens.RowHeadersVisible = False
         Me.DgvImportBens.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
         Me.DgvImportBens.RowHeight = 25
         Me.DgvImportBens.RowsColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(252, Byte), Integer), CType(CType(253, Byte), Integer))
-        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle24.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(252, Byte), Integer), CType(CType(253, Byte), Integer))
-        DataGridViewCellStyle24.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle24.ForeColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
-        DataGridViewCellStyle24.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
-        DataGridViewCellStyle24.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(73, Byte), Integer), CType(CType(101, Byte), Integer), CType(CType(108, Byte), Integer))
-        DataGridViewCellStyle24.SelectionForeColor = System.Drawing.Color.WhiteSmoke
-        Me.DgvImportBens.RowsDefaultCellStyle = DataGridViewCellStyle24
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(252, Byte), Integer), CType(CType(253, Byte), Integer))
+        DataGridViewCellStyle9.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
+        DataGridViewCellStyle9.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
+        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(73, Byte), Integer), CType(CType(101, Byte), Integer), CType(CType(108, Byte), Integer))
+        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.WhiteSmoke
+        Me.DgvImportBens.RowsDefaultCellStyle = DataGridViewCellStyle9
         Me.DgvImportBens.RowsTextColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
         Me.DgvImportBens.RowTemplate.Height = 25
         Me.DgvImportBens.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(73, Byte), Integer), CType(CType(101, Byte), Integer), CType(CType(108, Byte), Integer))
@@ -1845,7 +1927,7 @@ Partial Class FormInventarios
         Me.LblAviso.Image = CType(resources.GetObject("LblAviso.Image"), System.Drawing.Image)
         Me.LblAviso.Location = New System.Drawing.Point(13, 249)
         Me.LblAviso.Name = "LblAviso"
-        Me.LblAviso.Size = New System.Drawing.Size(173, 223)
+        Me.LblAviso.Size = New System.Drawing.Size(179, 214)
         Me.LblAviso.TabIndex = 125
         Me.LblAviso.Text = "É de suma importância obter os dados atualizados do SIGA. Você pode efetuar a imp" &
     "ortação dos bens agora clicando no botão importar."
@@ -2021,9 +2103,6 @@ Partial Class FormInventarios
         '
         'PnlInventarioDireito
         '
-        Me.PnlInventarioDireito.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PnlInventarioDireito.BackColor = System.Drawing.Color.FromArgb(CType(CType(205, Byte), Integer), CType(CType(212, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.PnlInventarioDireito.BorderRadius = 0
         Me.PnlInventarioDireito.Controls.Add(Me.BtnMenuLateral)
@@ -2040,9 +2119,10 @@ Partial Class FormInventarios
         Me.PnlInventarioDireito.Controls.Add(Me.RjLabel47)
         Me.PnlInventarioDireito.Controls.Add(Me.DgvInventarioBens)
         Me.PnlInventarioDireito.Customizable = False
-        Me.PnlInventarioDireito.Location = New System.Drawing.Point(234, 3)
+        Me.PnlInventarioDireito.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PnlInventarioDireito.Location = New System.Drawing.Point(225, 0)
         Me.PnlInventarioDireito.Name = "PnlInventarioDireito"
-        Me.PnlInventarioDireito.Size = New System.Drawing.Size(713, 487)
+        Me.PnlInventarioDireito.Size = New System.Drawing.Size(725, 490)
         Me.PnlInventarioDireito.TabIndex = 1
         '
         'BtnMenuLateral
@@ -2069,7 +2149,7 @@ Partial Class FormInventarios
         Me.LblInventarioNumero.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblInventarioNumero.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.LblInventarioNumero.LinkLabel = False
-        Me.LblInventarioNumero.Location = New System.Drawing.Point(415, 7)
+        Me.LblInventarioNumero.Location = New System.Drawing.Point(427, 7)
         Me.LblInventarioNumero.Name = "LblInventarioNumero"
         Me.LblInventarioNumero.Size = New System.Drawing.Size(291, 18)
         Me.LblInventarioNumero.Style = PROJETOBASE.LabelStyle.BarText
@@ -2124,7 +2204,7 @@ Partial Class FormInventarios
         Me.LblDgvInventarioBensTotal.Font = New System.Drawing.Font("Verdana", 9.5!)
         Me.LblDgvInventarioBensTotal.ForeColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
         Me.LblDgvInventarioBensTotal.LinkLabel = False
-        Me.LblDgvInventarioBensTotal.Location = New System.Drawing.Point(529, 461)
+        Me.LblDgvInventarioBensTotal.Location = New System.Drawing.Point(541, 464)
         Me.LblDgvInventarioBensTotal.Name = "LblDgvInventarioBensTotal"
         Me.LblDgvInventarioBensTotal.Size = New System.Drawing.Size(174, 18)
         Me.LblDgvInventarioBensTotal.Style = PROJETOBASE.LabelStyle.Normal
@@ -2150,7 +2230,7 @@ Partial Class FormInventarios
         Me.BtnInventarioPendencias.IconColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
         Me.BtnInventarioPendencias.IconFont = FontAwesome.Sharp.IconFont.[Auto]
         Me.BtnInventarioPendencias.IconSize = 24
-        Me.BtnInventarioPendencias.Location = New System.Drawing.Point(611, 29)
+        Me.BtnInventarioPendencias.Location = New System.Drawing.Point(623, 29)
         Me.BtnInventarioPendencias.Name = "BtnInventarioPendencias"
         Me.BtnInventarioPendencias.Size = New System.Drawing.Size(94, 49)
         Me.BtnInventarioPendencias.SkinBorderColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
@@ -2178,7 +2258,7 @@ Partial Class FormInventarios
         Me.BtnInventarioDadosCelular.IconColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
         Me.BtnInventarioDadosCelular.IconFont = FontAwesome.Sharp.IconFont.[Auto]
         Me.BtnInventarioDadosCelular.IconSize = 24
-        Me.BtnInventarioDadosCelular.Location = New System.Drawing.Point(513, 29)
+        Me.BtnInventarioDadosCelular.Location = New System.Drawing.Point(525, 29)
         Me.BtnInventarioDadosCelular.Name = "BtnInventarioDadosCelular"
         Me.BtnInventarioDadosCelular.Size = New System.Drawing.Size(94, 49)
         Me.BtnInventarioDadosCelular.SkinBorderColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
@@ -2206,7 +2286,7 @@ Partial Class FormInventarios
         Me.BtnInventarioScanner.IconColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
         Me.BtnInventarioScanner.IconFont = FontAwesome.Sharp.IconFont.[Auto]
         Me.BtnInventarioScanner.IconSize = 24
-        Me.BtnInventarioScanner.Location = New System.Drawing.Point(415, 29)
+        Me.BtnInventarioScanner.Location = New System.Drawing.Point(427, 29)
         Me.BtnInventarioScanner.Name = "BtnInventarioScanner"
         Me.BtnInventarioScanner.Size = New System.Drawing.Size(94, 49)
         Me.BtnInventarioScanner.SkinBorderColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
@@ -2328,13 +2408,13 @@ Partial Class FormInventarios
         Me.DgvInventarioBens.ColumnHeaderFont = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DgvInventarioBens.ColumnHeaderHeight = 40
         Me.DgvInventarioBens.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
-        DataGridViewCellStyle13.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle13.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle13.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
-        DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DgvInventarioBens.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
+        DataGridViewCellStyle10.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle10.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle10.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
+        DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgvInventarioBens.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle10
         Me.DgvInventarioBens.ColumnHeadersHeight = 40
         Me.DgvInventarioBens.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.DgvInventarioBens.ColumnHeaderTextColor = System.Drawing.Color.White
@@ -2349,39 +2429,37 @@ Partial Class FormInventarios
         Me.DgvInventarioBens.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.DgvInventarioBens.RowHeaderColor = System.Drawing.Color.WhiteSmoke
         Me.DgvInventarioBens.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle14.BackColor = System.Drawing.Color.WhiteSmoke
-        DataGridViewCellStyle14.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle14.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(73, Byte), Integer), CType(CType(101, Byte), Integer), CType(CType(108, Byte), Integer))
-        DataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DgvInventarioBens.RowHeadersDefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle11.BackColor = System.Drawing.Color.WhiteSmoke
+        DataGridViewCellStyle11.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle11.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(73, Byte), Integer), CType(CType(101, Byte), Integer), CType(CType(108, Byte), Integer))
+        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DgvInventarioBens.RowHeadersDefaultCellStyle = DataGridViewCellStyle11
         Me.DgvInventarioBens.RowHeadersVisible = False
         Me.DgvInventarioBens.RowHeadersWidth = 25
         Me.DgvInventarioBens.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DgvInventarioBens.RowHeight = 25
         Me.DgvInventarioBens.RowsColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(252, Byte), Integer), CType(CType(253, Byte), Integer))
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(252, Byte), Integer), CType(CType(253, Byte), Integer))
-        DataGridViewCellStyle15.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle15.ForeColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
-        DataGridViewCellStyle15.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
-        DataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(73, Byte), Integer), CType(CType(101, Byte), Integer), CType(CType(108, Byte), Integer))
-        DataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.WhiteSmoke
-        Me.DgvInventarioBens.RowsDefaultCellStyle = DataGridViewCellStyle15
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(252, Byte), Integer), CType(CType(253, Byte), Integer))
+        DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle12.ForeColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
+        DataGridViewCellStyle12.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
+        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(73, Byte), Integer), CType(CType(101, Byte), Integer), CType(CType(108, Byte), Integer))
+        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.WhiteSmoke
+        Me.DgvInventarioBens.RowsDefaultCellStyle = DataGridViewCellStyle12
         Me.DgvInventarioBens.RowsTextColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
         Me.DgvInventarioBens.RowTemplate.Height = 25
         Me.DgvInventarioBens.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(73, Byte), Integer), CType(CType(101, Byte), Integer), CType(CType(108, Byte), Integer))
         Me.DgvInventarioBens.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvInventarioBens.SelectionTextColor = System.Drawing.Color.WhiteSmoke
-        Me.DgvInventarioBens.Size = New System.Drawing.Size(700, 371)
+        Me.DgvInventarioBens.Size = New System.Drawing.Size(712, 374)
         Me.DgvInventarioBens.TabIndex = 146
         '
         'PnlInventarioEsquerdo
         '
-        Me.PnlInventarioEsquerdo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.PnlInventarioEsquerdo.BackColor = System.Drawing.Color.FromArgb(CType(CType(205, Byte), Integer), CType(CType(212, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.PnlInventarioEsquerdo.BorderRadius = 0
         Me.PnlInventarioEsquerdo.Controls.Add(Me.BtnEditarResponsaveis)
@@ -2407,9 +2485,10 @@ Partial Class FormInventarios
         Me.PnlInventarioEsquerdo.Controls.Add(Me.RjLabel43)
         Me.PnlInventarioEsquerdo.Controls.Add(Me.RjLabel41)
         Me.PnlInventarioEsquerdo.Customizable = False
-        Me.PnlInventarioEsquerdo.Location = New System.Drawing.Point(3, 3)
+        Me.PnlInventarioEsquerdo.Dock = System.Windows.Forms.DockStyle.Left
+        Me.PnlInventarioEsquerdo.Location = New System.Drawing.Point(0, 0)
         Me.PnlInventarioEsquerdo.Name = "PnlInventarioEsquerdo"
-        Me.PnlInventarioEsquerdo.Size = New System.Drawing.Size(225, 492)
+        Me.PnlInventarioEsquerdo.Size = New System.Drawing.Size(225, 490)
         Me.PnlInventarioEsquerdo.TabIndex = 0
         '
         'BtnEditarResponsaveis
@@ -2441,7 +2520,6 @@ Partial Class FormInventarios
         '
         'BtnInventarioImportar
         '
-        Me.BtnInventarioImportar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnInventarioImportar.BackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(245, Byte), Integer), CType(CType(249, Byte), Integer))
         Me.BtnInventarioImportar.BorderRadius = 0
         Me.BtnInventarioImportar.BorderSize = 1
@@ -2469,7 +2547,6 @@ Partial Class FormInventarios
         '
         'BtnInventarioAtualizarDados
         '
-        Me.BtnInventarioAtualizarDados.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnInventarioAtualizarDados.BackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(245, Byte), Integer), CType(CType(249, Byte), Integer))
         Me.BtnInventarioAtualizarDados.BorderRadius = 0
         Me.BtnInventarioAtualizarDados.BorderSize = 1
@@ -2497,7 +2574,7 @@ Partial Class FormInventarios
         '
         'BtnInventarioFinalizar
         '
-        Me.BtnInventarioFinalizar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.BtnInventarioFinalizar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnInventarioFinalizar.BackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(245, Byte), Integer), CType(CType(249, Byte), Integer))
         Me.BtnInventarioFinalizar.BorderRadius = 0
@@ -2514,7 +2591,7 @@ Partial Class FormInventarios
         Me.BtnInventarioFinalizar.IconColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
         Me.BtnInventarioFinalizar.IconFont = FontAwesome.Sharp.IconFont.[Auto]
         Me.BtnInventarioFinalizar.IconSize = 24
-        Me.BtnInventarioFinalizar.Location = New System.Drawing.Point(3, 428)
+        Me.BtnInventarioFinalizar.Location = New System.Drawing.Point(3, 426)
         Me.BtnInventarioFinalizar.Name = "BtnInventarioFinalizar"
         Me.BtnInventarioFinalizar.Size = New System.Drawing.Size(214, 57)
         Me.BtnInventarioFinalizar.SkinBorderColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
@@ -2895,6 +2972,12 @@ Partial Class FormInventarios
         Me.ToolStripMenuTudo.Size = New System.Drawing.Size(115, 22)
         Me.ToolStripMenuTudo.Text = "Tudo"
         '
+        'Timer1
+        '
+        '
+        'Timer2
+        '
+        '
         'FormInventarios
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -3078,4 +3161,9 @@ Partial Class FormInventarios
     Friend WithEvents RjLabel47 As RJLabel
     Friend WithEvents DgvInventarioBens As RJDataGridView
     Friend WithEvents BtnMenuLateral As RJImageColorOverlay
+    Friend WithEvents Timer1 As Timer
+    Friend WithEvents Timer2 As Timer
+    Friend WithEvents BtnSigaOk As RJButton
+    Friend WithEvents TggSiga_Ok As RJToggleButton
+    Friend WithEvents RjLabel16 As RJLabel
 End Class

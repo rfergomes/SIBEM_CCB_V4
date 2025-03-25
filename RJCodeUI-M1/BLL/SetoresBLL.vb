@@ -2,6 +2,8 @@
 'Data:                  04/10/2024
 'Autor:                 Rodrigo Fernando Gomes Lima
 
+Imports System.Text
+
 Public Class SetoresBLL
     Private ReadOnly setoresDAL As SetoresDAL
     Private ReadOnly connectionFactory As ConnectionFactory
@@ -74,6 +76,15 @@ Public Class SetoresBLL
             MsgBox("Erro ao buscar Setor." & vbNewLine & ex.ToString() & vbNewLine & ex.Message, MsgBoxStyle.Critical, ex.TargetSite.ToString)
         End Try
         Return Nothing
+    End Function
+
+    Public Function BuscarListaDt() As DataTable
+        Try
+            Return setoresDAL.GetAllDt()
+        Catch ex As Exception
+            MsgBox("Erro ao buscar Lista de Setores." & vbNewLine & ex.ToString() & vbNewLine & ex.Message, MsgBoxStyle.Critical, ex.TargetSite.ToString)
+            Return Nothing
+        End Try
     End Function
 
 End Class

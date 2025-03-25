@@ -3,7 +3,7 @@
 'Autor:                 Rodrigo Fernando Gomes Lima
 
 Public Class InventariosOnDTO
-    Public Property Id As Integer
+    Public Property Id As String
     Public Property Id_Igreja As String
     Public Property Igreja As String
     Public Property Cod_Setor As String
@@ -24,6 +24,7 @@ Public Class InventariosOnDTO
     Public Property Inventario_Teste As Boolean
     Public Property Pdf As String
     Public Property Id_Admlc As Integer
+    Public Property Siga_Ok As Boolean
     Public Property Data_Alteracao As Date
 
 

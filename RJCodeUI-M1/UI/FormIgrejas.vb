@@ -179,7 +179,7 @@ Public Class FormIgrejas
         DgvInventarios.DataSource = Nothing
 
         ' Busca os dados de acordo com o filtro (se houver)
-        InventarioList.AddRange(InventarioBLL.BuscarTodos("", "", "", Igreja))
+        InventarioList.AddRange(InventarioBLL.BuscarTodos("", "", "", False, Igreja))
 
         ' Define o DataSource apenas com as colunas que você quer exibir
         DgvInventarios.AutoGenerateColumns = False

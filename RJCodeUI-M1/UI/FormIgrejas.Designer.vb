@@ -194,6 +194,7 @@ Partial Class FormIgrejas
         Me.DgvIgrejas.ReadOnly = True
         Me.DgvIgrejas.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.DgvIgrejas.RowHeaderColor = System.Drawing.Color.WhiteSmoke
+        Me.DgvIgrejas.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
         DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle5.BackColor = System.Drawing.Color.WhiteSmoke
         DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -313,7 +314,7 @@ Partial Class FormIgrejas
         Me.DgvInventarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.DgvInventarios.ColumnHeaderTextColor = System.Drawing.Color.White
         Me.DgvInventarios.ColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.DgvInventarios.Customizable = False
+        Me.DgvInventarios.Customizable = True
         Me.DgvInventarios.DgvBackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(252, Byte), Integer), CType(CType(253, Byte), Integer))
         Me.DgvInventarios.EnableHeadersVisualStyles = False
         Me.DgvInventarios.GridColor = System.Drawing.Color.Gainsboro
@@ -339,12 +340,12 @@ Partial Class FormIgrejas
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(252, Byte), Integer), CType(CType(253, Byte), Integer))
         DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Gray
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
         DataGridViewCellStyle3.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
         DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(73, Byte), Integer), CType(CType(101, Byte), Integer), CType(CType(108, Byte), Integer))
         DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.WhiteSmoke
         Me.DgvInventarios.RowsDefaultCellStyle = DataGridViewCellStyle3
-        Me.DgvInventarios.RowsTextColor = System.Drawing.Color.Gray
+        Me.DgvInventarios.RowsTextColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
         Me.DgvInventarios.RowTemplate.Height = 25
         Me.DgvInventarios.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(73, Byte), Integer), CType(CType(101, Byte), Integer), CType(CType(108, Byte), Integer))
         Me.DgvInventarios.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
