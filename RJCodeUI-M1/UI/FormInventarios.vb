@@ -4,6 +4,7 @@ Imports System.Runtime.InteropServices
 Imports DynamicData
 Imports Mysqlx
 Imports Vip.Notification
+Imports System.Windows.Forms
 
 Public Class FormInventarios
     Private ReadOnly setoresBLL As SetoresBLL
@@ -489,6 +490,7 @@ Public Class FormInventarios
         End If
     End Sub
 
+
 #End Region 'Métodos
 
 #End Region 'TAB HOME
@@ -937,7 +939,23 @@ Public Class FormInventarios
     End Sub
 
     Private Sub CboInventarioConsultas_OnSelectedIndexChanged(sender As Object, e As EventArgs) Handles CboInventarioConsultas.OnSelectedIndexChanged
+        Dim Consulta As String = CboInventarioConsultas.Text
+        Dim Funcoes As String = " - (Para Excluir, Exportar, Copiar, selecione um item clicando com botão direito do mouse)"
         LoadPageDatagridViewInventarioBens(TxtInventarioPesquisar.Text, CboInventarioConsultas.Text)
+        If Consulta = "BENS TOTALIZADOS" Then
+            LblInventarioTituloDatagrid.Text = $"LISTA DE BENS TOTALIZADOS"
+        ElseIf Consulta = "BENS LOCALIZADOS" Then
+            LblInventarioTituloDatagrid.Text = $"LISTA DE BENS ENCONTRADOS {Funcoes}"
+        ElseIf Consulta = "BENS PENDENTES" Then
+            LblInventarioTituloDatagrid.Text = $"LISTA DE BENS NÃO LOCALIZADOS"
+        ElseIf Consulta = "LIDOS REPETIDOS" Then
+            LblInventarioTituloDatagrid.Text = $"LISTA DE BENS REPETIDOS"
+        ElseIf Consulta = "DEPENDÊNCIAS" Then
+            LblInventarioTituloDatagrid.Text = "LISTA DE DEPENDÊNCIAS - (Para remover uma dependência, selecione e aperte a tecla delete)"
+        Else
+            LblInventarioTituloDatagrid.Text = $"LISTA GERAL DE BENS {Funcoes}"
+        End If
+
     End Sub
 
     Private Sub BtnInventarioLimpar_Click(sender As Object, e As EventArgs) Handles BtnInventarioLimpar.Click
@@ -998,12 +1016,24 @@ Public Class FormInventarios
 
     Public Sub LoadPageDatagridViewInventarioBens(Optional TextoPesquisar As String = "", Optional Consulta As String = "")
         Dim inventarioDetalhesBLL As New InventarioDetalhesBLL(SQLite)
+        Dim Dependencia As New DataTable()
 
         ' Limpa a lista antes de adicionar novos itens
         detalhesLista.Clear()
 
         ' Busca os dados e adiciona à BindingList
         detalhesLista = New BindingList(Of InventarioDetalhesDTO)(inventarioDetalhesBLL.BuscarTodos(SanitizeString(TextoPesquisar), Consulta))
+
+        Dim novaLista As New List(Of InventarioDetalhesDTO)
+        Dim grupos = detalhesLista.GroupBy(Function(x) x.Dependencia)
+
+        For Each grupo In grupos
+            ' Adiciona uma linha "cabeçalho" para a categoria
+            novaLista.Add(New InventarioDetalhesDTO With {.Dependencia = $"[--- {grupo.Key} ---]", .Id_dependencia = 0})
+
+            ' Adiciona os itens da categoria
+            novaLista.AddRange(grupo)
+        Next
 
         If String.IsNullOrEmpty(Consulta) Then
             With DgvInventarioBens
@@ -1018,16 +1048,18 @@ Public Class FormInventarios
                 .Columns(0).Visible = False
                 .Columns("id_inventario").Visible = False
                 .Columns("id_dependencia").Visible = False
-                .Columns("dependencia").Visible = False
-                .Columns("acao").Visible = False
+                .Columns("estado").Visible = False
                 .Columns("observacao").Visible = False
                 .Columns("qtde").Visible = False
                 .Columns("Id_bem").HeaderText = "Etiqueta"
                 .Columns("bem").HeaderText = "Bem Móvel"
-                .Columns("contagem").HeaderText = "Cont"
+                .Columns("dependencia").HeaderText = "Dependência"
+                .Columns("acao").HeaderText = "Situação"
+                .Columns("contagem").HeaderText = "Lido"
                 .Columns("bem").AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
                 .Columns("Id_bem").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-                .Columns("estado").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                .Columns("dependencia").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                .Columns("acao").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
                 .Columns("contagem").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
                 .AllowUserToOrderColumns = True
                 'Limpar seleção automática da linha 1
@@ -1048,7 +1080,7 @@ Public Class FormInventarios
                 .Columns("id_inventario").Visible = False
                 .Columns("id_bem").Visible = False
                 .Columns("id_dependencia").Visible = False
-                .Columns("dependencia").Visible = False
+                .Columns("dependencia").Visible = True
                 .Columns("estado").Visible = False
                 .Columns("acao").Visible = False
                 .Columns("observacao").Visible = False
@@ -1078,7 +1110,7 @@ Public Class FormInventarios
                 .Columns("observacao").Visible = False
                 .Columns("Id_bem").HeaderText = "Etiqueta"
                 .Columns("bem").HeaderText = "Bem Móvel"
-                .Columns("contagem").HeaderText = "Cont"
+                .Columns("contagem").HeaderText = "Lido"
                 .Columns("qtde").Visible = False
                 .Columns("bem").AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
                 .Columns("Id_bem").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
@@ -1096,7 +1128,7 @@ Public Class FormInventarios
                 ' Define o DataSource apenas com as colunas que você quer exibir
                 .AutoGenerateColumns = True
                 ' Vincula a lista ao DataGridView
-                .DataSource = detalhesLista
+                .DataSource = New BindingList(Of InventarioDetalhesDTO)(novaLista) 'detalhesLista
                 .Columns(0).Visible = False
                 .Columns("id_inventario").Visible = False
                 .Columns("id_dependencia").Visible = False
@@ -1132,7 +1164,7 @@ Public Class FormInventarios
                 .Columns("qtde").Visible = False
                 .Columns("Id_bem").HeaderText = "Etiqueta"
                 .Columns("bem").HeaderText = "Bem Móvel"
-                .Columns("contagem").HeaderText = "Cont"
+                .Columns("contagem").HeaderText = "Lido"
                 .Columns("bem").AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
                 .Columns("Id_bem").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
                 .Columns("dependencia").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
@@ -1141,15 +1173,46 @@ Public Class FormInventarios
                 'Limpar seleção automática da linha 1
                 .ClearSelection()
             End With
+        ElseIf Consulta = "DEPENDÊNCIAS" Then
+
+            ' Obtém os valores únicos de id_dependencia e sua respectiva dependencia
+            Dim idsUnicos As List(Of (Integer?, String)) = detalhesLista _
+    .Select(Function(d) (d.Id_dependencia, d.Dependencia)).Distinct().ToList()
+
+            ' Cria um DataTable para armazenar os valores únicos
+
+            Dependencia.Columns.Add("Código", GetType(Integer)) ' Define a coluna do ID
+            Dependencia.Columns.Add("Dependência", GetType(String))    ' Define a coluna do Nome
+
+            ' Preenche a tabela com os valores únicos
+            For Each item In idsUnicos
+                Dependencia.Rows.Add(item.Item1, item.Item2)
+            Next
+
+            With DgvInventarioBens
+                .DataSource = Nothing
+                ' Limpa qualquer configuração anterior de colunas
+                .Columns.Clear()
+                ' Define o DataSource apenas com as colunas que você quer exibir
+                .AutoGenerateColumns = True
+                ' Vincula a lista ao DataGridView
+                .DataSource = Dependencia
+                .Columns(0).Visible = True
+                .Columns("Código").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                .Columns("Dependência").AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+                .AllowUserToOrderColumns = True
+                'Limpar seleção automática da linha 1
+                .ClearSelection()
+            End With
         End If
-        LblDgvInventarioBensTotal.Text = detalhesLista.Count & " item(ns)"
+        LblDgvInventarioBensTotal.Text = If(Dependencia.Rows.Count > 0, Dependencia.Rows.Count, detalhesLista.Count) & " item(ns)"
     End Sub
 
     Private Sub DgvInventarioBens_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles DgvInventarioBens.CellFormatting
         'Console.WriteLine("Coluna: " & e.ColumnIndex.ToString)
 
         ' Verifica se é a coluna "PENDENTE" (coluna de índice 6) e uma linha válida
-        If e.ColumnIndex = 6 AndAlso e.RowIndex >= 0 Then
+        If e.ColumnIndex = 7 AndAlso e.RowIndex >= 0 Then
             Dim linha As String = If(e.Value IsNot Nothing, CStr(e.Value), "") ' Converte para string e trata valores nulos
 
             ' Define a cor com base no valor da célula
@@ -1186,7 +1249,7 @@ Public Class FormInventarios
                     colIndex = e.ColumnIndex
 
                     ' Verifica se a célula é visível antes de defini-la como a célula atual
-                    DgvInventarioBens.CurrentCell = DgvInventarioBens.Rows(e.RowIndex).Cells(6)
+                    DgvInventarioBens.CurrentCell = DgvInventarioBens.Rows(e.RowIndex).Cells(2)
                     ' Exibe o menu de contexto no local do cursor
                     DdmInventarioBens.Show(Cursor.Position)
                     'End If
@@ -1194,6 +1257,39 @@ Public Class FormInventarios
             Catch ex As Exception
                 RJMessageBox.Show($"Sem opção de Menu para esta consulta. {vbNewLine & ex.Message}", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             End Try
+        End If
+    End Sub
+
+    Private Sub DgvInventarioBens_KeyDown(sender As Object, e As KeyEventArgs) Handles DgvInventarioBens.KeyDown
+        ' Verifica se a tecla pressionada foi a tecla Delete
+        If e.KeyCode = Keys.Delete Then
+            ' Verifica se há uma linha selecionada no DataGridView
+            If DgvInventarioBens.SelectedRows.Count > 0 Then
+                Try
+                    Dim inventarioDetalhesBLL As New InventarioDetalhesBLL(SQLite)
+
+                    ' Obtém o id_dependencia da linha selecionada
+                    Dim idDependencia As String = (DgvInventarioBens.SelectedRows(0).Cells("Código").Value)
+
+                    ' Remove a linha correspondente da lista sem recarregar o DataGridView
+                    Dim itemParaRemover = detalhesLista.FirstOrDefault(Function(x) x.Id_dependencia = idDependencia)
+                    ' Remove a linha correspondente da lista sem recarregar o DataGridView
+                    Dim itensParaRemover = detalhesLista.Where(Function(d) d.Id_dependencia = idDependencia).ToList()
+                    If itemParaRemover IsNot Nothing Then
+                        If RJMessageBox.Show("Deseja excluir todos os itens desta dependência?", "Atenção", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                            For Each item In itensParaRemover
+                                inventarioDetalhesBLL.Excluir(item.Id_Bem)
+                                detalhesLista.Remove(item)
+                            Next
+                        End If
+                    End If
+                Catch ex As Exception
+
+                End Try
+
+            Else
+                RJMessageBox.Show("Selecione uma dependência antes de excluir.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            End If
         End If
     End Sub
 
@@ -1208,38 +1304,41 @@ Public Class FormInventarios
             ' Obtém o índice da linha selecionada
             Dim rowIndex As Integer = DgvInventarioBens.SelectedRows(0).Index
 
-            ' Obtém o valor da célula (ID do bem) verificando se o índice está correto
-            Dim Id_bem As String = DgvInventarioBens.Rows(rowIndex).Cells("Id_bem").Value.ToString()
 
+            ' Obtém o valor da célula como String
+            Dim Id_bem As String = If(DgvInventarioBens.Rows(rowIndex).Cells(2).Value, "")
 
-            ' Instancia a classe de negócios
-            Dim InventarioDetalheBLL As New InventarioDetalhesBLL(SQLite)
-            Dim Item As InventarioDetalhesDTO = InventarioDetalheBLL.BuscarPorId(Id_bem)
+            If Not String.IsNullOrEmpty(Id_bem) Then
+                ' Instancia a classe de negócios
+                Dim InventarioDetalheBLL As New InventarioDetalhesBLL(SQLite)
+                Dim Item As InventarioDetalhesDTO = InventarioDetalheBLL.BuscarPorId(Id_bem)
 
-            ' Verifica se o item pode ser excluído
-            If Item IsNot Nothing AndAlso Item.Estado <> "OK" Then
-                InventarioDetalheBLL.Excluir(Item.Id_Bem)
-
-                ' Remove da lista vinculada ao DataGridView
-                Dim itemParaRemover As InventarioDetalhesDTO = detalhesLista.FirstOrDefault(Function(x) x.Id_Bem = Id_bem)
-                If itemParaRemover IsNot Nothing Then
-                    detalhesLista.Remove(itemParaRemover)
-                End If
-            Else
-                ' Confirmação caso o item já tenha sido localizado
-                If RJMessageBox.Show("Este Bem Móvel já foi localizado." & vbNewLine & "Tem certeza que quer excluí-lo?", "Atenção", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = vbYes Then
+                ' Verifica se o item pode ser excluído
+                If Item IsNot Nothing AndAlso Item.Estado <> "OK" Then
                     InventarioDetalheBLL.Excluir(Item.Id_Bem)
 
-                    ' Remove da BindingList
+                    ' Remove da lista vinculada ao DataGridView
                     Dim itemParaRemover As InventarioDetalhesDTO = detalhesLista.FirstOrDefault(Function(x) x.Id_Bem = Id_bem)
                     If itemParaRemover IsNot Nothing Then
                         detalhesLista.Remove(itemParaRemover)
                     End If
+                Else
+                    ' Confirmação caso o item já tenha sido localizado
+                    If RJMessageBox.Show("Este Bem Móvel já foi localizado." & vbNewLine & "Tem certeza que quer excluí-lo?", "Atenção", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = vbYes Then
+                        InventarioDetalheBLL.Excluir(Item.Id_Bem)
+
+                        ' Remove da BindingList
+                        Dim itemParaRemover As InventarioDetalhesDTO = detalhesLista.FirstOrDefault(Function(x) x.Id_Bem = Id_bem)
+                        If itemParaRemover IsNot Nothing Then
+                            detalhesLista.Remove(itemParaRemover)
+                        End If
+                    End If
                 End If
+
+                ' Atualiza estatísticas após exclusão
+                AtualizaEstatisticas()
             End If
 
-            ' Atualiza estatísticas após exclusão
-            AtualizaEstatisticas()
 
         Catch ex As OverflowException
             RJMessageBox.Show("O valor do ID excede o limite permitido.", "Erro de Estouro", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -1260,36 +1359,39 @@ Public Class FormInventarios
             Dim rowIndex As Integer = DgvInventarioBens.SelectedRows(0).Index
 
             ' Obtém o valor da célula como String
-            Dim Id_bem As String = DgvInventarioBens.Rows(rowIndex).Cells(2).Value.ToString()
+            Dim Id_bem As String = If(DgvInventarioBens.Rows(rowIndex).Cells(2).Value, "")
 
-            ' Instancia a classe de negócios
-            Dim InventarioDetalheBLL As New InventarioDetalhesBLL(SQLite)
-            Dim Item As InventarioDetalhesDTO = InventarioDetalheBLL.BuscarPorId(Id_bem)
+            If Not String.IsNullOrEmpty(Id_bem) Then
+                ' Instancia a classe de negócios
+                Dim InventarioDetalheBLL As New InventarioDetalhesBLL(SQLite)
+                Dim Item As InventarioDetalhesDTO = InventarioDetalheBLL.BuscarPorId(Id_bem)
 
-            ' Atualiza os valores
-            Item.Id_inventario = VarGlob.Inventario.Id
-            Item.Estado = "PENDENTE"
-            Item.Acao = "PENDENTE"
-            Item.Bem = String.Empty
-            Item.Id_dependencia = String.Empty
-            Item.Contagem = 0
+                ' Atualiza os valores
+                Item.Id_inventario = VarGlob.Inventario.Id
+                Item.Estado = "PENDENTE"
+                Item.Acao = "PENDENTE"
+                Item.Bem = String.Empty
+                Item.Id_dependencia = Nothing
+                Item.Contagem = 0
 
-            ' Atualiza no banco de dados
-            InventarioDetalheBLL.Atualizar(Item)
+                ' Atualiza no banco de dados
+                InventarioDetalheBLL.Atualizar(Item)
 
-            ' Atualiza diretamente na lista vinculada ao DataGridView
-            Dim itemParaAtualizar As InventarioDetalhesDTO = detalhesLista.FirstOrDefault(Function(x) x.Id_Bem = Id_bem)
-            If itemParaAtualizar IsNot Nothing Then
-                itemParaAtualizar.Estado = Item.Estado
-                itemParaAtualizar.Acao = Item.Acao
-                itemParaAtualizar.Contagem = Item.Contagem
+                ' Atualiza diretamente na lista vinculada ao DataGridView
+                Dim itemParaAtualizar As InventarioDetalhesDTO = detalhesLista.FirstOrDefault(Function(x) x.Id_Bem = Id_bem)
+                If itemParaAtualizar IsNot Nothing Then
+                    itemParaAtualizar.Estado = Item.Estado
+                    itemParaAtualizar.Acao = Item.Acao
+                    itemParaAtualizar.Contagem = Item.Contagem
+                End If
+
+                ' Atualiza estatísticas
+                AtualizaEstatisticas()
+
+                ' Força a atualização visual do DataGridView
+                DgvInventarioBens.Refresh()
             End If
 
-            ' Atualiza estatísticas
-            AtualizaEstatisticas()
-
-            ' Força a atualização visual do DataGridView
-            DgvInventarioBens.Refresh()
 
         Catch ex As OverflowException
             RJMessageBox.Show("Não foi possível reverter o estado deste Bem Móvel.", "Falha na Execução", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -1310,36 +1412,40 @@ Public Class FormInventarios
             Dim rowIndex As Integer = DgvInventarioBens.SelectedRows(0).Index
 
             ' Obtém o valor da célula como String
-            Dim Id_bem As String = DgvInventarioBens.Rows(rowIndex).Cells(2).Value.ToString()
+            Dim Valor = DgvInventarioBens.Rows(rowIndex).Cells(2).Value
+            Dim Id_bem As String = If(Valor, "")
 
-            ' Instancia a classe de negócios
-            Dim InventarioDetalheBLL As New InventarioDetalhesBLL(SQLite)
-            Dim Item As InventarioDetalhesDTO = InventarioDetalheBLL.BuscarPorId(Id_bem)
+            If Not String.IsNullOrEmpty(Id_bem) Then
+                ' Instancia a classe de negócios
+                Dim InventarioDetalheBLL As New InventarioDetalhesBLL(SQLite)
+                Dim Item As InventarioDetalhesDTO = InventarioDetalheBLL.BuscarPorId(Id_bem)
 
-            ' Atualiza os valores
-            Item.Id_inventario = VarGlob.Inventario.Id
-            Item.Estado = "OK"
-            Item.Acao = "OK"
-            Item.Bem = String.Empty
-            Item.Id_dependencia = String.Empty
-            Item.Contagem += 1
+                ' Atualiza os valores
+                Item.Id_inventario = VarGlob.Inventario.Id
+                Item.Estado = "OK"
+                Item.Acao = "OK"
+                Item.Bem = String.Empty
+                Item.Id_dependencia = Nothing
+                Item.Contagem += 1
 
-            ' Atualiza no banco de dados
-            InventarioDetalheBLL.Atualizar(Item)
+                ' Atualiza no banco de dados
+                InventarioDetalheBLL.Atualizar(Item)
 
-            ' Atualiza diretamente na lista vinculada ao DataGridView
-            Dim itemParaAtualizar As InventarioDetalhesDTO = detalhesLista.FirstOrDefault(Function(x) x.Id_Bem = Id_bem)
-            If itemParaAtualizar IsNot Nothing Then
-                itemParaAtualizar.Estado = Item.Estado
-                itemParaAtualizar.Acao = Item.Acao
-                itemParaAtualizar.Contagem = Item.Contagem
+                ' Atualiza diretamente na lista vinculada ao DataGridView
+                Dim itemParaAtualizar As InventarioDetalhesDTO = detalhesLista.FirstOrDefault(Function(x) x.Id_Bem = Id_bem)
+                If itemParaAtualizar IsNot Nothing Then
+                    itemParaAtualizar.Estado = Item.Estado
+                    itemParaAtualizar.Acao = Item.Acao
+                    itemParaAtualizar.Contagem = Item.Contagem
+                End If
+
+                ' Atualiza estatísticas
+                AtualizaEstatisticas()
+
+                ' Força a atualização visual do DataGridView
+                DgvInventarioBens.Refresh()
             End If
 
-            ' Atualiza estatísticas
-            AtualizaEstatisticas()
-
-            ' Força a atualização visual do DataGridView
-            DgvInventarioBens.Refresh()
 
         Catch ex As OverflowException
             RJMessageBox.Show("Não foi possível atualizar o estado deste Bem Móvel.", "Falha na Execução", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -1380,6 +1486,8 @@ Public Class FormInventarios
             .Items.Add("BENS LOCALIZADOS")
             .Items.Add("BENS PENDENTES")
             .Items.Add("LIDOS REPETIDOS")
+            .Items.Add("DEPENDÊNCIAS")
+            .AccessibleDescription = "DEPENDÊNCIAS"
         End With
     End Sub
 
@@ -1453,10 +1561,6 @@ Public Class FormInventarios
         End If
         Return defaultValue
     End Function
-
-
-
-
 
 
 #End Region 'FUNCOES GERAIS

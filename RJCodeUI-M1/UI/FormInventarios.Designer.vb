@@ -133,6 +133,7 @@ Partial Class FormInventarios
         Me.RjLabel34 = New PROJETOBASE.RJLabel()
         Me.TabPage4_Inventario = New System.Windows.Forms.TabPage()
         Me.PnlInventarioDireito = New PROJETOBASE.RJPanel()
+        Me.LblInventarioTituloDatagrid = New PROJETOBASE.RJLabel()
         Me.BtnMenuLateral = New PROJETOBASE.RJImageColorOverlay()
         Me.LblInventarioNumero = New PROJETOBASE.RJLabel()
         Me.RjLabel48 = New PROJETOBASE.RJLabel()
@@ -2105,6 +2106,7 @@ Partial Class FormInventarios
         '
         Me.PnlInventarioDireito.BackColor = System.Drawing.Color.FromArgb(CType(CType(205, Byte), Integer), CType(CType(212, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.PnlInventarioDireito.BorderRadius = 0
+        Me.PnlInventarioDireito.Controls.Add(Me.LblInventarioTituloDatagrid)
         Me.PnlInventarioDireito.Controls.Add(Me.BtnMenuLateral)
         Me.PnlInventarioDireito.Controls.Add(Me.LblInventarioNumero)
         Me.PnlInventarioDireito.Controls.Add(Me.RjLabel48)
@@ -2124,6 +2126,23 @@ Partial Class FormInventarios
         Me.PnlInventarioDireito.Name = "PnlInventarioDireito"
         Me.PnlInventarioDireito.Size = New System.Drawing.Size(725, 490)
         Me.PnlInventarioDireito.TabIndex = 1
+        '
+        'LblInventarioTituloDatagrid
+        '
+        Me.LblInventarioTituloDatagrid.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.LblInventarioTituloDatagrid.Cursor = System.Windows.Forms.Cursors.Arrow
+        Me.LblInventarioTituloDatagrid.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.LblInventarioTituloDatagrid.ForeColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
+        Me.LblInventarioTituloDatagrid.LinkLabel = False
+        Me.LblInventarioTituloDatagrid.Location = New System.Drawing.Point(10, 92)
+        Me.LblInventarioTituloDatagrid.Name = "LblInventarioTituloDatagrid"
+        Me.LblInventarioTituloDatagrid.Size = New System.Drawing.Size(708, 23)
+        Me.LblInventarioTituloDatagrid.Style = PROJETOBASE.LabelStyle.Custom
+        Me.LblInventarioTituloDatagrid.TabIndex = 159
+        Me.LblInventarioTituloDatagrid.Text = "LISTA GERAL DE BENS  - (Para Excluir, Exportar, Copiar, selecione um item clicand" &
+    "o com botão direito do mouse)"
+        Me.LblInventarioTituloDatagrid.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'BtnMenuLateral
         '
@@ -2423,7 +2442,7 @@ Partial Class FormInventarios
         Me.DgvInventarioBens.DgvBackColor = System.Drawing.Color.White
         Me.DgvInventarioBens.EnableHeadersVisualStyles = False
         Me.DgvInventarioBens.GridColor = System.Drawing.Color.Gainsboro
-        Me.DgvInventarioBens.Location = New System.Drawing.Point(6, 87)
+        Me.DgvInventarioBens.Location = New System.Drawing.Point(6, 115)
         Me.DgvInventarioBens.Name = "DgvInventarioBens"
         Me.DgvInventarioBens.ReadOnly = True
         Me.DgvInventarioBens.RightToLeft = System.Windows.Forms.RightToLeft.No
@@ -2455,7 +2474,7 @@ Partial Class FormInventarios
         Me.DgvInventarioBens.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(73, Byte), Integer), CType(CType(101, Byte), Integer), CType(CType(108, Byte), Integer))
         Me.DgvInventarioBens.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DgvInventarioBens.SelectionTextColor = System.Drawing.Color.WhiteSmoke
-        Me.DgvInventarioBens.Size = New System.Drawing.Size(712, 374)
+        Me.DgvInventarioBens.Size = New System.Drawing.Size(712, 346)
         Me.DgvInventarioBens.TabIndex = 146
         '
         'PnlInventarioEsquerdo
@@ -3166,4 +3185,5 @@ Partial Class FormInventarios
     Friend WithEvents BtnSigaOk As RJButton
     Friend WithEvents TggSiga_Ok As RJToggleButton
     Friend WithEvents RjLabel16 As RJLabel
+    Friend WithEvents LblInventarioTituloDatagrid As RJLabel
 End Class

@@ -223,6 +223,7 @@ Partial Class FormRelatorios
         'RbtSetor
         '
         Me.RbtSetor.AutoSize = True
+        Me.RbtSetor.Checked = True
         Me.RbtSetor.CheckedColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
         Me.RbtSetor.Cursor = System.Windows.Forms.Cursors.Hand
         Me.RbtSetor.Customizable = False
@@ -253,7 +254,6 @@ Partial Class FormRelatorios
         Me.RbtMes.Padding = New System.Windows.Forms.Padding(10, 0, 0, 0)
         Me.RbtMes.Size = New System.Drawing.Size(87, 21)
         Me.RbtMes.TabIndex = 3
-        Me.RbtMes.TabStop = True
         Me.RbtMes.Text = "Por Mês"
         Me.RbtMes.UnCheckedColor = System.Drawing.Color.FromArgb(CType(CType(165, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(165, Byte), Integer))
         Me.RbtMes.UseVisualStyleBackColor = True

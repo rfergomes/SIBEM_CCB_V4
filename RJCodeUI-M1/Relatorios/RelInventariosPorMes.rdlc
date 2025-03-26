@@ -2163,12 +2163,12 @@
             <TablixMember>
               <Group Name="Group1">
                 <GroupExpressions>
-                  <GroupExpression>=MonthName(Month(Fields!Data.Value),false)</GroupExpression>
+                  <GroupExpression>=UCase(MonthName(Month(Fields!Data.Value),true)) &amp; "/" &amp; Year(Fields!Data.Value)</GroupExpression>
                 </GroupExpressions>
               </Group>
               <SortExpressions>
                 <SortExpression>
-                  <Value>=MonthName(Month(Fields!Data.Value),false)</Value>
+                  <Value>=Fields!Data.Value</Value>
                 </SortExpression>
               </SortExpressions>
               <TablixMembers>
@@ -2210,7 +2210,15 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
+        <RepeatColumnHeaders>true</RepeatColumnHeaders>
+        <RepeatRowHeaders>true</RepeatRowHeaders>
+        <FixedColumnHeaders>true</FixedColumnHeaders>
+        <FixedRowHeaders>true</FixedRowHeaders>
+        <KeepTogether>true</KeepTogether>
         <DataSetName>DtSrcInventarios</DataSetName>
+        <PageBreak>
+          <BreakLocation>End</BreakLocation>
+        </PageBreak>
         <Top>0.21552cm</Top>
         <Left>0.09525cm</Left>
         <Height>5.4cm</Height>

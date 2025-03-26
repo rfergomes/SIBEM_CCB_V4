@@ -87,6 +87,10 @@ Public Class FormInventarioPendencias
                         'Dependencia = String.Empty
 
                     Else
+                        If RbtImprimir.Checked Then RbtImprimir_Click(sender, e)
+                        If RbtBipar.Checked Then RbtBipar_Click(sender, e)
+                        If RbtAlterar.Checked Then RbtAlterar_Click(sender, e)
+                        If RbtExcluir.Checked Then RbtExcluir_Click(sender, e)
                         Dim dependencia As DependenciasDTO = dependenciasBLL.BuscarPorNome(Pendentes.Dependencia)
                         ' Popula os TextBoxs com os valores das células da linha selecionada
                         LblSituacao.Text = Pendentes.Acao
@@ -277,7 +281,7 @@ Public Class FormInventarioPendencias
         }
 
             inventarioDetalhesBLL.Inserir(BemNovo)
-
+            RbtNovo.Checked = False
         Else
             RJMessageBox.Show("Selecione um item da lista", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Exit Sub
@@ -297,7 +301,7 @@ Public Class FormInventarioPendencias
         Bem.Id_inventario = VarGlob.Id_Inventario_Ativo
         Bem.Acao = If(Acao = "ENCONTRADO", "OK", Acao)
         Bem.Estado = If(Acao = "ENCONTRADO", "OK", "PENDENTE")
-        Bem.Id_dependencia = If(Depend IsNot Nothing, Depend.Id, "")
+        Bem.Id_dependencia = If(Depend IsNot Nothing, Depend.Id, Nothing)
         Bem.Bem = String.Empty
         Bem.Observacao = observacao
 

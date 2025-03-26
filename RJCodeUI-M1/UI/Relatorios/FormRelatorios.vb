@@ -21,6 +21,8 @@ Public Class FormRelatorios
         ReportViewer1.Reset()
         ReportViewer1.RefreshReport()
         PopularComboBoxSetores()
+        DtpInicio.Value = New Date(Year(Now()), 1, 1)
+        DtpFim.Value = Now
     End Sub
 
     Private Sub BtnGerarRelatorio_Click(sender As Object, e As EventArgs) Handles BtnGerarRelatorio.Click
@@ -143,7 +145,7 @@ Public Class FormRelatorios
     ''' Restaura os filtros e limpa o ReportViewer
     ''' </summary>
     Private Sub Reset()
-        RbtSetor.Checked = False
+        RbtSetor.Checked = True
         RbtMes.Checked = False
         CboSetor.SelectedIndex = -1
         CboSetor.SelectedValue = Nothing
