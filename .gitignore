@@ -366,3 +366,4 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /RJCodeUI-M1/Banco_.db
+/RJCodeUI-M1/Banco.db
