@@ -17,7 +17,7 @@ Public Class InventariosOnBLL
         InventariosOnDAL = New InventariosOnDAL(connectionFactory)
     End Sub
 
-    Public Function Inserir(inventarios As InventariosOnDTO) As Long
+    Public Function Inserir(inventarios As InventariosOnDTO) As Integer
         Try
             ' Validação dos dados do inventarios (opcional)
             Return InventariosOnDAL.Insert(inventarios)
@@ -35,14 +35,14 @@ Public Class InventariosOnBLL
         End Try
     End Sub
 
-    Public Sub Atualizar(inventarios As InventariosOnDTO)
+    Public Function Atualizar(inventarios As InventariosOnDTO) As Integer
         Try
             ' Validação dos dados do inventarios (opcional)
-            InventariosOnDAL.Update(inventarios)
+            Return InventariosOnDAL.Update(inventarios)
         Catch ex As Exception
             Throw New Exception("Erro ao atualizar Inventário." & vbNewLine & ex.Message, ex)
         End Try
-    End Sub
+    End Function
 
     Public Function BuscarPorId(inventariosId As String) As InventariosOnDTO
         Try

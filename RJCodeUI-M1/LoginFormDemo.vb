@@ -63,11 +63,11 @@
     Private Sub Login()
         Dim user = New UsuarioDTO()
         If String.IsNullOrWhiteSpace(txtUser.Text) Then
-            lblMessage.Text = "* Digite seu usuário"
+            lblMessage.Text = "* Digite seu E-mail"
             lblMessage.Visible = True
             Return
         Else
-            user.Usuario = Me.txtUser.Text
+            user.Email = Me.txtUser.Text
         End If
 
         If String.IsNullOrWhiteSpace(txtPassword.Text) Then
@@ -78,15 +78,14 @@
             user.Senha = txtPassword.Text
         End If
 
-        '' Method to login
-        'Dim user = New Models.User().Login(txtUser.Text, txtPassword.Text)
-        Dim login = usuarioBLL.Login(user.Usuario, user.Senha)
-
+        'Method to login
+        Dim login As UsuarioDTO = usuarioBLL.Login(user.Email, user.Senha)
         If login IsNot Nothing Then
             VarGlob.UsuarioLogado = login
+            Me.Hide()
             Dim mainForm = New MainFormDemo(login)
             mainForm.Show()
-            Me.Hide()
+
             'Redisplay the login form and clear the fields if the main form is closed.
             AddHandler mainForm.FormClosed, AddressOf MainForm_Logout
         Else
@@ -131,19 +130,19 @@
     End Sub
 
     Private Sub biYoutube_Click(ByVal sender As Object, ByVal e As EventArgs) Handles biYoutube.Click
-        Process.Start("https://youtube.com/rjcodeadvanceen")
+        Process.Start("https://youtube.com/rfergomes")
     End Sub
 
     Private Sub biWebPage_Click(ByVal sender As Object, ByVal e As EventArgs) Handles biWebPage.Click
-        Process.Start("https://rjcodeadvance.com/")
+        Process.Start("https://sibem.online/")
     End Sub
 
     Private Sub biGitHub_Click(ByVal sender As Object, ByVal e As EventArgs) Handles biGitHub.Click
-        Process.Start("https://github.com/rjcodeadvance")
+        Process.Start("https://github.com/rfergomes")
     End Sub
 
     Private Sub biFacebook_Click(ByVal sender As Object, ByVal e As EventArgs) Handles biFacebook.Click
-        Process.Start("https://www.facebook.com/RJCodeAdvance")
+        Process.Start("https://www.facebook.com/rfergomes")
     End Sub
 #End Region
 

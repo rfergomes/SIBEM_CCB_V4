@@ -17,7 +17,7 @@ Public Class InventarioDetalhesBLL
         inventarioDetalhesDAL = New InventarioDetalhesDAL(connectionFactory)
     End Sub
 
-    Public Function Inserir(inventarioDetalhes As InventarioDetalhesDTO) As Long
+    Public Function Inserir(inventarioDetalhes As InventarioDetalhesDTO) As Integer
         Try
             ' Validação dos dados do InventarioDetalhes (opcional)
             Return inventarioDetalhesDAL.Insert(inventarioDetalhes)
@@ -35,23 +35,14 @@ Public Class InventarioDetalhesBLL
         End Try
     End Sub
 
-    Public Sub Deletar(inventarioDetalhesId As String)
-        Try
-            ' Validação do ID do InventarioDetalhes (opcional)
-            inventarioDetalhesDAL.Drop(inventarioDetalhesId)
-        Catch ex As Exception
-            Throw New Exception("Erro ao excluir Inventário." & vbNewLine & ex.Message, ex)
-        End Try
-    End Sub
-
-    Public Sub Atualizar(inventarioDetalhes As InventarioDetalhesDTO)
+    Public Function Atualizar(inventarioDetalhes As InventarioDetalhesDTO) As Integer
         Try
             ' Validação dos dados do InventarioDetalhes (opcional)
-            inventarioDetalhesDAL.Update(inventarioDetalhes)
+            Return inventarioDetalhesDAL.Update(inventarioDetalhes)
         Catch ex As Exception
             Throw New Exception("Erro ao atualizar Inventário." & vbNewLine & ex.Message, ex)
         End Try
-    End Sub
+    End Function
 
     Public Function BuscarPorId(inventarioDetalhesId As String) As InventarioDetalhesDTO
         Try

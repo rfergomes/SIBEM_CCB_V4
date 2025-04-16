@@ -304,7 +304,7 @@ Public Class FormInventarioCelular
                 If InventarioDetalhes IsNot Nothing Then
                     If BemMovel.Id_igreja = Id_igreja Then
                         InventarioDetalhes.Bem = String.Empty
-                        InventarioDetalhes.Dependencia = String.Empty
+                        InventarioDetalhes.Id_dependencia = Nothing
                         InventarioDetalhes.Estado = "OK"
                         InventarioDetalhes.Acao = "OK"
                         InventarioDetalhes.Contagem = InventarioDetalhes.Contagem + 1
@@ -319,7 +319,7 @@ Public Class FormInventarioCelular
                     Else
                         InventarioDetalhes.Id_inventario = VarGlob.Inventario.Id
                         InventarioDetalhes.Bem = String.Empty
-                        InventarioDetalhes.Dependencia = String.Empty
+                        InventarioDetalhes.Id_dependencia = Nothing
                         InventarioDetalhes.Estado = "PENDENTE"
                         InventarioDetalhes.Acao = "TRANSFERIR"
                         InventarioDetalhes.Observacao = $"TRANSFERIR DE: [{Id_igreja}]. BEM DE OUTRA IGREJA"
@@ -339,7 +339,7 @@ Public Class FormInventarioCelular
                             .Estado = "OK",
                             .Acao = "OK",
                             .Bem = String.Empty,
-                            .Id_dependencia = String.Empty,
+                            .Id_dependencia = Nothing,
                             .Contagem = 1
                             }
 
@@ -356,7 +356,7 @@ Public Class FormInventarioCelular
                             .Estado = "PENDENTE",
                             .Acao = "TRANSFERIR",
                             .Bem = String.Empty,
-                            .Id_dependencia = String.Empty,
+                            .Id_dependencia = Nothing,
                             .Observacao = $"TRANSFERIR DE: {Id_igreja}. BEM DE OUTRA IGREJA",
                             .Contagem = 1
                             }

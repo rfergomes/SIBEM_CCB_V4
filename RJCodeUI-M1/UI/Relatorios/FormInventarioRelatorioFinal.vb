@@ -32,6 +32,10 @@ Public Class FormInventarioRelatorioFinal
 
             ' Buscar Administração e converter para DataTable com um único registro
             Administracao = admBLL.BuscarAtivo()
+            If Administracao Is Nothing Then
+                RJMessageBox.Show("Nenhuma Administração Ativa no momento", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Exit Sub
+            End If
             Dim dtAdm As New DataTable()
 
             ' Adicionar colunas ao DataTable de acordo com as propriedades do objeto Administracao

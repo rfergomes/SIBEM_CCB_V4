@@ -9,9 +9,9 @@ Public Class EmailHelper
         Try
             ' Configuração do e-mail
             Dim mail As New MailMessage()
-            mail.From = New MailAddress("SIBEM CCB<sibem@sibem.online>")
+            mail.From = New MailAddress("SIBEM CCB<contato@sibem.online>")
             mail.To.Add(Destinatario)
-            mail.CC.Add(DestinatarioCopia)
+            If Not String.IsNullOrEmpty(DestinatarioCopia) Then mail.CC.Add(DestinatarioCopia)
             mail.Subject = Assunto
             mail.Body = Mensagem
             mail.IsBodyHtml = True ' Defina como True se quiser enviar em formato HTML

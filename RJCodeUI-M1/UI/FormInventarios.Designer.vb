@@ -923,7 +923,7 @@ Partial Class FormInventarios
         Me.BtnLimparFiltros.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BtnLimparFiltros.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnLimparFiltros.ForeColor = System.Drawing.Color.FromArgb(CType(CType(180, Byte), Integer), CType(CType(68, Byte), Integer), CType(CType(57, Byte), Integer))
-        Me.BtnLimparFiltros.IconChar = FontAwesome.Sharp.IconChar.TrashAlt
+        Me.BtnLimparFiltros.IconChar = FontAwesome.Sharp.IconChar.ArrowRotateBackward
         Me.BtnLimparFiltros.IconColor = System.Drawing.Color.FromArgb(CType(CType(180, Byte), Integer), CType(CType(68, Byte), Integer), CType(CType(57, Byte), Integer))
         Me.BtnLimparFiltros.IconFont = FontAwesome.Sharp.IconFont.[Auto]
         Me.BtnLimparFiltros.IconSize = 24
@@ -1486,7 +1486,7 @@ Partial Class FormInventarios
         Me.BtnLimparNovo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BtnLimparNovo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnLimparNovo.ForeColor = System.Drawing.Color.FromArgb(CType(CType(180, Byte), Integer), CType(CType(68, Byte), Integer), CType(CType(57, Byte), Integer))
-        Me.BtnLimparNovo.IconChar = FontAwesome.Sharp.IconChar.TrashAlt
+        Me.BtnLimparNovo.IconChar = FontAwesome.Sharp.IconChar.ArrowRotateBackward
         Me.BtnLimparNovo.IconColor = System.Drawing.Color.FromArgb(CType(CType(180, Byte), Integer), CType(CType(68, Byte), Integer), CType(CType(57, Byte), Integer))
         Me.BtnLimparNovo.IconFont = FontAwesome.Sharp.IconFont.[Auto]
         Me.BtnLimparNovo.IconSize = 24

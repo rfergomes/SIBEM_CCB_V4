@@ -2,6 +2,9 @@
 'Data:                  24/03/2025
 'Autor:                 Rodrigo Fernando Gomes Lima
 
+Imports System.Windows.Forms.DataVisualization.Charting
+Imports ZstdSharp.Unsafe
+
 Public Class FormSincronizar
     Private SQLite As New ConnectionFactory
     Private MySQL As New ConnectionFactory
@@ -20,6 +23,7 @@ Public Class FormSincronizar
     Private SetoresBLL As SetoresBLL
     Private SetoresOnBLL As SetoresOnBLL
     Private Log As New Logger
+    Private Retorno As Integer?
     'Private SetoresOn As SetoresOnBLL
 
     Sub New()
@@ -175,10 +179,14 @@ Public Class FormSincronizar
                         }
 
                         ' ENVIAR INVENTÁRIO
+
+
                         If InventOn IsNot Nothing AndAlso InventOn.Id <> "" Then
-                            InventOnBLL.Atualizar(Invent)
+                            Retorno = InventOnBLL.Atualizar(Invent)
+                            If (Retorno = 0) Then Log.WriteLog($"Falha: Enviar Dados - Inventário {InventOn.Id} - Atualizar")
                         Else
-                            InventOnBLL.Inserir(Invent)
+                            Retorno = InventOnBLL.Inserir(Invent)
+                            If (Retorno = 0) Then Log.WriteLog($"Falha: Enviar Dados - Inventário {InventOn.Id} - Inserir")
                         End If
 
                         Dim Detalhes As List(Of InventarioDetalhesDTO) = InventDetalhesBLL.BuscarTodos()
@@ -207,9 +215,11 @@ Public Class FormSincronizar
                                 }
                                 Dim InventDetalheOn As InventarioDetalhesOnDTO = InventDetalhesOnBLL.BuscarPorId(Detalhe.Id_Bem)
                                 If InventDetalheOn IsNot Nothing AndAlso InventDetalheOn.Id_Bem <> "" Then
-                                    InventDetalhesOnBLL.Atualizar(IDetalhe)
+                                    Retorno = InventDetalhesOnBLL.Atualizar(IDetalhe)
+                                    If (Retorno = 0) Then Log.WriteLog($"Falha: Enviar Dados - Inventário Detalhes {IDetalhe.Id} - Atualizar")
                                 Else
-                                    InventDetalhesOnBLL.Inserir(IDetalhe)
+                                    Retorno = InventDetalhesOnBLL.Inserir(IDetalhe)
+                                    If (Retorno = 0) Then Log.WriteLog($"Falha: Enviar Dados - Inventário Detalhes {IDetalhe.Id} - Inserir")
                                 End If
 
                                 ' ENVIAR BENS MÓVEIS
@@ -225,7 +235,8 @@ Public Class FormSincronizar
                                             .Id_Dependencia = BemMovel.Id_Dependencia,
                                             .Id_Status = BemMovel.Id_Status
                                         }
-                                        BensMoveisOnBLL.Atualizar(BemMovelOn)
+                                        Retorno = BensMoveisOnBLL.Atualizar(BemMovelOn)
+                                        If (Retorno = 0) Then Log.WriteLog($"Falha: Enviar Dados - Bens Móveis {BemMovelOn.Id} - Atualizar")
                                     Else
                                         BemMovelOn = New BensOnDTO With {
                                             .Id = BemMovel.Id,
@@ -234,7 +245,8 @@ Public Class FormSincronizar
                                             .Id_Dependencia = BemMovel.Id_Dependencia,
                                             .Id_Status = BemMovel.Id_Status
                                         }
-                                        BensMoveisOnBLL.Inserir(BemMovelOn)
+                                        Retorno = BensMoveisOnBLL.Inserir(BemMovelOn)
+                                        If (Retorno = 0) Then Log.WriteLog($"Falha: Enviar Dados - Bens Móveis {BemMovelOn.Id} - Inserir")
                                     End If
                                 End If
                                 ContB += 1
@@ -290,9 +302,11 @@ Public Class FormSincronizar
                             }
 
                         If IgrejaExiste IsNot Nothing Then
-                            IgrejasOnBLL.Atualizar(IgrejaOn)
+                            Retorno = IgrejasOnBLL.Atualizar(IgrejaOn)
+                            If (Retorno = 0) Then Log.WriteLog($"Falha: Enviar Dados - Igreja {IgrejaOn.Id} - Atualizar")
                         Else
-                            IgrejasOnBLL.Inserir(IgrejaOn)
+                            Retorno = IgrejasOnBLL.Inserir(IgrejaOn)
+                            If (Retorno = 0) Then Log.WriteLog($"Falha: Enviar Dados - Igreja {IgrejaOn.Id} - Inserir")
                         End If
                     End If
                     ContA += 1
@@ -334,9 +348,11 @@ Public Class FormSincronizar
                             }
 
                         If SetorExiste IsNot Nothing Then
-                            SetoresOnBLL.Atualizar(SetoresOn)
+                            Retorno = SetoresOnBLL.Atualizar(SetoresOn)
+                            If (Retorno = 0) Then Log.WriteLog($"Falha: Enviar Dados - Setor {SetoresOn.Id} - Atualizar")
                         Else
-                            SetoresOnBLL.Inserir(SetoresOn)
+                            Retorno = SetoresOnBLL.Inserir(SetoresOn)
+                            If (Retorno = 0) Then Log.WriteLog($"Falha: Enviar Dados - Setor {SetoresOn.Id} - Inserir")
                         End If
                         ReplicarDados(SyncOrigem.Receber, "setores", Setor.Cod_Setor, "")
                     End If
@@ -398,10 +414,13 @@ Public Class FormSincronizar
                             }
 
                             If SetorExiste IsNot Nothing Then
-                                SetoresBLL.Atualizar(Setor)
+                                Retorno = SetoresBLL.Atualizar(Setor)
+                                If (Retorno = 0) Then Log.WriteLog($"Falha: Receber Dados - Setor {Setor.Id} - Atualizar")
                             Else
-                                SetoresBLL.Inserir(Setor)
+                                Retorno = SetoresBLL.Inserir(Setor)
+                                If (Retorno = 0) Then Log.WriteLog($"Falha: Receber Dados - Setor {Setor.Id} - Inserir")
                             End If
+
                             SetoresSinc.Status = -1
                             SincBLL.Atualizar(SetoresSinc)
                             AtualizarLabels()
@@ -442,9 +461,11 @@ Public Class FormSincronizar
                             }
 
                             If DependExiste IsNot Nothing Then
-                                DependBLL.Atualizar(Depend)
+                                Retorno = DependBLL.Atualizar(Depend)
+                                If (Retorno = 0) Then Log.WriteLog($"Falha: Receber Dados - Dependência {Depend.Id} - Atualizar")
                             Else
-                                DependBLL.Inserir(Depend)
+                                Retorno = DependBLL.Inserir(Depend)
+                                If (Retorno = 0) Then Log.WriteLog($"Falha: Receber Dados - Dependência {Depend.Id} - Inserir")
                             End If
                             DependSinc.Status = -1
                             SincBLL.Atualizar(DependSinc)
@@ -499,9 +520,11 @@ Public Class FormSincronizar
                             }
 
                             If IgrejaExiste IsNot Nothing Then
-                                IgrejasBLL.Atualizar(Igreja)
+                                Retorno = IgrejasBLL.Atualizar(Igreja)
+                                If (Retorno = 0) Then Log.WriteLog($"Falha: Receber Dados - Igreja {Igreja.Id} - Atualizar")
                             Else
-                                IgrejasBLL.Inserir(Igreja)
+                                Retorno = IgrejasBLL.Inserir(Igreja)
+                                If (Retorno = 0) Then Log.WriteLog($"Falha: Receber Dados - Igreja {Igreja.Id} - Inserir")
                             End If
                         End If
 
@@ -554,12 +577,14 @@ Public Class FormSincronizar
 
                             ' RECEBER INVENTÁRIO
                             If Invent IsNot Nothing AndAlso Invent.Id <> "" Then
-                                InventBLL.Atualizar(InventSync)
+                                Retorno = InventBLL.Atualizar(InventSync)
+                                If (Retorno = 0) Then Log.WriteLog($"Falha: Receber Dados - Inventário {InventSync.Id} - Atualizar")
                             Else
-                                InventBLL.Inserir(InventSync)
+                                Retorno = InventBLL.Inserir(InventSync)
+                                If (Retorno = 0) Then Log.WriteLog($"Falha: Receber Dados - Inventário {InventSync.Id} - Inserir")
                             End If
 
-                            Dim Detalhes As List(Of InventarioDetalhesOnDTO) = InventDetalhesOnBLL.BuscarTodos(Consultas:="BENS PENDENTES")
+                            Dim Detalhes As List(Of InventarioDetalhesOnDTO) = InventDetalhesOnBLL.BuscarTodos()
                             If Detalhes IsNot Nothing Then
                                 With RjProgressBar2
                                     .Visible = True
@@ -585,9 +610,11 @@ Public Class FormSincronizar
                                         }
                                     Dim InventDetalhe As InventarioDetalhesDTO = InventDetalhesBLL.BuscarPorId(Detalhe.Id_Bem)
                                     If InventDetalhe IsNot Nothing AndAlso InventDetalhe.Id_Bem <> "" Then
-                                        InventDetalhesBLL.Atualizar(IDetalhe)
+                                        Retorno = InventDetalhesBLL.Atualizar(IDetalhe)
+                                        If (Retorno = 0) Then Log.WriteLog($"Falha: Receber Dados - Inventário Detalhes {IDetalhe.Id} - Inserir")
                                     Else
-                                        InventDetalhesBLL.Inserir(IDetalhe)
+                                        Retorno = InventDetalhesBLL.Inserir(IDetalhe)
+                                        If (Retorno = 0) Then Log.WriteLog($"Falha: Receber Dados - Inventário Detalhes {IDetalhe.Id} - Inserir")
                                     End If
 
                                     ' RECEBER BENS MÓVEIS
@@ -604,10 +631,11 @@ Public Class FormSincronizar
 
                                         Dim BemExiste As BensDTO = BensMoveisBLL.BuscarPorId(IDetalhe.Id_Bem)
                                         If BemExiste IsNot Nothing Then
-                                            BensMoveisBLL.Atualizar(Bem)
+                                            Retorno = BensMoveisBLL.Atualizar(Bem)
+                                            If (Retorno = 0) Then Log.WriteLog($"Falha: Receber Dados - Bem Móvel {Bem.Id} - Inserir")
                                         Else
-
-                                            BensMoveisBLL.Inserir(Bem)
+                                            Retorno = BensMoveisBLL.Inserir(Bem)
+                                            If (Retorno = 0) Then Log.WriteLog($"Falha: Receber Dados - Bem Móvel {Bem.Id} - Inserir")
                                         End If
                                     End If
                                     ContB += 1

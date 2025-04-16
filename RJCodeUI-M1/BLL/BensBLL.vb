@@ -17,14 +17,14 @@ Friend Class BensBLL
 
     End Sub
 
-    Public Sub Inserir(bens As BensDTO)
+    Public Function Inserir(bens As BensDTO) As Integer
         Try
             ' Validação dos dados do bens (opcional)
-            bensDAL.Insert(bens)
+            Return bensDAL.Insert(bens)
         Catch ex As Exception
             Throw New Exception("Erro ao inserir bens. - " & ex.Message, ex)
         End Try
-    End Sub
+    End Function
 
     Public Sub Excluir(bensId As Integer)
         Try
@@ -35,14 +35,14 @@ Friend Class BensBLL
         End Try
     End Sub
 
-    Public Sub Atualizar(bens As BensDTO)
+    Public Function Atualizar(bens As BensDTO) As Integer
         Try
             ' Validação dos dados do bens (opcional)
-            bensDAL.Update(bens)
+            Return bensDAL.Update(bens)
         Catch ex As Exception
             Throw New Exception("Erro ao atualizar bens." & vbNewLine & ex.Message, ex)
         End Try
-    End Sub
+    End Function
 
     Public Function Contar(Optional Id_Igreja As String = "") As Long
         Try

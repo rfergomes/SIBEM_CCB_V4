@@ -24,7 +24,9 @@ Public Class FormToken
     Private IgrejasOn As List(Of IgrejasOnDTO)
     Private SQLite As New ConnectionFactory()
     Private MySQL_SYS As New ConnectionFactory(DatabaseType.MySQL_SYS)
+    Private Log As New Logger
     Private Token As Boolean
+    Private Dispositivo As String
 
     Sub New()
 
@@ -45,6 +47,7 @@ Public Class FormToken
         ServidoresBLL = New ServidoresBLL(SQLite)
         ServidoresOnBLL = New ServidoresOnBLL(MySQL_SYS)
         SolicitacaoOnBLL = New TokenSolicitacaoOnBLL(MySQL_SYS)
+        Dispositivo = Environment.MachineName
     End Sub
 
     Private Sub FormToken_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -119,15 +122,13 @@ Public Class FormToken
             Return False
         End If
 
+        If sisNuvem.Dispositivo <> Dispositivo Then
+            RJMessageBox.Show("Token inválido para este dispositivo.", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+        End If
+
         Try
             Dim admlc As String = sisNuvem.Id_Admlc
-            Dim status As Integer = Convert.ToInt32(sisNuvem.status)
-
-            ' Verifica se o status já é 1
-            If status = 1 Then
-                RJMessageBox.Show($"Token já validado anteriormente.{vbNewLine}Solicite um novo token.", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                Return False
-            End If
 
             ' Baixando Administração Local
             Dim AdmLocalOn As AdmlcDTO = AdmLocalOnBLL.BuscarPorId(admlc)
@@ -172,7 +173,7 @@ Public Class FormToken
                     .Setor_Definido = 0,
                     .Token = Token,
                     .Token_Validado = 1,
-                    .Ativo = -1
+                    .Ativo = 1
                 }
 
                 If sistemaExistente IsNot Nothing Then
@@ -266,11 +267,11 @@ Public Class FormToken
                 End If
 
                 ' Atualiza o status do token na nuvem
-                sisNuvem.status = 1
+                '''''sisNuvem.status = 1
                 SistemaNuvemBLL.Atualizar(sisNuvem)
 
                 ' Atualiza o status do solicitante na nuvem
-                Dim Solicitante As TokenSolicitacaoOnDTO = SolicitacaoOnBLL.BuscarPorId(sisNuvem.Id_solicitacao)
+                Dim Solicitante As TokenSolicitacaoOnDTO = SolicitacaoOnBLL.BuscarPorId(sisNuvem.Id_Usuario)
                 Solicitante.Status = 1
                 SolicitacaoOnBLL.Atualizar(Solicitante)
 
@@ -318,34 +319,57 @@ Public Class FormToken
                   $"<li>Telefone:               {TxtTelefone.Text.ToUpper}</li>" &
                   $"<li>Comum Congregação:      {TxtComun.Text.ToUpper}</li>" &
                   $"<li>Cidade:                 {TxtCidade.Text.ToUpper}</li>" &
-                  $"<li>Setor:                  {TxtSetor.Text.ToUpper}</li>" &
               "</ul>" &
               $"<p>Irmão <b>{TxtNome.Text}</b>, em breve o administrador enviará seu token de acesso.</p>" &
               "<p>Att,</p><p>SIBEM - Sistema para Inventário de Bens Móveis"
         Try
-            ' Enviar solicitação
-            Dim Solicitacao As Boolean = EmailHelper.EnviarEmail("Solicitação de Token para acesso ao Sistema SIBEM-v4", Mensagem, "rfergomes@gmail.com", TxtEmail.Text.ToLower)
-            ' Mensagem de retorno
-            If Solicitacao Then
-                Dim SolicitacaoOn As New TokenSolicitacaoOnDTO With {
-                .Nome = TxtNome.Text.ToUpper,
-                .Email = TxtEmail.Text,
-                .Telefone = TxtTelefone.Text,
-                .Igreja = TxtComun.Text.ToUpper,
-                .Cidade = TxtCidade.Text.ToUpper,
-                .Setor = TxtSetor.Text.ToUpper,
-                .AdmLc = String.Empty,
-                .Status = 0,
-                .Data = Now().ToString("yyyy-mm-dd HH:ss:ff")
-                }
-                SolicitacaoOnBLL.Inserir(SolicitacaoOn)
-                RJMessageBox.Show("Solcitação enviada com sucesso! Aguarde o contato do Administrador do Sistema", "Solicitação de Token", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                TabControl1.SelectedIndex = 0
+            Dim Usuario As New UsuarioBLL(MySQL_SYS)
+            Dim TokenBLL As New TokenOnBLL(MySQL_SYS)
+            Dim Tokens As List(Of TokenOnDTO) = TokenBLL.BuscarTodos()
+            Dim Email As String = TxtEmail.Text.ToLower
+            Dim UsuarioExiste As UsuarioDTO = Usuario.GetByEmail(Email)
+            Dim Id_Usuario As Long
+
+            If UsuarioExiste IsNot Nothing Then
+                Dim DispositivoExiste As TokenOnDTO = Tokens.FirstOrDefault(Function(d) d.Dispositivo = Dispositivo)
+                With UsuarioExiste
+                    .Telefone = TxtTelefone.Text
+                    .Igreja = TxtComun.Text.ToUpper
+                    .Cidade = TxtCidade.Text.ToUpper
+                End With
+                Usuario.UpdateUser(UsuarioExiste)
+                Id_Usuario = UsuarioExiste.Id
+
+                If DispositivoExiste IsNot Nothing Then
+                    RJMessageBox.Show($"Este token já está atribuído ao dispositivo {DispositivoExiste.Dispositivo}.{vbNewLine} Solicite um novo token para este dispositivo {Dispositivo}", "Solicitação de Token", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    Return
+                End If
             Else
-                RJMessageBox.Show("Não foi possível enviar sua solicitação.", "Solicitação de Token", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Dim NewUser As New UsuarioDTO With {
+                    .Nome = TxtNome.Text.ToUpper,
+                    .Email = TxtEmail.Text.ToLower,
+                    .Telefone = TxtTelefone.Text,
+                    .Igreja = TxtComun.Text.ToUpper,
+                    .Cidade = TxtCidade.Text.ToUpper,
+                    .Tipo = "user",
+                    .Foto = "/Imagens/userProfile.png"
+                }
+                Id_Usuario = Usuario.InsertUser(NewUser)
             End If
+
+            Dim NovoToken As New TokenOnDTO With {
+                .Token = GerarTokenSHA256(Email & Dispositivo),
+                .Id_Admlc = 0,
+                .Id_Usuario = Id_Usuario,
+                .Dispositivo = Dispositivo.ToUpper
+            }
+            TokenBLL.Inserir(NovoToken)
+            EmailHelper.EnviarEmail("Solicitação de Token para acesso ao Sistema SIBEM-v4", Mensagem, "rfergomes@gmail.com", TxtEmail.Text.ToLower)
+            RJMessageBox.Show("Solcitação enviada com sucesso! Aguarde o contato do Administrador do Sistema", "Solicitação de Token", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            TabControl1.SelectedIndex = 0
         Catch ex As Exception
             RJMessageBox.Show(ex.Message, "Solicitação de Token", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Log.WriteLog($"TOKEN - BtnSolicitar_Click - {ex.Message}")
         End Try
 
     End Sub

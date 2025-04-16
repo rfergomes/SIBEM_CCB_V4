@@ -38,12 +38,10 @@ Partial Class FormToken
         Me.BtnCancelar = New PROJETOBASE.RJButton()
         Me.BtnSolicitar = New PROJETOBASE.RJButton()
         Me.RjLabel4 = New PROJETOBASE.RJLabel()
-        Me.TxtSetor = New PROJETOBASE.RJTextBox()
         Me.TxtCidade = New PROJETOBASE.RJTextBox()
         Me.TxtComun = New PROJETOBASE.RJTextBox()
         Me.TxtTelefone = New PROJETOBASE.RJTextBox()
         Me.TxtEmail = New PROJETOBASE.RJTextBox()
-        Me.RjLabel9 = New PROJETOBASE.RJLabel()
         Me.TxtNome = New PROJETOBASE.RJTextBox()
         Me.RjLabel8 = New PROJETOBASE.RJLabel()
         Me.RjLabel7 = New PROJETOBASE.RJLabel()
@@ -276,12 +274,10 @@ Partial Class FormToken
         Me.TabPage2.Controls.Add(Me.BtnCancelar)
         Me.TabPage2.Controls.Add(Me.BtnSolicitar)
         Me.TabPage2.Controls.Add(Me.RjLabel4)
-        Me.TabPage2.Controls.Add(Me.TxtSetor)
         Me.TabPage2.Controls.Add(Me.TxtCidade)
         Me.TabPage2.Controls.Add(Me.TxtComun)
         Me.TabPage2.Controls.Add(Me.TxtTelefone)
         Me.TabPage2.Controls.Add(Me.TxtEmail)
-        Me.TabPage2.Controls.Add(Me.RjLabel9)
         Me.TabPage2.Controls.Add(Me.TxtNome)
         Me.TabPage2.Controls.Add(Me.RjLabel8)
         Me.TabPage2.Controls.Add(Me.RjLabel7)
@@ -365,29 +361,6 @@ Partial Class FormToken
         Me.RjLabel4.Text = "SOLICITAR TOKEN"
         Me.RjLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'TxtSetor
-        '
-        Me.TxtSetor._Customizable = False
-        Me.TxtSetor.BackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(245, Byte), Integer), CType(CType(249, Byte), Integer))
-        Me.TxtSetor.BorderColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
-        Me.TxtSetor.BorderFocusColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.TxtSetor.BorderRadius = 0
-        Me.TxtSetor.BorderSize = 2
-        Me.TxtSetor.Font = New System.Drawing.Font("Verdana", 9.5!)
-        Me.TxtSetor.ForeColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
-        Me.TxtSetor.Location = New System.Drawing.Point(203, 176)
-        Me.TxtSetor.MultiLine = False
-        Me.TxtSetor.Name = "TxtSetor"
-        Me.TxtSetor.Padding = New System.Windows.Forms.Padding(10, 7, 10, 7)
-        Me.TxtSetor.PasswordChar = False
-        Me.TxtSetor.PlaceHolderColor = System.Drawing.Color.DarkGray
-        Me.TxtSetor.PlaceHolderText = Nothing
-        Me.TxtSetor.ScrollBars = System.Windows.Forms.ScrollBars.None
-        Me.TxtSetor.Size = New System.Drawing.Size(73, 31)
-        Me.TxtSetor.Style = PROJETOBASE.TextBoxStyle.MatteBorder
-        Me.TxtSetor.TabIndex = 5
-        Me.TxtSetor.Tag = "Setor"
-        '
         'TxtCidade
         '
         Me.TxtCidade._Customizable = False
@@ -406,7 +379,7 @@ Partial Class FormToken
         Me.TxtCidade.PlaceHolderColor = System.Drawing.Color.DarkGray
         Me.TxtCidade.PlaceHolderText = "Digite sua Cidade"
         Me.TxtCidade.ScrollBars = System.Windows.Forms.ScrollBars.None
-        Me.TxtCidade.Size = New System.Drawing.Size(191, 31)
+        Me.TxtCidade.Size = New System.Drawing.Size(270, 31)
         Me.TxtCidade.Style = PROJETOBASE.TextBoxStyle.MatteBorder
         Me.TxtCidade.TabIndex = 4
         Me.TxtCidade.Tag = "Cidade"
@@ -479,20 +452,6 @@ Partial Class FormToken
         Me.TxtEmail.Style = PROJETOBASE.TextBoxStyle.MatteBorder
         Me.TxtEmail.TabIndex = 2
         Me.TxtEmail.Tag = "E-mail"
-        '
-        'RjLabel9
-        '
-        Me.RjLabel9.AutoSize = True
-        Me.RjLabel9.Cursor = System.Windows.Forms.Cursors.Arrow
-        Me.RjLabel9.Font = New System.Drawing.Font("Verdana", 9.5!)
-        Me.RjLabel9.ForeColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
-        Me.RjLabel9.LinkLabel = False
-        Me.RjLabel9.Location = New System.Drawing.Point(200, 157)
-        Me.RjLabel9.Name = "RjLabel9"
-        Me.RjLabel9.Size = New System.Drawing.Size(43, 16)
-        Me.RjLabel9.Style = PROJETOBASE.LabelStyle.Normal
-        Me.RjLabel9.TabIndex = 7
-        Me.RjLabel9.Text = "Setor"
         '
         'TxtNome
         '
@@ -647,6 +606,7 @@ Partial Class FormToken
         Me.DisplayMaximizeButton = False
         Me.DisplayMinimizeButton = False
         Me.FormIcon = FontAwesome.Sharp.IconChar.Key
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FormToken"
         Me.Padding = New System.Windows.Forms.Padding(1)
         Me.Resizable = False
@@ -691,8 +651,6 @@ Partial Class FormToken
     Friend WithEvents BtnCancelar As RJButton
     Friend WithEvents BtnSolicitar As RJButton
     Friend WithEvents ErrorProvider1 As ErrorProvider
-    Friend WithEvents TxtSetor As RJTextBox
-    Friend WithEvents RjLabel9 As RJLabel
     Friend WithEvents RjProgressBar1 As RJProgressBar
     Friend WithEvents LabelTeste As RJLabel
 End Class

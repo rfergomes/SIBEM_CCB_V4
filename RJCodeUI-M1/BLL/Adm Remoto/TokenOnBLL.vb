@@ -84,7 +84,7 @@ Public Class TokenOnBLL
 
     Public Function BuscarPorToken(Token As String) As List(Of TokenOnDTO)
         Try
-            Return tokenOnDAL.GetAllList($"AND token = '{Token}'")
+            Return tokenOnDAL.GetAllList($" AND token = '{Token}'")
         Catch ex As Exception
             MsgBox("Erro ao buscar Token." & vbNewLine & ex.ToString() & vbNewLine & ex.Message, MsgBoxStyle.Critical, ex.TargetSite.ToString)
         End Try

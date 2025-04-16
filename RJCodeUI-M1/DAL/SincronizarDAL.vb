@@ -7,7 +7,7 @@
         MyBase.New(connectionFactory)
     End Sub
 
-    Public Overrides Function Insert(sincronizar As SincronizarDTO) As Long
+    Public Overrides Function Insert(sincronizar As SincronizarDTO) As Integer
         Dim columns As New Dictionary(Of String, Object) From {
             {"id_tabela", sincronizar.Id_Tabela},
             {"tabela", sincronizar.Tabela},
@@ -21,11 +21,11 @@
         Return Inserir(Tabela, columns)
     End Function
 
-    Public Overrides Sub Delete(sincronizarId As String)
-        Excluir(Tabela, $"AND id_sincronizar = {sincronizarId}")
-    End Sub
+    Public Overrides Function Delete(sincronizarId As String) As Integer
+        Return Excluir(Tabela, $"AND id_sincronizar = {sincronizarId}")
+    End Function
 
-    Public Overrides Sub Update(sincronizar As SincronizarDTO)
+    Public Overrides Function Update(sincronizar As SincronizarDTO) As Integer
         Dim columns As New Dictionary(Of String, Object) From {
             {"id_sincronizar", sincronizar.Id},
             {"id_tabela", sincronizar.Id_Tabela},
@@ -36,8 +36,8 @@
             {"data_atualizacao", sincronizar.Data_Atualizacao},
             {"id_admlc", sincronizar.Id_Admlc}
         }
-        Atualizar(Tabela, columns, $"AND id_sincronizar = '{sincronizar.Id}'")
-    End Sub
+        Return Atualizar(Tabela, columns, $"AND id_sincronizar = '{sincronizar.Id}'")
+    End Function
 
     Public Overrides Function GetByIdDt(sincronizarId As Integer) As DataTable
         Dim columns As New Dictionary(Of String, Object)()

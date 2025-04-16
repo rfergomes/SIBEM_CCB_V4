@@ -12,7 +12,7 @@ Public Class InventariosOnDAL
         MyBase.New(connectionFactory)
     End Sub
 
-    Public Overrides Function Insert(inventarios As InventariosOnDTO) As Long
+    Public Overrides Function Insert(inventarios As InventariosOnDTO) As Integer
         Dim columns As New Dictionary(Of String, Object) From {
             {"id_inventario", inventarios.Id},
             {"id_igreja", inventarios.Id_Igreja},
@@ -38,11 +38,11 @@ Public Class InventariosOnDAL
         Return Inserir(Tabela, columns)
     End Function
 
-    Public Overrides Sub Delete(inventariosId As String)
-        Excluir(Tabela, $"id_inventario = {inventariosId}")
-    End Sub
+    Public Overrides Function Delete(inventariosId As String) As Integer
+        Return Excluir(Tabela, $"id_inventario = {inventariosId}")
+    End Function
 
-    Public Overrides Sub Update(inventarios As InventariosOnDTO)
+    Public Overrides Function Update(inventarios As InventariosOnDTO) As Integer
         Dim columns As New Dictionary(Of String, Object) From {
             {"id_inventario", inventarios.Id},
             {"id_igreja", inventarios.Id_Igreja},
@@ -65,8 +65,8 @@ Public Class InventariosOnDAL
             {"id_admlc", inventarios.Id_Admlc},
             {"data_alter", Now.ToString("yyyy-MM-dd HH:mm:ss")}
         }
-        Atualizar(Tabela, columns, $"AND id_inventario = '{inventarios.Id}'")
-    End Sub
+        Return Atualizar(Tabela, columns, $"AND id_inventario = '{inventarios.Id}'")
+    End Function
 
     Public Overrides Function GetById(inventariosId As String) As InventariosOnDTO
         Dim columns As New Dictionary(Of String, Object)()

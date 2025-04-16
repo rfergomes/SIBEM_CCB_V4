@@ -30,7 +30,7 @@
         Try
             Sistema = SistemaBLL.BuscarTodos()
             Dim AdmAtiva As SistemaDTO = Sistema.FirstOrDefault(Function(s) s.Id_Admlc = CboAdm.SelectedValue)
-            AdmAtiva.Ativo = -1
+            AdmAtiva.Ativo = 1
             SistemaBLL.Atualizar(AdmAtiva)
             VarGlob.SistemaAtivo = AdmAtiva
 

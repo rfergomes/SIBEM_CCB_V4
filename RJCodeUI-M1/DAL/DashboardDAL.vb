@@ -13,17 +13,17 @@ Public Class DashboardDAL
         MyBase.New(connectionFactory)
     End Sub
 
-    Public Overrides Function Insert(status As DashboardDTO) As Long
+    Public Overrides Function Insert(status As DashboardDTO) As Integer
         Throw New NotImplementedException()
     End Function
 
-    Public Overrides Sub Delete(statusId As String)
+    Public Overrides Function Delete(statusId As String) As Integer
         Throw New NotImplementedException()
-    End Sub
+    End Function
 
-    Public Overrides Sub Update(status As DashboardDTO)
+    Public Overrides Function Update(status As DashboardDTO) As Integer
         Throw New NotImplementedException()
-    End Sub
+    End Function
 
     Public Overrides Function GetByIdDt(statusId As Integer) As DataTable
         Throw New NotImplementedException()

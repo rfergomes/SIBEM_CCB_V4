@@ -1,4 +1,6 @@
-﻿Public Class UsuarioBLL
+﻿Imports System.Text
+
+Public Class UsuarioBLL
     Private ReadOnly usuarioDAL As UsuarioDAL
     Private ReadOnly connectionFactory As ConnectionFactory
 
@@ -7,19 +9,22 @@
         usuarioDAL = New UsuarioDAL(connectionFactory)
     End Sub
 
-    Public Function Login(username As String, pass As String)
-        Return GetAllUsers().Find(Function(x) x.Usuario = username AndAlso x.Senha = pass)
+    Public Function Login(email As String, pass As String) As UsuarioDTO
+        Dim Usuario As UsuarioDTO = GetByEmail(email)
+        If Usuario Is Nothing Then Return Nothing
+        If Usuario.Email = email AndAlso Usuario.Senha = pass Then Return Usuario
+        Return Nothing
     End Function
 
-    Public Sub InsertUser(user As UsuarioDTO)
+    Public Function InsertUser(user As UsuarioDTO) As Long
         Try
             ' Validação dos dados do usuário (opcional)
 
-            usuarioDAL.Insert(user)
+            Return usuarioDAL.Insert(user)
         Catch ex As Exception
             Throw New Exception("Erro ao inserir usuário." & vbNewLine & ex.Message, ex)
         End Try
-    End Sub
+    End Function
 
     Public Sub DeleteUser(userId As Integer)
         Try
@@ -51,10 +56,33 @@
         End Try
     End Function
 
-    Public Function GetAllUsers() As List(Of UsuarioDTO)
+    Public Function GetByEmail(Email As String) As UsuarioDTO
         Try
+            Dim lista As List(Of UsuarioDTO)
+            lista = usuarioDAL.GetAllList()
+            Return lista.FirstOrDefault(Function(u) u.Email = Email)
+        Catch ex As Exception
+            Throw New Exception("Erro ao buscar usuário." & vbNewLine & ex.Message, ex)
+        End Try
+    End Function
+
+    Public Function GetAllUsers(Optional Pesquisar As String = "", Optional UsuarioTipo As String = "user") As List(Of UsuarioDTO)
+        Dim condicao As New StringBuilder()
+        Try
+            If Not String.IsNullOrEmpty(Pesquisar) Then
+                condicao.Append($" AND nome LIKE '%{Pesquisar}%' OR email LIKE '%{Pesquisar}%' OR id_usuario = '{Pesquisar}'")
+            End If
+
+            If Not String.IsNullOrEmpty(UsuarioTipo) Then
+                If UsuarioTipo = "admin" Then
+                    condicao.Append($" AND id_admlc >=0 ")
+                Else
+                    condicao.Append($" AND id_admlc = {VarGlob.SistemaAtivo.Id_Admlc}")
+                End If
+            End If
+
             ' Validação do ID do usuário (opcional)
-            Return usuarioDAL.GetAllList()
+            Return usuarioDAL.GetAllList(condicao.ToString())
 
         Catch ex As Exception
             MsgBox("Erro ao buscar usuário." & vbNewLine & ex.ToString() & vbNewLine & ex.Message, MsgBoxStyle.Critical, ex.TargetSite.ToString)

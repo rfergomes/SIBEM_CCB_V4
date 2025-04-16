@@ -17,14 +17,14 @@ Public Class SetoresBLL
         setoresDAL = New SetoresDAL(connectionFactory)
     End Sub
 
-    Public Sub Inserir(setores As SetoresDTO)
+    Public Function Inserir(setores As SetoresDTO) As Integer
         Try
             ' Validação dos dados do setores (opcional)
-            setoresDAL.Insert(setores)
+            Return setoresDAL.Insert(setores)
         Catch ex As Exception
             Throw New Exception("Erro ao inserir setores." & vbNewLine & ex.Message, ex)
         End Try
-    End Sub
+    End Function
 
     Public Sub Excluir(setoresId As Integer)
         Try
@@ -35,14 +35,14 @@ Public Class SetoresBLL
         End Try
     End Sub
 
-    Public Sub Atualizar(setores As SetoresDTO)
+    Public Function Atualizar(setores As SetoresDTO) As Integer
         Try
             ' Validação dos dados do setores (opcional)
-            setoresDAL.Update(setores)
+            Return setoresDAL.Update(setores)
         Catch ex As Exception
             Throw New Exception("Erro ao atualizar setores." & vbNewLine & ex.Message, ex)
         End Try
-    End Sub
+    End Function
 
     Public Function BuscarPorNome(Nome As String) As SetoresDTO
         Try

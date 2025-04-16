@@ -95,7 +95,7 @@ Public Class SistemaBLL
         Try
             Dim lista As List(Of SistemaDTO)
             lista = sistemaDAL.GetAllList()
-            Return lista.FirstOrDefault(Function(t) t.Id_Status = 1)
+            Return lista.FirstOrDefault(Function(t) t.Ativo <> 0)
         Catch ex As Exception
             MsgBox("Erro ao buscar dados do Sistema Ativo." & vbNewLine & ex.ToString() & vbNewLine & ex.Message, MsgBoxStyle.Critical, ex.TargetSite.ToString)
         End Try

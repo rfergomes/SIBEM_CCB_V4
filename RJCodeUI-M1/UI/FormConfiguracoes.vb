@@ -13,6 +13,8 @@ Public Class FormConfiguracoes
     Private rowIndex As Integer = 0
     Private Id_Solicitacao As String
     Private Log As New Logger
+    Private UsuarioBLL As New UsuarioBLL(MySQL_SYS)
+    Private UsuarioTipo As String
 
     Sub New()
 
@@ -22,9 +24,17 @@ Public Class FormConfiguracoes
         ' Adicione qualquer inicialização após a chamada InitializeComponent().
         LoadDataGridViewServidores()
         If VarGlob.UsuarioLogado IsNot Nothing Then
-            Pnl_Tokens.Visible = True
-            LoadTokens()
+            UsuarioTipo = VarGlob.UsuarioLogado.Tipo
+            Select Case (VarGlob.UsuarioLogado.Tipo)
+                Case "admin", "super"
+                    BtnConsultar.Visible = True
+                Case Else
+                    BtnConsultar.Visible = False
+            End Select
+        Else
+            UsuarioTipo = "user"
         End If
+        UsuariosLoad()
     End Sub
 
     Private Sub FormConfiguracoes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -307,65 +317,69 @@ Public Class FormConfiguracoes
 
 #Region "Gerenciar Tokens"
 
-    Private Sub ChkListarTodos_CheckedChanged(sender As Object, e As EventArgs) Handles ChkListarTodos.CheckedChanged
-        LoadTokens()
-    End Sub
-
     Private Sub TxtPesquisar_OnTextChange(sender As Object, e As EventArgs) Handles TxtPesquisar.OnTextChange
-        LoadTokens()
+        UsuariosLoad()
     End Sub
 
-    Private Sub LoadTokens()
-        Dim TokenSolicitacaoOnBLL As New TokenSolicitacaoOnBLL(MySQL_SYS)
-        Dim Dados As List(Of TokenSolicitacaoOnDTO) = TokenSolicitacaoOnBLL.BuscarTodos(TxtPesquisar.Text)
+    Private Sub UsuariosLoad()
+        Dim Dados As List(Of UsuarioDTO) = UsuarioBLL.GetAllUsers(TxtPesquisar.Text, UsuarioTipo)
 
-        Dim Tokens As List(Of TokenSolicitacaoOnDTO) = If(ChkListarTodos.Checked = False,
-        Dados.Where(Function(x) x.Status = 0).ToList(),
-        Dados)
-
-        With DgvTokens
-            .DataSource = Nothing
-            .Columns.Clear()
-            .AutoGenerateColumns = True
-            .DataSource = Tokens
-            ConfigurarColunasDataGridView()
-            .AllowUserToOrderColumns = True
-            .ClearSelection()
-        End With
-        lblNumberItems.Text = DgvTokens.Rows.Count
+        If Dados IsNot Nothing AndAlso Dados.Count > 0 Then
+            With DgvUsuarios
+                .DataSource = Nothing
+                .Columns.Clear()
+                .AutoGenerateColumns = True
+                .DataSource = Dados
+                ConfigurarColunasDataGridView()
+                .AllowUserToOrderColumns = True
+                .ClearSelection()
+            End With
+            lblNumberItems.Text = DgvUsuarios.Rows.Count
+        End If
     End Sub
 
     Private Sub ConfigurarColunasDataGridView()
         ' Configuração das colunas do DataGridView
-        With DgvTokens
+        With DgvUsuarios
+            .Columns("id").HeaderText = "Cód"
+            .Columns("id").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
             .Columns("id").Visible = False
-            .Columns("email").Visible = False
-            .Columns("telefone").Visible = False
-            .Columns("setor").Visible = False
-            .Columns("admlc").Visible = False
-            .Columns("nome").HeaderText = "Solicitante"
-            .Columns("Igreja").HeaderText = "Comum Congregação"
-            .Columns("AdmLc").HeaderText = "Administração"
+            .Columns("nome").HeaderText = "Nome"
             .Columns("nome").AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-            .Columns("status").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+            .Columns("telefone").HeaderText = "Telefone"
+            .Columns("telefone").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+            .Columns("email").HeaderText = "E-mail"
+            .Columns("email").AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+            .Columns("senha").Visible = False
+            .Columns("igreja").HeaderText = "Comum Congregação"
+            .Columns("igreja").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+            .Columns("cidade").HeaderText = "Cidade"
+            .Columns("cidade").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+            .Columns("tipo").Visible = False
+            .Columns("id_admlc").Visible = False
+            .Columns("adm_local").HeaderText = "Administração"
+            .Columns("adm_local").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+            .Columns("foto").Visible = False
+            '.Columns("data_cadastro").HeaderText = "Data Cadastro"
+            '.Columns("data_cadastro").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
         End With
     End Sub
 
-    Private Sub DgvTokens_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles DgvTokens.CellFormatting
+    Private Sub DgvUsuarios_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles DgvUsuarios.CellFormatting
         If e.RowIndex >= 0 Then ' Verifica se é a coluna correta e a linha válida
-            Dim linha = DgvTokens.Rows(e.RowIndex).Cells("Status").Value ' Converte o valor para string, pois pode ser null
-            If linha = 1 Then
-                DgvTokens.Rows(e.RowIndex).DefaultCellStyle.ForeColor = Color.Red
+            Dim linha = DgvUsuarios.Rows(e.RowIndex).Cells("tipo").Value ' Converte o valor para string, pois pode ser null
+            If linha = "admin" Then
+                DgvUsuarios.Rows(e.RowIndex).DefaultCellStyle.ForeColor = Color.Green
             Else
                 ' Limpa a cor de fundo se não for "4B"
-                DgvTokens.Rows(e.RowIndex).DefaultCellStyle.ForeColor = Color.DarkBlue
+                DgvUsuarios.Rows(e.RowIndex).DefaultCellStyle.ForeColor = Color.DarkBlue
             End If
         End If
     End Sub
 
-    Private Sub DgvTokens_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DgvTokens.CellClick
-        If DgvTokens.SelectedRows.Count > 0 Then
-            Dim row As DataGridViewRow = DgvTokens.SelectedRows(0)
+    Private Sub DgvUsuarios_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DgvUsuarios.CellClick
+        If DgvUsuarios.SelectedRows.Count > 0 Then
+            Dim row As DataGridViewRow = DgvUsuarios.SelectedRows(0)
             Id_Solicitacao = row.Cells("Id").Value.ToString()
             BtnConsultar.Enabled = True
         Else

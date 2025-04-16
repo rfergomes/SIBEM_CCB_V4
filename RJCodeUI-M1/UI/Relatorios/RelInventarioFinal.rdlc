@@ -1123,7 +1123,7 @@
               <Top>3.97482cm</Top>
               <Left>0.24417cm</Left>
               <Height>0.6cm</Height>
-              <Width>14.07934cm</Width>
+              <Width>13.04746cm</Width>
               <ZIndex>6</ZIndex>
               <Style>
                 <Border>
@@ -1158,9 +1158,9 @@
               </Paragraphs>
               <rd:DefaultName>Data</rd:DefaultName>
               <Top>3.23737cm</Top>
-              <Left>4.70322cm</Left>
+              <Left>4.9678cm</Left>
               <Height>0.6cm</Height>
-              <Width>2.46697cm</Width>
+              <Width>2.51989cm</Width>
               <ZIndex>7</ZIndex>
               <Style>
                 <Border>
@@ -1193,9 +1193,9 @@
               </Paragraphs>
               <rd:DefaultName>Textbox21</rd:DefaultName>
               <Top>3.23737cm</Top>
-              <Left>7.4574cm</Left>
+              <Left>7.77771cm</Left>
               <Height>0.6cm</Height>
-              <Width>1.38121cm</Width>
+              <Width>1.58905cm</Width>
               <ZIndex>8</ZIndex>
               <Style>
                 <Border>
@@ -1261,9 +1261,9 @@
               </Paragraphs>
               <rd:DefaultName>Textbox22</rd:DefaultName>
               <Top>3.23737cm</Top>
-              <Left>3.25851cm</Left>
+              <Left>3.45959cm</Left>
               <Height>0.6cm</Height>
-              <Width>1.38121cm</Width>
+              <Width>1.44471cm</Width>
               <ZIndex>10</ZIndex>
               <Style>
                 <Border>
@@ -1298,9 +1298,9 @@
               </Paragraphs>
               <rd:DefaultName>DataInicio</rd:DefaultName>
               <Top>3.23737cm</Top>
-              <Left>8.91446cm</Left>
+              <Left>9.54315cm</Left>
               <Height>0.6cm</Height>
-              <Width>2.43449cm</Width>
+              <Width>2.16991cm</Width>
               <ZIndex>11</ZIndex>
               <Style>
                 <Border>
@@ -1333,9 +1333,9 @@
               </Paragraphs>
               <rd:DefaultName>Textbox21</rd:DefaultName>
               <Top>3.23737cm</Top>
-              <Left>11.51901cm</Left>
+              <Left>12.07465cm</Left>
               <Height>0.6cm</Height>
-              <Width>1.38121cm</Width>
+              <Width>1.56259cm</Width>
               <ZIndex>12</ZIndex>
               <Style>
                 <Border>
@@ -1370,9 +1370,9 @@
               </Paragraphs>
               <rd:DefaultName>DataFim</rd:DefaultName>
               <Top>3.23737cm</Top>
-              <Left>12.99675cm</Left>
+              <Left>13.81362cm</Left>
               <Height>0.6cm</Height>
-              <Width>2.43449cm</Width>
+              <Width>2.16991cm</Width>
               <ZIndex>13</ZIndex>
               <Style>
                 <Border>
@@ -1392,7 +1392,7 @@
                   <TextRuns>
                     <TextRun>
                       <Label>Setor</Label>
-                      <Value>="Setor: " &amp; First(Fields!Cod_Setor.Value, "DtsInventarios") &amp; " - " &amp;First(Fields!Setor.Value, "DtsInventarios")</Value>
+                      <Value>="Setor: " &amp; First(Fields!Cod_Setor.Value, "DtsInventarios") &amp; " - " &amp; IIf(Len(First(Fields!Setor.Value, "DtsInventarios")) &gt; 15, Left(First(Fields!Setor.Value, "DtsInventarios"), 16) &amp; "...",First(Fields!Setor.Value, "DtsInventarios"))</Value>
                       <Style>
                         <FontFamily>verdana</FontFamily>
                         <FontWeight>SemiBold</FontWeight>
@@ -1405,10 +1405,10 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Setor</rd:DefaultName>
-              <Top>4.00967cm</Top>
-              <Left>14.52636cm</Left>
+              <Top>3.97482cm</Top>
+              <Left>13.46802cm</Left>
               <Height>0.6cm</Height>
-              <Width>5.50637cm</Width>
+              <Width>6.56471cm</Width>
               <ZIndex>14</ZIndex>
               <Style>
                 <Border>
@@ -1443,9 +1443,9 @@
               </Paragraphs>
               <rd:DefaultName>Resultado</rd:DefaultName>
               <Top>3.23737cm</Top>
-              <Left>15.71895cm</Left>
+              <Left>16.83833cm</Left>
               <Height>0.6cm</Height>
-              <Width>4.28732cm</Width>
+              <Width>3.16794cm</Width>
               <ZIndex>15</ZIndex>
               <Style>
                 <Border>
@@ -1714,7 +1714,7 @@
               </Style>
             </Rectangle>
             <Line Name="Line3">
-              <Top>2.62471cm</Top>
+              <Top>2.40246cm</Top>
               <Left>0.20108cm</Left>
               <Height>0cm</Height>
               <Width>19.74169cm</Width>
@@ -1758,7 +1758,7 @@
                       </Style>
                     </TextRun>
                     <TextRun>
-                      <Value> - Desvenvolvido por  Rodrigo Lima©  - Todos os direitos reservados - </Value>
+                      <Value> - By Rodrigo Lima©  - Todos os direitos reservados - </Value>
                       <Style>
                         <FontSize>8pt</FontSize>
                         <Format>yyyy</Format>
@@ -1778,7 +1778,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Ano</rd:DefaultName>
-              <Top>2.76582cm</Top>
+              <Top>2.48007cm</Top>
               <Left>0.20108cm</Left>
               <Height>0.52062cm</Height>
               <Width>16.46086cm</Width>
@@ -1846,7 +1846,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>TotalPages</rd:DefaultName>
-              <Top>2.76582cm</Top>
+              <Top>2.48007cm</Top>
               <Left>16.83833cm</Left>
               <Height>0.52062cm</Height>
               <Width>3.16794cm</Width>

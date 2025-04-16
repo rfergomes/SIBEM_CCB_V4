@@ -225,7 +225,7 @@ Public Class FormBensMoveis
                         .Id = IdBem,
                         .Descricao = Descricao,
                         .Id_igreja = Id_Igreja,
-                        .Id_Dependencia = If(Id_Dependencia IsNot Nothing, Id_Dependencia.Id, 0),
+                        .Id_Dependencia = If(Id_Dependencia IsNot Nothing, Id_Dependencia.Id, Nothing),
                         .Dependencia = If(Id_Dependencia IsNot Nothing, Id_Dependencia.Descricao, String.Empty),
                         .Id_Status = If(Id_Status IsNot Nothing, Id_Status.Id, 1),
                         .Status = If(Id_Status IsNot Nothing, Id_Status.Descricao, String.Empty)

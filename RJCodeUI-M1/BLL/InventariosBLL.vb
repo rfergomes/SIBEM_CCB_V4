@@ -17,7 +17,7 @@ Public Class InventariosBLL
         inventariosDAL = New InventariosDAL(connectionFactory)
     End Sub
 
-    Public Function Inserir(inventarios As InventariosDTO) As String
+    Public Function Inserir(inventarios As InventariosDTO) As Integer
         Try
             ' Validação dos dados do inventarios (opcional)
             Return inventariosDAL.Insert(inventarios)
@@ -35,14 +35,14 @@ Public Class InventariosBLL
         End Try
     End Sub
 
-    Public Sub Atualizar(inventarios As InventariosDTO)
+    Public Function Atualizar(inventarios As InventariosDTO) As Integer
         Try
             ' Validação dos dados do inventarios (opcional)
-            inventariosDAL.Update(inventarios)
+            Return inventariosDAL.Update(inventarios)
         Catch ex As Exception
             Throw New Exception("Erro ao atualizar Inventário." & vbNewLine & ex.Message, ex)
         End Try
-    End Sub
+    End Function
 
     Public Function BuscarPorId(inventariosId As String) As InventariosDTO
         Try

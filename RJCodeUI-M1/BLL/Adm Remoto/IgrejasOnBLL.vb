@@ -18,14 +18,14 @@ Public Class IgrejasOnBLL
         igrejasOnDAL = New IgrejasOnDAL(connectionFactory)
     End Sub
 
-    Public Sub Inserir(igrejas As IgrejasOnDTO)
+    Public Function Inserir(igrejas As IgrejasOnDTO) As Integer
         Try
             ' Validação dos dados do igrejas (opcional)
-            igrejasOnDAL.Insert(igrejas)
+            Return igrejasOnDAL.Insert(igrejas)
         Catch ex As Exception
             Throw New Exception("Erro ao inserir Casa de Oração." & vbNewLine & ex.Message, ex)
         End Try
-    End Sub
+    End Function
 
     Public Sub Excluir(igrejasId As Integer)
         Try
@@ -36,14 +36,14 @@ Public Class IgrejasOnBLL
         End Try
     End Sub
 
-    Public Sub Atualizar(igrejas As IgrejasOnDTO)
+    Public Function Atualizar(igrejas As IgrejasOnDTO) As Integer
         Try
             ' Validação dos dados do igrejas (opcional)
-            igrejasOnDAL.Update(igrejas)
+            Return igrejasOnDAL.Update(igrejas)
         Catch ex As Exception
             Throw New Exception("Erro ao atualizar Casa de Oração." & vbNewLine & ex.Message, ex)
         End Try
-    End Sub
+    End Function
 
     Public Function BuscarPorId(igrejasId As String) As IgrejasOnDTO
         Try

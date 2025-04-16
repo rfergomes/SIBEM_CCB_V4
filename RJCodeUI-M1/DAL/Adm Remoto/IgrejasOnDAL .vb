@@ -13,7 +13,7 @@ Public Class IgrejasOnDAL
         MyBase.New(connectionFactory)
     End Sub
 
-    Public Overrides Function Insert(igrejas As IgrejasOnDTO) As Long
+    Public Overrides Function Insert(igrejas As IgrejasOnDTO) As Integer
         Dim columns As New Dictionary(Of String, Object) From {
             {"id_igreja", igrejas.Id},
             {"igreja", igrejas.Igreja},
@@ -35,11 +35,11 @@ Public Class IgrejasOnDAL
         Return Inserir(Tabela, columns)
     End Function
 
-    Public Overrides Sub Delete(igrejasId As String)
-        Excluir(Tabela, $"AND id_igreja = {igrejasId} AND id_admlc = {VarGlob.SistemaAtivo.Id_Admlc}")
-    End Sub
+    Public Overrides Function Delete(igrejasId As String) As Integer
+        Return Excluir(Tabela, $"AND id_igreja = {igrejasId} AND id_admlc = {VarGlob.SistemaAtivo.Id_Admlc}")
+    End Function
 
-    Public Overrides Sub Update(igrejas As IgrejasOnDTO)
+    Public Overrides Function Update(igrejas As IgrejasOnDTO) As Integer
         Dim columns As New Dictionary(Of String, Object) From {
             {"id_igreja", igrejas.Id},
             {"igreja", igrejas.Igreja},
@@ -58,8 +58,8 @@ Public Class IgrejasOnDAL
             {"observacao", igrejas.Observacao},
             {"data_alter", Now.ToString("yyyy-MM-dd HH:mm:ss")}
         }
-        Atualizar(Tabela, columns, $"AND id_igreja = '{igrejas.Id}' AND id_admlc = {VarGlob.SistemaAtivo.Id_Admlc}")
-    End Sub
+        Return Atualizar(Tabela, columns, $"AND id_igreja = '{igrejas.Id}' AND id_admlc = {VarGlob.SistemaAtivo.Id_Admlc}")
+    End Function
 
     Public Overrides Function GetById(igrejasId As String) As IgrejasOnDTO
         Dim columns As New Dictionary(Of String, Object)()

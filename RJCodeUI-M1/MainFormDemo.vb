@@ -27,7 +27,7 @@
         InitializeSystem()
         lblUserName.Text = "CCB"
         LblVersao.Text = $"V{SistemaVersao()}"
-        StatusLabelDesenvolvedor.Text = $"SIBEM CCB© v{SistemaVersao()}  - 2020/{Year(Now())} - Todos os direitos reservados - Desenvolvido por Rodrigo Lima"
+        StatusLabelDesenvolvedor.Text = $"SIBEM CCB© v{SistemaVersao()}  - 2020/{Year(Now())} - Todos os direitos reservados - by Rodrigo Lima"
         StatusLabelDataHora.Text = Today.ToLongDateString.ToString() & " " & Now.ToLongTimeString.ToString
     End Sub
 
@@ -38,8 +38,8 @@
         InitializeSystem()
         userConnected = user
         lblUserName.Text = ObterPrimeiroNomeEInicial(user.Nome.ToUpper())
-        LblVersao.Text = "V" & Application.ProductVersion
-        StatusLabelDesenvolvedor.Text = $"SIBEM CCB© v{SistemaVersao()}  - 2020/{Year(Now())} - Todos os direitos reservados - Desenvolvido por Rodrigo Lima"
+        LblVersao.Text = "V" & SistemaVersao()
+        StatusLabelDesenvolvedor.Text = $"SIBEM CCB© v{SistemaVersao()}  - 2020/{Year(Now())} - Todos os direitos reservados - by Rodrigo Lima"
         StatusLabelDataHora.Text = Today.ToLongDateString.ToString() & " " & Now.ToLongTimeString.ToString
     End Sub
 
@@ -54,21 +54,24 @@
         Dim sistemaBLL = New SistemaBLL(SQLite)
         Dim Sistema As List(Of SistemaDTO) = sistemaBLL.BuscarTodos()
 
-        ' Atribui o primeiro elemento da lista, caso ela não esteja vazia
+        '' Atribui o primeiro elemento da lista, caso ela não esteja vazia
         If Sistema.Count > 0 Then
             VarGlob.SistemaAtivo = Sistema.FirstOrDefault(Function(s) s.Ativo = -1)
             If VarGlob.SistemaAtivo IsNot Nothing Then
                 With VarGlob.SistemaAtivo
                     LblSubTitulo.Text = $"{ .Adm_Regional} | { .Adm_Local}"
                 End With
-            Else
-                Dim Form As Form = New FormToken
-                Form.ShowDialog()
+                '    Else
+                '        Dim Form As Form = New FormToken
+                '        Form.ShowDialog()
             End If
 
-        Else
-            Dim Form As Form = New FormToken
-            Form.ShowDialog()
+            'Else
+            '    Dim Form As Form = New FormToken
+            '    Form.ShowDialog()
+        End If
+        If VarGlob.UsuarioLogado IsNot Nothing Then
+            If VarGlob.UsuarioLogado.Tipo = "admin" Then LogToolStripMenuItem.Visible = True
         End If
     End Sub
 #End Region
@@ -171,18 +174,19 @@
 
 #Region "- User options"
     '- >>> (User options drop-down menu)
-    Private Sub LogoutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LogoutToolStripMenuItem.Click
-        Dim Form As Form = New LoginFormDemo
-        Form.ShowDialog()
+    Private Sub LoginToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LoginToolStripMenuItem.Click
+        My.Settings.Login = True
+        My.Settings.Save()
+        Application.Restart()
     End Sub
 
     Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
         Me.CloseWindow()
     End Sub
 
-    Private Sub TermsAndCondToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TermsAndCondToolStripMenuItem.Click
+    Private Sub LogToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LogToolStripMenuItem.Click
         Try
-            Process.Start("Files\License.pdf")
+            Process.Start("Files\SIBEM_Log.txt")
         Catch ex As Exception
             RJMessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -251,6 +255,8 @@
         End Try
         Return Versao
     End Function
+
+
 
     Private Sub BtnInfo_Click(sender As Object, e As EventArgs) Handles BtnInfo.Click
         Dim Form As Form = New FormInfo

@@ -5,7 +5,6 @@
     Public Property Telefone As String
     Public Property Igreja As String
     Public Property Cidade As String
-    Public Property Setor As String
     Public Property AdmLc As String
     Public Property Status As Integer
     Public Property Data As String

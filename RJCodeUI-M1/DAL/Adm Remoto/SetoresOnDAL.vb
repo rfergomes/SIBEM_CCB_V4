@@ -8,7 +8,7 @@
         MyBase.New(connectionFactory)
     End Sub
 
-    Public Overrides Function Insert(setores As SetoresOnDTO) As Long
+    Public Overrides Function Insert(setores As SetoresOnDTO) As Integer
         Dim columns As New Dictionary(Of String, Object) From {
             {"id_setor", setores.Id},
             {"cod_setor", setores.Cod_Setor},
@@ -19,19 +19,19 @@
         Return Inserir(Tabela, columns)
     End Function
 
-    Public Overrides Sub Delete(setoresId As String)
-        Excluir(Tabela, $"AND cod_setor = {setoresId} AND id_admlc={VarGlob.SistemaAtivo.Id_Admlc}")
-    End Sub
+    Public Overrides Function Delete(setoresId As String) As Integer
+        Return Excluir(Tabela, $"AND cod_setor = {setoresId} AND id_admlc={VarGlob.SistemaAtivo.Id_Admlc}")
+    End Function
 
-    Public Overrides Sub Update(setores As SetoresOnDTO)
+    Public Overrides Function Update(setores As SetoresOnDTO) As Integer
         Dim columns As New Dictionary(Of String, Object) From {
             {"cod_setor", setores.Cod_Setor},
             {"descricao", setores.Descricao},
             {"id_admlc", setores.Id_Admlc},
             {"data_alter", Now.ToString("yyyy-MM-dd HH:mm:ss")}
         }
-        Atualizar(Tabela, columns, $"AND cod_setor = '{setores.Cod_Setor}' AND id_admlc={VarGlob.SistemaAtivo.Id_Admlc}")
-    End Sub
+        Return Atualizar(Tabela, columns, $"AND cod_setor = '{setores.Cod_Setor}' AND id_admlc={VarGlob.SistemaAtivo.Id_Admlc}")
+    End Function
 
     Public Overrides Function GetByIdDt(setoresId As Integer) As DataTable
         Dim columns As New Dictionary(Of String, Object)()

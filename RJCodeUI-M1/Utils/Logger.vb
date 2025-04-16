@@ -1,7 +1,7 @@
 ﻿Imports System.IO
 
 Public Class Logger
-    Private logFilePath As String = "C:\Temp\SIBEM_log.txt"
+    Private logFilePath As String = Path.Combine(Application.StartupPath, "Files", "SIBEM_Log.txt")
 
     ' Método para registrar uma mensagem no arquivo de log
     Public Sub WriteLog(message As String)

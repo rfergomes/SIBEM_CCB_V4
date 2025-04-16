@@ -7,7 +7,7 @@
         MyBase.New(connectionFactory)
     End Sub
 
-    Public Overrides Function Insert(admrg As AdmrgDTO) As Long
+    Public Overrides Function Insert(admrg As AdmrgDTO) As Integer
         Dim columns As New Dictionary(Of String, Object) From {
             {"id_admrg", admrg.Id},
             {"adm_regional", admrg.Adm_Regional},
@@ -16,17 +16,17 @@
         Return Inserir(Tabela, columns)
     End Function
 
-    Public Overrides Sub Delete(admrgId As String)
-        Excluir(Tabela, $"id_admrg = {admrgId}")
-    End Sub
+    Public Overrides Function Delete(admrgId As String) As Integer
+        Return Excluir(Tabela, $"id_admrg = {admrgId}")
+    End Function
 
-    Public Overrides Sub Update(admrg As AdmrgDTO)
+    Public Overrides Function Update(admrg As AdmrgDTO) As Integer
         Dim columns As New Dictionary(Of String, Object) From {
             {"adm_regional", admrg.Adm_Regional},
             {"uf", admrg.UF}
         }
-        Atualizar(Tabela, columns, $"AND id_admrg = '{admrg.Id}'")
-    End Sub
+        Return Atualizar(Tabela, columns, $"AND id_admrg = '{admrg.Id}'")
+    End Function
 
     Public Overrides Function GetByIdDt(admrgId As Integer) As DataTable
         Dim columns As New Dictionary(Of String, Object)()

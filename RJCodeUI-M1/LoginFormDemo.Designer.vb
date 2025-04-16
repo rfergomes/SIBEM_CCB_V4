@@ -64,7 +64,7 @@ Partial Class LoginFormDemo
         Me.RjImageColorOverlay1.Controls.Add(Me.lblTitle)
         Me.RjImageColorOverlay1.Controls.Add(Me.pbLogo)
         Me.RjImageColorOverlay1.Controls.Add(Me.lblWelcome)
-        Me.RjImageColorOverlay1.Customizable = False
+        Me.RjImageColorOverlay1.Customizable = True
         Me.RjImageColorOverlay1.Dock = System.Windows.Forms.DockStyle.Left
         Me.RjImageColorOverlay1.Image = CType(resources.GetObject("RjImageColorOverlay1.Image"), System.Drawing.Image)
         Me.RjImageColorOverlay1.ImageMode = System.Windows.Forms.ImageLayout.Stretch
@@ -72,7 +72,7 @@ Partial Class LoginFormDemo
         Me.RjImageColorOverlay1.Margin = New System.Windows.Forms.Padding(4)
         Me.RjImageColorOverlay1.Name = "RjImageColorOverlay1"
         Me.RjImageColorOverlay1.Opacity = 80
-        Me.RjImageColorOverlay1.OverlayColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(212, Byte), Integer))
+        Me.RjImageColorOverlay1.OverlayColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
         Me.RjImageColorOverlay1.Size = New System.Drawing.Size(370, 470)
         Me.RjImageColorOverlay1.TabIndex = 0
         '
@@ -84,9 +84,9 @@ Partial Class LoginFormDemo
         Me.lblVersion.ForeColor = System.Drawing.Color.LightGray
         Me.lblVersion.Location = New System.Drawing.Point(15, 439)
         Me.lblVersion.Name = "lblVersion"
-        Me.lblVersion.Size = New System.Drawing.Size(106, 13)
+        Me.lblVersion.Size = New System.Drawing.Size(101, 13)
         Me.lblVersion.TabIndex = 9
-        Me.lblVersion.Text = "Demo application"
+        Me.lblVersion.Text = "By Rodrigo Lima"
         Me.lblVersion.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'lblDescription
@@ -95,11 +95,11 @@ Partial Class LoginFormDemo
         Me.lblDescription.BackColor = System.Drawing.Color.Transparent
         Me.lblDescription.Font = New System.Drawing.Font("Verdana", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblDescription.ForeColor = System.Drawing.Color.LightGray
-        Me.lblDescription.Location = New System.Drawing.Point(110, 253)
+        Me.lblDescription.Location = New System.Drawing.Point(84, 291)
         Me.lblDescription.Name = "lblDescription"
-        Me.lblDescription.Size = New System.Drawing.Size(233, 32)
+        Me.lblDescription.Size = New System.Drawing.Size(203, 16)
         Me.lblDescription.TabIndex = 8
-        Me.lblDescription.Text = "Custom themes, styles, forms and" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "controls for WinForm"
+        Me.lblDescription.Text = "Patrimônio - Ativo Imobilizado"
         Me.lblDescription.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'lblTitle
@@ -108,20 +108,21 @@ Partial Class LoginFormDemo
         Me.lblTitle.BackColor = System.Drawing.Color.Transparent
         Me.lblTitle.Font = New System.Drawing.Font("Verdana", 15.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTitle.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.lblTitle.Location = New System.Drawing.Point(42, 208)
+        Me.lblTitle.Location = New System.Drawing.Point(33, 222)
         Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(302, 25)
+        Me.lblTitle.Size = New System.Drawing.Size(304, 50)
         Me.lblTitle.TabIndex = 7
-        Me.lblTitle.Text = "RJ Code Modern UI Template"
+        Me.lblTitle.Text = "Uso Exclusivo da " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Congregação Cristã no Brasil"
+        Me.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'pbLogo
         '
         Me.pbLogo.BackColor = System.Drawing.Color.Transparent
-        Me.pbLogo.Image = CType(resources.GetObject("pbLogo.Image"), System.Drawing.Image)
-        Me.pbLogo.Location = New System.Drawing.Point(25, 18)
+        Me.pbLogo.Image = Global.PROJETOBASE.My.Resources.Resources.SIBEM_Logo_Branco
+        Me.pbLogo.Location = New System.Drawing.Point(54, 20)
         Me.pbLogo.Name = "pbLogo"
-        Me.pbLogo.Size = New System.Drawing.Size(180, 45)
-        Me.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
+        Me.pbLogo.Size = New System.Drawing.Size(263, 71)
+        Me.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.pbLogo.TabIndex = 6
         Me.pbLogo.TabStop = False
         '
@@ -132,11 +133,11 @@ Partial Class LoginFormDemo
         Me.lblWelcome.Font = New System.Drawing.Font("Verdana", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblWelcome.ForeColor = System.Drawing.Color.LightGray
         Me.lblWelcome.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.lblWelcome.Location = New System.Drawing.Point(206, 192)
+        Me.lblWelcome.Location = New System.Drawing.Point(95, 159)
         Me.lblWelcome.Name = "lblWelcome"
-        Me.lblWelcome.Size = New System.Drawing.Size(137, 16)
+        Me.lblWelcome.Size = New System.Drawing.Size(183, 16)
         Me.lblWelcome.TabIndex = 5
-        Me.lblWelcome.Text = "W E L C O M E   TO"
+        Me.lblWelcome.Text = "S E J A   B E M   V I N D O"
         Me.lblWelcome.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'lblCaption
@@ -144,7 +145,7 @@ Partial Class LoginFormDemo
         Me.lblCaption.AutoSize = True
         Me.lblCaption.Cursor = System.Windows.Forms.Cursors.Arrow
         Me.lblCaption.Font = New System.Drawing.Font("Verdana", 14.0!)
-        Me.lblCaption.ForeColor = System.Drawing.Color.FromArgb(CType(CType(99, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(99, Byte), Integer))
+        Me.lblCaption.ForeColor = System.Drawing.Color.FromArgb(CType(CType(2, Byte), Integer), CType(CType(46, Byte), Integer), CType(CType(72, Byte), Integer))
         Me.lblCaption.LinkLabel = False
         Me.lblCaption.Location = New System.Drawing.Point(390, 20)
         Me.lblCaption.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
@@ -158,12 +159,12 @@ Partial Class LoginFormDemo
         '
         Me.txtUser._Customizable = False
         Me.txtUser.BackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(245, Byte), Integer), CType(CType(249, Byte), Integer))
-        Me.txtUser.BorderColor = System.Drawing.Color.FromArgb(CType(CType(132, Byte), Integer), CType(CType(129, Byte), Integer), CType(CType(132, Byte), Integer))
-        Me.txtUser.BorderFocusColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(121, Byte), Integer), CType(CType(218, Byte), Integer))
+        Me.txtUser.BorderColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
+        Me.txtUser.BorderFocusColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.txtUser.BorderRadius = 0
         Me.txtUser.BorderSize = 2
         Me.txtUser.Font = New System.Drawing.Font("Verdana", 10.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtUser.ForeColor = System.Drawing.Color.FromArgb(CType(CType(132, Byte), Integer), CType(CType(129, Byte), Integer), CType(CType(132, Byte), Integer))
+        Me.txtUser.ForeColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
         Me.txtUser.Location = New System.Drawing.Point(428, 130)
         Me.txtUser.MultiLine = False
         Me.txtUser.Name = "txtUser"
@@ -180,12 +181,12 @@ Partial Class LoginFormDemo
         '
         Me.txtPassword._Customizable = False
         Me.txtPassword.BackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(245, Byte), Integer), CType(CType(249, Byte), Integer))
-        Me.txtPassword.BorderColor = System.Drawing.Color.FromArgb(CType(CType(132, Byte), Integer), CType(CType(129, Byte), Integer), CType(CType(132, Byte), Integer))
-        Me.txtPassword.BorderFocusColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(121, Byte), Integer), CType(CType(218, Byte), Integer))
+        Me.txtPassword.BorderColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
+        Me.txtPassword.BorderFocusColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.txtPassword.BorderRadius = 0
         Me.txtPassword.BorderSize = 2
         Me.txtPassword.Font = New System.Drawing.Font("Verdana", 10.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPassword.ForeColor = System.Drawing.Color.FromArgb(CType(CType(132, Byte), Integer), CType(CType(129, Byte), Integer), CType(CType(132, Byte), Integer))
+        Me.txtPassword.ForeColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
         Me.txtPassword.Location = New System.Drawing.Point(428, 185)
         Me.txtPassword.MultiLine = False
         Me.txtPassword.Name = "txtPassword"
@@ -205,9 +206,9 @@ Partial Class LoginFormDemo
         Me.RjMenuIcon1.Cursor = System.Windows.Forms.Cursors.Hand
         Me.RjMenuIcon1.Customizable = False
         Me.RjMenuIcon1.DropdownMenu = Nothing
-        Me.RjMenuIcon1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(132, Byte), Integer), CType(CType(129, Byte), Integer), CType(CType(132, Byte), Integer))
+        Me.RjMenuIcon1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
         Me.RjMenuIcon1.IconChar = FontAwesome.Sharp.IconChar.Key
-        Me.RjMenuIcon1.IconColor = System.Drawing.Color.FromArgb(CType(CType(132, Byte), Integer), CType(CType(129, Byte), Integer), CType(CType(132, Byte), Integer))
+        Me.RjMenuIcon1.IconColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
         Me.RjMenuIcon1.IconFont = FontAwesome.Sharp.IconFont.[Auto]
         Me.RjMenuIcon1.IconSize = 25
         Me.RjMenuIcon1.Location = New System.Drawing.Point(397, 193)
@@ -224,9 +225,9 @@ Partial Class LoginFormDemo
         Me.RjMenuIcon2.Cursor = System.Windows.Forms.Cursors.Hand
         Me.RjMenuIcon2.Customizable = False
         Me.RjMenuIcon2.DropdownMenu = Nothing
-        Me.RjMenuIcon2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(132, Byte), Integer), CType(CType(129, Byte), Integer), CType(CType(132, Byte), Integer))
+        Me.RjMenuIcon2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
         Me.RjMenuIcon2.IconChar = FontAwesome.Sharp.IconChar.UserAlt
-        Me.RjMenuIcon2.IconColor = System.Drawing.Color.FromArgb(CType(CType(132, Byte), Integer), CType(CType(129, Byte), Integer), CType(CType(132, Byte), Integer))
+        Me.RjMenuIcon2.IconColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
         Me.RjMenuIcon2.IconFont = FontAwesome.Sharp.IconFont.[Auto]
         Me.RjMenuIcon2.IconSize = 25
         Me.RjMenuIcon2.Location = New System.Drawing.Point(397, 138)
@@ -252,21 +253,22 @@ Partial Class LoginFormDemo
         Me.btnLogin.BackColor = System.Drawing.SystemColors.Control
         Me.btnLogin.BorderRadius = 20
         Me.btnLogin.BorderSize = 2
+        Me.btnLogin.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnLogin.Design = PROJETOBASE.ButtonDesign.Normal
         Me.btnLogin.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(212, Byte), Integer))
         Me.btnLogin.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
         Me.btnLogin.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer))
         Me.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnLogin.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnLogin.ForeColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(212, Byte), Integer))
+        Me.btnLogin.ForeColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
         Me.btnLogin.IconChar = FontAwesome.Sharp.IconChar.None
-        Me.btnLogin.IconColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(212, Byte), Integer))
+        Me.btnLogin.IconColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
         Me.btnLogin.IconFont = FontAwesome.Sharp.IconFont.[Auto]
         Me.btnLogin.IconSize = 24
         Me.btnLogin.Location = New System.Drawing.Point(428, 267)
         Me.btnLogin.Name = "btnLogin"
         Me.btnLogin.Size = New System.Drawing.Size(250, 40)
-        Me.btnLogin.SkinBorderColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(212, Byte), Integer))
+        Me.btnLogin.SkinBorderColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
         Me.btnLogin.Style = PROJETOBASE.ControlStyle.Glass
         Me.btnLogin.TabIndex = 7
         Me.btnLogin.Text = "Login"
@@ -277,7 +279,7 @@ Partial Class LoginFormDemo
         Me.lblForgotPass.AutoSize = True
         Me.lblForgotPass.Cursor = System.Windows.Forms.Cursors.Hand
         Me.lblForgotPass.Font = New System.Drawing.Font("Verdana", 9.5!)
-        Me.lblForgotPass.ForeColor = System.Drawing.Color.FromArgb(CType(CType(132, Byte), Integer), CType(CType(129, Byte), Integer), CType(CType(132, Byte), Integer))
+        Me.lblForgotPass.ForeColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
         Me.lblForgotPass.LinkLabel = True
         Me.lblForgotPass.Location = New System.Drawing.Point(483, 320)
         Me.lblForgotPass.Name = "lblForgotPass"
@@ -293,9 +295,9 @@ Partial Class LoginFormDemo
         Me.biFacebook.Cursor = System.Windows.Forms.Cursors.Hand
         Me.biFacebook.Customizable = False
         Me.biFacebook.DropdownMenu = Nothing
-        Me.biFacebook.ForeColor = System.Drawing.Color.FromArgb(CType(CType(132, Byte), Integer), CType(CType(129, Byte), Integer), CType(CType(132, Byte), Integer))
+        Me.biFacebook.ForeColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
         Me.biFacebook.IconChar = FontAwesome.Sharp.IconChar.FacebookSquare
-        Me.biFacebook.IconColor = System.Drawing.Color.FromArgb(CType(CType(132, Byte), Integer), CType(CType(129, Byte), Integer), CType(CType(132, Byte), Integer))
+        Me.biFacebook.IconColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
         Me.biFacebook.IconFont = FontAwesome.Sharp.IconFont.[Auto]
         Me.biFacebook.IconSize = 25
         Me.biFacebook.Location = New System.Drawing.Point(679, 427)
@@ -312,9 +314,9 @@ Partial Class LoginFormDemo
         Me.biGitHub.Cursor = System.Windows.Forms.Cursors.Hand
         Me.biGitHub.Customizable = False
         Me.biGitHub.DropdownMenu = Nothing
-        Me.biGitHub.ForeColor = System.Drawing.Color.FromArgb(CType(CType(132, Byte), Integer), CType(CType(129, Byte), Integer), CType(CType(132, Byte), Integer))
+        Me.biGitHub.ForeColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
         Me.biGitHub.IconChar = FontAwesome.Sharp.IconChar.Github
-        Me.biGitHub.IconColor = System.Drawing.Color.FromArgb(CType(CType(132, Byte), Integer), CType(CType(129, Byte), Integer), CType(CType(132, Byte), Integer))
+        Me.biGitHub.IconColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
         Me.biGitHub.IconFont = FontAwesome.Sharp.IconFont.[Auto]
         Me.biGitHub.IconSize = 25
         Me.biGitHub.Location = New System.Drawing.Point(648, 427)
@@ -331,9 +333,9 @@ Partial Class LoginFormDemo
         Me.biWebPage.Cursor = System.Windows.Forms.Cursors.Hand
         Me.biWebPage.Customizable = False
         Me.biWebPage.DropdownMenu = Nothing
-        Me.biWebPage.ForeColor = System.Drawing.Color.FromArgb(CType(CType(132, Byte), Integer), CType(CType(129, Byte), Integer), CType(CType(132, Byte), Integer))
+        Me.biWebPage.ForeColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
         Me.biWebPage.IconChar = FontAwesome.Sharp.IconChar.Globe
-        Me.biWebPage.IconColor = System.Drawing.Color.FromArgb(CType(CType(132, Byte), Integer), CType(CType(129, Byte), Integer), CType(CType(132, Byte), Integer))
+        Me.biWebPage.IconColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
         Me.biWebPage.IconFont = FontAwesome.Sharp.IconFont.[Auto]
         Me.biWebPage.IconSize = 25
         Me.biWebPage.Location = New System.Drawing.Point(617, 427)
@@ -350,9 +352,9 @@ Partial Class LoginFormDemo
         Me.biYoutube.Cursor = System.Windows.Forms.Cursors.Hand
         Me.biYoutube.Customizable = False
         Me.biYoutube.DropdownMenu = Nothing
-        Me.biYoutube.ForeColor = System.Drawing.Color.FromArgb(CType(CType(132, Byte), Integer), CType(CType(129, Byte), Integer), CType(CType(132, Byte), Integer))
+        Me.biYoutube.ForeColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
         Me.biYoutube.IconChar = FontAwesome.Sharp.IconChar.Youtube
-        Me.biYoutube.IconColor = System.Drawing.Color.FromArgb(CType(CType(132, Byte), Integer), CType(CType(129, Byte), Integer), CType(CType(132, Byte), Integer))
+        Me.biYoutube.IconColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
         Me.biYoutube.IconFont = FontAwesome.Sharp.IconFont.[Auto]
         Me.biYoutube.IconSize = 25
         Me.biYoutube.Location = New System.Drawing.Point(583, 427)
@@ -409,11 +411,6 @@ Partial Class LoginFormDemo
     End Sub
     Friend WithEvents RjImageColorOverlay1 As PROJETOBASE.RJImageColorOverlay
     Friend WithEvents lblCaption As PROJETOBASE.RJLabel
-    Private WithEvents lblVersion As System.Windows.Forms.Label
-    Private WithEvents lblDescription As System.Windows.Forms.Label
-    Private WithEvents lblTitle As System.Windows.Forms.Label
-    Private WithEvents pbLogo As System.Windows.Forms.PictureBox
-    Private WithEvents lblWelcome As System.Windows.Forms.Label
     Friend WithEvents txtUser As PROJETOBASE.RJTextBox
     Friend WithEvents txtPassword As PROJETOBASE.RJTextBox
     Friend WithEvents RjMenuIcon1 As PROJETOBASE.RJMenuIcon
@@ -429,5 +426,9 @@ Partial Class LoginFormDemo
     Friend WithEvents RjDragControl2 As PROJETOBASE.RJDragControl
     Friend WithEvents RjRadioButton2 As PROJETOBASE.RJRadioButton
     Friend WithEvents RjRadioButton1 As PROJETOBASE.RJRadioButton
-
+    Private WithEvents lblVersion As Label
+    Private WithEvents lblDescription As Label
+    Private WithEvents lblTitle As Label
+    Private WithEvents pbLogo As PictureBox
+    Private WithEvents lblWelcome As Label
 End Class

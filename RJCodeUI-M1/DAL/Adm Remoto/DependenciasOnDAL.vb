@@ -7,21 +7,21 @@
         MyBase.New(connectionFactory)
     End Sub
 
-    Public Overrides Function Insert(dependencias As DependenciasOnDTO) As Long
+    Public Overrides Function Insert(dependencias As DependenciasOnDTO) As Integer
         Dim columns As New Dictionary(Of String, Object)()
         columns.Add("descricao", dependencias.Descricao)
         Return Inserir(Tabela, columns)
     End Function
 
-    Public Overrides Sub Delete(dependenciasId As String)
-        Excluir(Tabela, $"id_dependencia = {dependenciasId}")
-    End Sub
+    Public Overrides Function Delete(dependenciasId As String) As Integer
+        Return Excluir(Tabela, $"id_dependencia = {dependenciasId}")
+    End Function
 
-    Public Overrides Sub Update(dependencias As DependenciasOnDTO)
+    Public Overrides Function Update(dependencias As DependenciasOnDTO) As Integer
         Dim columns As New Dictionary(Of String, Object)()
         columns.Add("descricao", dependencias.Descricao)
-        Atualizar(Tabela, columns, $"AND id_dependencia = '{dependencias.Id}'")
-    End Sub
+        Return Atualizar(Tabela, columns, $"AND id_dependencia = '{dependencias.Id}'")
+    End Function
 
     Public Overrides Function GetByIdDt(dependenciasId As Integer) As DataTable
         Dim columns As New Dictionary(Of String, Object)()

@@ -2,34 +2,37 @@
     Inherits GenericDAL(Of TokenOnDTO)
 
     Private Tabela = "token"
-    Private TabelaView = "token"
+    Private TabelaView = "lista_token"
 
     Public Sub New(connectionFactory As ConnectionFactory)
         MyBase.New(connectionFactory)
     End Sub
 
-    Public Overrides Function Insert(token As TokenOnDTO) As Long
+    Public Overrides Function Insert(token As TokenOnDTO) As Integer
         Dim columns As New Dictionary(Of String, Object)()
         columns.Add("token", token.Token)
         columns.Add("id_admlc", token.Id_Admlc)
-        columns.Add("id_solicitacao", token.Id_solicitacao)
-        columns.Add("status", token.status)
+        columns.Add("id_usuario", token.Id_Usuario)
+        columns.Add("dispositivo", token.Dispositivo)
+        columns.Add("ativo", token.Ativo)
+        columns.Add("data_cad", Now.ToString("yyyy-MM-dd HH:mm:ss"))
         Return Inserir(Tabela, columns)
     End Function
 
-    Public Overrides Sub Delete(tokenId As String)
-        Excluir(Tabela, $"AND id_token = {tokenId}")
-    End Sub
+    Public Overrides Function Delete(tokenId As String) As Integer
+        Return Excluir(Tabela, $"AND id_token = {tokenId}")
+    End Function
 
-    Public Overrides Sub Update(token As TokenOnDTO)
+    Public Overrides Function Update(token As TokenOnDTO) As Integer
         Dim columns As New Dictionary(Of String, Object)()
         columns.Add("id_token", token.Id)
         columns.Add("token", token.Token)
         columns.Add("id_admlc", token.Id_Admlc)
-        columns.Add("id_solicitacao", token.Id_solicitacao)
-        columns.Add("status", token.status)
-        Atualizar(Tabela, columns, $"AND id_token = '{token.Id}'")
-    End Sub
+        columns.Add("id_usuario", token.Id_Usuario)
+        columns.Add("dispositivo", token.Dispositivo)
+        columns.Add("ativo", token.Ativo)
+        Return Atualizar(Tabela, columns, $"AND id_token = '{token.Id}'")
+    End Function
 
     Public Overrides Function GetByIdDt(tokenId As Integer) As DataTable
         Dim columns As New Dictionary(Of String, Object)()
@@ -43,7 +46,7 @@
 
     Public Overrides Function GetAllList(Optional condicao As String = "") As List(Of TokenOnDTO)
         Dim columns As New Dictionary(Of String, Object)()
-        Return BuscarLista(Tabela, columns, condicao)
+        Return BuscarLista(TabelaView, columns, condicao)
     End Function
 
     Public Overrides Function GetAllDt(Optional condicao As String = "") As DataTable
@@ -79,12 +82,26 @@
             token.Id_Admlc = reader.GetInt32(reader.GetOrdinal("id_admlc"))
         End If
 
-        If Not reader.IsDBNull(reader.GetOrdinal("id_solicitacao")) Then
-            token.Id_solicitacao = reader.GetInt32(reader.GetOrdinal("id_solicitacao"))
+        If ColumnExists(reader, "adm_local") AndAlso Not reader.IsDBNull(reader.GetOrdinal("adm_local")) Then
+            If reader.GetFieldType(reader.GetOrdinal("adm_local")) = GetType(String) Then
+                token.Adm_Local = reader.GetString(reader.GetOrdinal("adm_local"))
+            End If
         End If
 
-        If Not reader.IsDBNull(reader.GetOrdinal("status")) Then
-            token.status = reader.GetInt32(reader.GetOrdinal("status"))
+        If Not reader.IsDBNull(reader.GetOrdinal("id_usuario")) Then
+            token.Id_Usuario = reader.GetInt32(reader.GetOrdinal("id_usuario"))
+        End If
+
+        If Not reader.IsDBNull(reader.GetOrdinal("dispositivo")) Then
+            token.Dispositivo = reader.GetString(reader.GetOrdinal("dispositivo"))
+        End If
+
+        If Not reader.IsDBNull(reader.GetOrdinal("ativo")) Then
+            token.Ativo = reader.GetInt32(reader.GetOrdinal("ativo"))
+        End If
+
+        If Not reader.IsDBNull(reader.GetOrdinal("data_cad")) Then
+            token.Data_Cadastro = reader.GetDateTime(reader.GetOrdinal("data_cad"))
         End If
 
         Return token

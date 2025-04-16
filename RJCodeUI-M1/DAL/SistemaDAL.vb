@@ -8,7 +8,7 @@
         MyBase.New(connectionFactory)
     End Sub
 
-    Public Overrides Function Insert(sistema As SistemaDTO) As Long
+    Public Overrides Function Insert(sistema As SistemaDTO) As Integer
         Dim columns As New Dictionary(Of String, Object)()
         columns.Add("id_admlc", sistema.Id_Admlc)
         columns.Add("setor_definido", sistema.Setor_Definido)
@@ -18,11 +18,11 @@
         Return Inserir(Tabela, columns)
     End Function
 
-    Public Overrides Sub Delete(sistemaId As String)
-        Excluir(Tabela, $"AND id_sistema = {sistemaId}")
-    End Sub
+    Public Overrides Function Delete(sistemaId As String) As Integer
+        Return Excluir(Tabela, $"AND id_sistema = {sistemaId}")
+    End Function
 
-    Public Overrides Sub Update(sistema As SistemaDTO)
+    Public Overrides Function Update(sistema As SistemaDTO) As Integer
         Dim columns As New Dictionary(Of String, Object)()
         columns.Add("id_sistema", sistema.Id)
         columns.Add("id_admlc", sistema.Id_Admlc)
@@ -30,8 +30,8 @@
         columns.Add("token", sistema.Token)
         columns.Add("token_validado", sistema.Token_Validado)
         columns.Add("ativo", sistema.Ativo)
-        Atualizar(Tabela, columns, $"AND id_sistema = '{sistema.Id}'")
-    End Sub
+        Return Atualizar(Tabela, columns, $"AND id_sistema = '{sistema.Id}'")
+    End Function
 
     Public Overrides Function GetByIdDt(sistemaId As Integer) As DataTable
         Dim columns As New Dictionary(Of String, Object)()

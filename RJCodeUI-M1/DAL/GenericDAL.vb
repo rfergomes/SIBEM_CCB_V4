@@ -8,7 +8,7 @@ Public MustInherit Class GenericDAL(Of T As {Class, New})
         Me.connectionFactory = connectionFactory
     End Sub
 
-    Protected Function Inserir(tableName As String, columns As Dictionary(Of String, Object)) As Long
+    Protected Function Inserir(tableName As String, columns As Dictionary(Of String, Object)) As Integer
         SQL = $"INSERT INTO {tableName} ({String.Join(", ", columns.Keys)}) VALUES ({String.Join(", ", columns.Keys.Select(Function(col) "@" & col))})"
         Using connection As IDbConnection = connectionFactory.GetConnection()
             connection.Open()
@@ -29,8 +29,8 @@ Public MustInherit Class GenericDAL(Of T As {Class, New})
         End Using
     End Function
 
-    Protected Sub Atualizar(tableName As String, columns As Dictionary(Of String, Object), Optional condition As String = "1")
-        SQL = $"UPDATE {tableName} SET {String.Join(", ", columns.Select(Function(col) $"{col.Key} = @{col.Key}"))} WHERE 1=1 {condition}"
+    Protected Function Atualizar(tableName As String, columns As Dictionary(Of String, Object), Optional condition As String = "") As Integer
+        SQL = $"UPDATE {tableName} SET {String.Join(", ", columns.Select(Function(col) $"{col.Key} = @{col.Key}"))} WHERE 1 {condition}"
         Using connection As IDbConnection = connectionFactory.GetConnection()
             connection.Open()
             Using command As IDbCommand = connection.CreateCommand()
@@ -44,21 +44,21 @@ Public MustInherit Class GenericDAL(Of T As {Class, New})
                     parameter.Value = kvp.Value
                     command.Parameters.Add(parameter)
                 Next
-                command.ExecuteNonQuery()
+                Return command.ExecuteNonQuery()
             End Using
         End Using
-    End Sub
+    End Function
 
-    Protected Sub Excluir(tableName As String, Optional condition As String = "1")
+    Protected Function Excluir(tableName As String, Optional condition As String = "1") As Integer
         SQL = $"DELETE FROM {tableName} WHERE {condition} "
         Using connection As IDbConnection = connectionFactory.GetConnection()
             connection.Open()
             Using command As IDbCommand = connection.CreateCommand()
                 command.CommandText = SQL
-                command.ExecuteNonQuery()
+                Return command.ExecuteNonQuery()
             End Using
         End Using
-    End Sub
+    End Function
 
     Protected Function BuscarDataTable(tableName As String, columns As Dictionary(Of String, Object), Optional condition As String = "") As DataTable
         Dim Colunas As String = IIf(columns.Count > 0, String.Join(", ", columns.Select(Function(col) $"{col.Key}")), "*")
@@ -183,7 +183,7 @@ Public MustInherit Class GenericDAL(Of T As {Class, New})
         Dim lastIdSQL As String = ""
 
         Select Case connectionFactory.GetDatabaseTypeFromConnectionString()
-            Case DatabaseType.MySQL
+            Case DatabaseType.MySQL, DatabaseType.MySQL_SYS
                 lastIdSQL = "SELECT LAST_INSERT_ID();"
             Case DatabaseType.SQLServer
                 lastIdSQL = "SELECT SCOPE_IDENTITY();"
@@ -219,9 +219,9 @@ Public MustInherit Class GenericDAL(Of T As {Class, New})
     Public MustOverride Function GetById(id As String) As T
     Public MustOverride Function GetByIdDt(id As Integer) As DataTable
     Public MustOverride Function GetByIdList(id As String) As List(Of T)
-    Public MustOverride Function Insert(item As T) As Long
-    Public MustOverride Sub Update(item As T)
-    Public MustOverride Sub Delete(id As String)
+    Public MustOverride Function Insert(item As T) As Integer
+    Public MustOverride Function Update(item As T) As Integer
+    Public MustOverride Function Delete(id As String) As Integer
     Protected MustOverride Function ConvertFromReader(reader As DbDataReader) As T
 End Class
 

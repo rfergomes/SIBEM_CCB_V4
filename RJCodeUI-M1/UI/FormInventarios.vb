@@ -821,7 +821,7 @@ Public Class FormInventarios
             For i As Integer = 2 To xlPlanilha1.UsedRange.Rows.Count
                 Dim IdBem As String = GetCellValueOrDefault(xlPlanilha1.Cells(i, 1).Value, String.Empty).Trim().Replace("-", "").Replace(" / ", "")
                 Dim Descricao As String = GetCellValueOrDefault(xlPlanilha1.Cells(i, 2).Value, String.Empty).Trim().Replace("'", "''")
-                Dim Dependencia As String = GetCellValueOrDefault(xlPlanilha1.Cells(i, 4).Value, String.Empty).Trim()
+                Dim Dependencia As String = GetCellValueOrDefault(xlPlanilha1.Cells(i, 4).Value, "NÃO DEFINIDO").Trim()
                 Id_igreja = GetCellValueOrDefault(xlPlanilha1.Cells(i, 3).Value, String.Empty).Trim().Replace("BR ", "").Replace("-", "")
 
                 If Id_igreja = LblImportId_igreja.Text Then
@@ -840,10 +840,11 @@ Public Class FormInventarios
                 Dim Status As String = If(Not Descricao Like "[5-9][0] - *" AndAlso Not Descricao Like "OT-6*", "ATIVO", "INATIVO")
                 Dim Id_Status As StatusDTO = todosStatus.FirstOrDefault(Function(d) d.Descricao = Status)
                 Dim Id_Dependencia As DependenciasDTO = todasDependencias.FirstOrDefault(Function(d) d.Descricao.Contains(Dependencia))
+                Dim NovoIdDependencia As Integer = If(todasDependencias.Any(), todasDependencias.Max(Function(x) x.Id) + 1, 0)
 
                 If Id_Dependencia Is Nothing Then
                     Dim dependenciasBLL = New DependenciasBLL(SQLite)
-                    Id_Dependencia = New DependenciasDTO With {.Descricao = Dependencia}
+                    Id_Dependencia = New DependenciasDTO With {.Id = NovoIdDependencia, .Descricao = Dependencia}
                     dependenciasBLL.Inserir(Id_Dependencia)
                     todasDependencias.Add(Id_Dependencia)
                 End If
@@ -852,7 +853,7 @@ Public Class FormInventarios
                 .Id = IdBem,
                 .Descricao = Descricao,
                 .Id_igreja = Id_igreja,
-                .Id_Dependencia = If(Id_Dependencia IsNot Nothing, Id_Dependencia.Id, 0),
+                .Id_Dependencia = If(Id_Dependencia IsNot Nothing, Id_Dependencia.Id, Nothing),
                 .Dependencia = If(Id_Dependencia IsNot Nothing, Id_Dependencia.Descricao, String.Empty),
                 .Id_Status = If(Id_Status IsNot Nothing, Id_Status.Id, 1),
                 .Status = If(Id_Status IsNot Nothing, Id_Status.Descricao, String.Empty)

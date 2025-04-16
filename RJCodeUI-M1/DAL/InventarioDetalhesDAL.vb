@@ -12,7 +12,7 @@ Public Class InventarioDetalhesDAL
         MyBase.New(connectionFactory)
     End Sub
 
-    Public Overrides Function Insert(inventario_detalhes As InventarioDetalhesDTO) As Long
+    Public Overrides Function Insert(inventario_detalhes As InventarioDetalhesDTO) As Integer
         Dim columns As New Dictionary(Of String, Object) From {
             {"id_inventario", inventario_detalhes.Id_inventario},
             {"id_bem", inventario_detalhes.Id_Bem},
@@ -26,15 +26,12 @@ Public Class InventarioDetalhesDAL
         Return Inserir(Tabela, columns)
     End Function
 
-    Public Overrides Sub Delete(Id_Bem As String)
-        Excluir(Tabela, $"id_bem = '{Id_Bem}' AND id_inventario = '{VarGlob.Id_Inventario_Ativo}'")
-    End Sub
+    Public Overrides Function Delete(Id_Bem As String) As Integer
+        Return Excluir(Tabela, $"id_bem = '{Id_Bem}' AND id_inventario = '{VarGlob.Id_Inventario_Ativo}'")
+    End Function
 
-    Public Sub Drop(Id_Bem As String)
-        Excluir(Tabela, $"id_bem = '{Id_Bem}' AND id_inventario = '{VarGlob.Id_Inventario_Ativo}'")
-    End Sub
 
-    Public Overrides Sub Update(inventario_detalhes As InventarioDetalhesDTO)
+    Public Overrides Function Update(inventario_detalhes As InventarioDetalhesDTO) As Integer
         Dim columns As New Dictionary(Of String, Object) From {
             {"id_detalhe", inventario_detalhes.Id},
             {"id_inventario", inventario_detalhes.Id_inventario},
@@ -46,8 +43,8 @@ Public Class InventarioDetalhesDAL
             {"observacao", inventario_detalhes.Observacao},
             {"cont", inventario_detalhes.Contagem}
         }
-        Atualizar(Tabela, columns, $"AND id_detalhe = {inventario_detalhes.Id} AND id_bem = '{inventario_detalhes.Id_Bem}'")
-    End Sub
+        Return Atualizar(Tabela, columns, $"AND id_detalhe = {inventario_detalhes.Id} AND id_bem = '{inventario_detalhes.Id_Bem}'")
+    End Function
 
     Public Overrides Function GetById(Id_Bem As String) As InventarioDetalhesDTO
         Dim columns As New Dictionary(Of String, Object)()

@@ -7,7 +7,7 @@
         MyBase.New(connectionFactory)
     End Sub
 
-    Public Overrides Function Insert(admlc As AdmlcOnDTO) As Long
+    Public Overrides Function Insert(admlc As AdmlcOnDTO) As Integer
         Dim columns As New Dictionary(Of String, Object) From {
             {"id_admlc", admlc.Id},
             {"adm_local", admlc.Adm_Local},
@@ -21,11 +21,11 @@
         Return Inserir(Tabela, columns)
     End Function
 
-    Public Overrides Sub Delete(admlcId As String)
-        Excluir(Tabela, $"id_admlc = {admlcId}")
-    End Sub
+    Public Overrides Function Delete(admlcId As String) As Integer
+        Return Excluir(Tabela, $"id_admlc = {admlcId}")
+    End Function
 
-    Public Overrides Sub Update(admlc As AdmlcOnDTO)
+    Public Overrides Function Update(admlc As AdmlcOnDTO) As Integer
         Dim columns As New Dictionary(Of String, Object) From {
             {"adm_local", admlc.Adm_Local},
             {"razao_social", admlc.Razao_Social},
@@ -35,8 +35,8 @@
             {"id_status", admlc.Id_Status},
             {"id_admrg", admlc.Id_Admrg}
         }
-        Atualizar(Tabela, columns, $"id_admlc = '{admlc.Id}'")
-    End Sub
+        Return Atualizar(Tabela, columns, $"id_admlc = '{admlc.Id}'")
+    End Function
 
     Public Overrides Function GetByIdDt(admlcId As Integer) As DataTable
         Dim columns As New Dictionary(Of String, Object)()

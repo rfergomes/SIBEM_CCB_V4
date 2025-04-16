@@ -54,9 +54,9 @@ Partial Class MainFormDemo
         Me.TrocaAdmMenuItem = New FontAwesome.Sharp.IconMenuItem()
         Me.NovaAdmMenuItem = New FontAwesome.Sharp.IconMenuItem()
         Me.SettingsToolStripMenuItem = New FontAwesome.Sharp.IconMenuItem()
-        Me.TermsAndCondToolStripMenuItem = New FontAwesome.Sharp.IconMenuItem()
+        Me.LogToolStripMenuItem = New FontAwesome.Sharp.IconMenuItem()
         Me.HelpToolStripMenuItem = New FontAwesome.Sharp.IconMenuItem()
-        Me.LogoutToolStripMenuItem = New FontAwesome.Sharp.IconMenuItem()
+        Me.LoginToolStripMenuItem = New FontAwesome.Sharp.IconMenuItem()
         Me.ExitToolStripMenuItem = New FontAwesome.Sharp.IconMenuItem()
         Me.biFormOptions = New PROJETOBASE.RJMenuIcon()
         Me.biNotifications = New PROJETOBASE.RJMenuIcon()
@@ -422,10 +422,10 @@ Partial Class MainFormDemo
         '
         Me.dmUserOptions.ActiveMenuItem = False
         Me.dmUserOptions.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dmUserOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MyProfileToolStripMenuItem, Me.AdminToolStripMenuItem, Me.SettingsToolStripMenuItem, Me.TermsAndCondToolStripMenuItem, Me.HelpToolStripMenuItem, Me.LogoutToolStripMenuItem, Me.ExitToolStripMenuItem})
+        Me.dmUserOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MyProfileToolStripMenuItem, Me.AdminToolStripMenuItem, Me.SettingsToolStripMenuItem, Me.LogToolStripMenuItem, Me.HelpToolStripMenuItem, Me.LoginToolStripMenuItem, Me.ExitToolStripMenuItem})
         Me.dmUserOptions.Name = "dmUserOptions"
         Me.dmUserOptions.OwnerIsMenuButton = False
-        Me.dmUserOptions.Size = New System.Drawing.Size(182, 158)
+        Me.dmUserOptions.Size = New System.Drawing.Size(166, 158)
         '
         'MyProfileToolStripMenuItem
         '
@@ -434,7 +434,7 @@ Partial Class MainFormDemo
         Me.MyProfileToolStripMenuItem.IconFont = FontAwesome.Sharp.IconFont.[Auto]
         Me.MyProfileToolStripMenuItem.IconSize = 21
         Me.MyProfileToolStripMenuItem.Name = "MyProfileToolStripMenuItem"
-        Me.MyProfileToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
+        Me.MyProfileToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
         Me.MyProfileToolStripMenuItem.Text = "Perfil"
         '
         'AdminToolStripMenuItem
@@ -444,7 +444,7 @@ Partial Class MainFormDemo
         Me.AdminToolStripMenuItem.IconColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(96, Byte), Integer))
         Me.AdminToolStripMenuItem.IconFont = FontAwesome.Sharp.IconFont.[Auto]
         Me.AdminToolStripMenuItem.Name = "AdminToolStripMenuItem"
-        Me.AdminToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
+        Me.AdminToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
         Me.AdminToolStripMenuItem.Text = "Administração"
         '
         'TrocaAdmMenuItem
@@ -472,19 +472,19 @@ Partial Class MainFormDemo
         Me.SettingsToolStripMenuItem.IconFont = FontAwesome.Sharp.IconFont.[Auto]
         Me.SettingsToolStripMenuItem.IconSize = 21
         Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
-        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
+        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
         Me.SettingsToolStripMenuItem.Text = "Preferências"
         '
-        'TermsAndCondToolStripMenuItem
+        'LogToolStripMenuItem
         '
-        Me.TermsAndCondToolStripMenuItem.IconChar = FontAwesome.Sharp.IconChar.ShieldAlt
-        Me.TermsAndCondToolStripMenuItem.IconColor = System.Drawing.Color.FromArgb(CType(CType(70, Byte), Integer), CType(CType(132, Byte), Integer), CType(CType(235, Byte), Integer))
-        Me.TermsAndCondToolStripMenuItem.IconFont = FontAwesome.Sharp.IconFont.[Auto]
-        Me.TermsAndCondToolStripMenuItem.IconSize = 21
-        Me.TermsAndCondToolStripMenuItem.Name = "TermsAndCondToolStripMenuItem"
-        Me.TermsAndCondToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
-        Me.TermsAndCondToolStripMenuItem.Text = "Terms and Cond"
-        Me.TermsAndCondToolStripMenuItem.Visible = False
+        Me.LogToolStripMenuItem.IconChar = FontAwesome.Sharp.IconChar.FileText
+        Me.LogToolStripMenuItem.IconColor = System.Drawing.Color.FromArgb(CType(CType(70, Byte), Integer), CType(CType(132, Byte), Integer), CType(CType(235, Byte), Integer))
+        Me.LogToolStripMenuItem.IconFont = FontAwesome.Sharp.IconFont.[Auto]
+        Me.LogToolStripMenuItem.IconSize = 21
+        Me.LogToolStripMenuItem.Name = "LogToolStripMenuItem"
+        Me.LogToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
+        Me.LogToolStripMenuItem.Text = "Abrir Log"
+        Me.LogToolStripMenuItem.Visible = False
         '
         'HelpToolStripMenuItem
         '
@@ -493,18 +493,18 @@ Partial Class MainFormDemo
         Me.HelpToolStripMenuItem.IconFont = FontAwesome.Sharp.IconFont.[Auto]
         Me.HelpToolStripMenuItem.IconSize = 21
         Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
-        Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
+        Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
         Me.HelpToolStripMenuItem.Text = "Ajuda"
         '
-        'LogoutToolStripMenuItem
+        'LoginToolStripMenuItem
         '
-        Me.LogoutToolStripMenuItem.IconChar = FontAwesome.Sharp.IconChar.RightFromBracket
-        Me.LogoutToolStripMenuItem.IconColor = System.Drawing.Color.FromArgb(CType(CType(73, Byte), Integer), CType(CType(84, Byte), Integer), CType(CType(228, Byte), Integer))
-        Me.LogoutToolStripMenuItem.IconFont = FontAwesome.Sharp.IconFont.[Auto]
-        Me.LogoutToolStripMenuItem.IconSize = 21
-        Me.LogoutToolStripMenuItem.Name = "LogoutToolStripMenuItem"
-        Me.LogoutToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
-        Me.LogoutToolStripMenuItem.Text = "Login"
+        Me.LoginToolStripMenuItem.IconChar = FontAwesome.Sharp.IconChar.RightFromBracket
+        Me.LoginToolStripMenuItem.IconColor = System.Drawing.Color.FromArgb(CType(CType(73, Byte), Integer), CType(CType(84, Byte), Integer), CType(CType(228, Byte), Integer))
+        Me.LoginToolStripMenuItem.IconFont = FontAwesome.Sharp.IconFont.[Auto]
+        Me.LoginToolStripMenuItem.IconSize = 21
+        Me.LoginToolStripMenuItem.Name = "LoginToolStripMenuItem"
+        Me.LoginToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
+        Me.LoginToolStripMenuItem.Text = "Login"
         '
         'ExitToolStripMenuItem
         '
@@ -513,7 +513,7 @@ Partial Class MainFormDemo
         Me.ExitToolStripMenuItem.IconFont = FontAwesome.Sharp.IconFont.[Auto]
         Me.ExitToolStripMenuItem.IconSize = 21
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
         Me.ExitToolStripMenuItem.Text = "Sair"
         '
         'biFormOptions
@@ -529,7 +529,7 @@ Partial Class MainFormDemo
         Me.biFormOptions.IconColor = System.Drawing.Color.WhiteSmoke
         Me.biFormOptions.IconFont = FontAwesome.Sharp.IconFont.[Auto]
         Me.biFormOptions.IconSize = 25
-        Me.biFormOptions.Location = New System.Drawing.Point(764, 20)
+        Me.biFormOptions.Location = New System.Drawing.Point(754, 20)
         Me.biFormOptions.Name = "biFormOptions"
         Me.biFormOptions.Size = New System.Drawing.Size(25, 25)
         Me.biFormOptions.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
@@ -549,7 +549,7 @@ Partial Class MainFormDemo
         Me.biNotifications.IconColor = System.Drawing.Color.WhiteSmoke
         Me.biNotifications.IconFont = FontAwesome.Sharp.IconFont.[Auto]
         Me.biNotifications.IconSize = 25
-        Me.biNotifications.Location = New System.Drawing.Point(795, 20)
+        Me.biNotifications.Location = New System.Drawing.Point(785, 20)
         Me.biNotifications.Name = "biNotifications"
         Me.biNotifications.Size = New System.Drawing.Size(25, 25)
         Me.biNotifications.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
@@ -565,11 +565,11 @@ Partial Class MainFormDemo
         Me.biUserOptions.Customizable = False
         Me.biUserOptions.DropdownMenu = Me.dmUserOptions
         Me.biUserOptions.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.biUserOptions.IconChar = FontAwesome.Sharp.IconChar.EllipsisVertical
+        Me.biUserOptions.IconChar = FontAwesome.Sharp.IconChar.Sliders
         Me.biUserOptions.IconColor = System.Drawing.Color.WhiteSmoke
         Me.biUserOptions.IconFont = FontAwesome.Sharp.IconFont.[Auto]
         Me.biUserOptions.IconSize = 25
-        Me.biUserOptions.Location = New System.Drawing.Point(925, 23)
+        Me.biUserOptions.Location = New System.Drawing.Point(816, 20)
         Me.biUserOptions.Name = "biUserOptions"
         Me.biUserOptions.Size = New System.Drawing.Size(25, 25)
         Me.biUserOptions.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
@@ -579,18 +579,18 @@ Partial Class MainFormDemo
         'lblUserName
         '
         Me.lblUserName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lblUserName.AutoSize = True
         Me.lblUserName.Cursor = System.Windows.Forms.Cursors.Arrow
         Me.lblUserName.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblUserName.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.lblUserName.LinkLabel = False
-        Me.lblUserName.Location = New System.Drawing.Point(826, 24)
+        Me.lblUserName.Location = New System.Drawing.Point(847, 23)
         Me.lblUserName.MaximumSize = New System.Drawing.Size(95, 20)
         Me.lblUserName.Name = "lblUserName"
-        Me.lblUserName.Size = New System.Drawing.Size(70, 16)
+        Me.lblUserName.Size = New System.Drawing.Size(95, 16)
         Me.lblUserName.Style = PROJETOBASE.LabelStyle.BarText
         Me.lblUserName.TabIndex = 9
         Me.lblUserName.Text = "Username"
+        Me.lblUserName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'dmCustomForms
         '
@@ -781,10 +781,12 @@ Partial Class MainFormDemo
         'StatusLabelDesenvolvedor
         '
         Me.StatusLabelDesenvolvedor.ForeColor = System.Drawing.Color.White
+        Me.StatusLabelDesenvolvedor.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.StatusLabelDesenvolvedor.Name = "StatusLabelDesenvolvedor"
         Me.StatusLabelDesenvolvedor.Size = New System.Drawing.Size(810, 17)
         Me.StatusLabelDesenvolvedor.Spring = True
         Me.StatusLabelDesenvolvedor.Text = "Desenvolvido por Rodrigo Lima© - 2020/2024 - Todos os direitos reservados"
+        Me.StatusLabelDesenvolvedor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'StatusLabelDataHora
         '
@@ -897,9 +899,9 @@ Partial Class MainFormDemo
     Friend WithEvents dmUserOptions As PROJETOBASE.RJDropdownMenu
     Friend WithEvents MyProfileToolStripMenuItem As FontAwesome.Sharp.IconMenuItem
     Friend WithEvents SettingsToolStripMenuItem As FontAwesome.Sharp.IconMenuItem
-    Friend WithEvents TermsAndCondToolStripMenuItem As FontAwesome.Sharp.IconMenuItem
+    Friend WithEvents LogToolStripMenuItem As FontAwesome.Sharp.IconMenuItem
     Friend WithEvents HelpToolStripMenuItem As FontAwesome.Sharp.IconMenuItem
-    Friend WithEvents LogoutToolStripMenuItem As FontAwesome.Sharp.IconMenuItem
+    Friend WithEvents LoginToolStripMenuItem As FontAwesome.Sharp.IconMenuItem
     Friend WithEvents ExitToolStripMenuItem As FontAwesome.Sharp.IconMenuItem
     Friend WithEvents dmSalesOrder As PROJETOBASE.RJDropdownMenu
     Friend WithEvents NewSaleToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem

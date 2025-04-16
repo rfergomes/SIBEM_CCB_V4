@@ -14,14 +14,14 @@ Public Class DependenciasBLL
         dependenciasDAL = New DependenciasDAL(connectionFactory)
     End Sub
 
-    Public Sub Inserir(dependencias As DependenciasDTO)
+    Public Function Inserir(dependencias As DependenciasDTO) As Integer
         Try
             ' Validação dos dados do dependencias (opcional)
-            dependenciasDAL.Insert(dependencias)
+            Return dependenciasDAL.Insert(dependencias)
         Catch ex As Exception
             Throw New Exception("Erro ao inserir Dependência." & vbNewLine & ex.Message, ex)
         End Try
-    End Sub
+    End Function
 
     Public Sub Excluir(dependenciasId As Integer)
         Try
@@ -32,14 +32,14 @@ Public Class DependenciasBLL
         End Try
     End Sub
 
-    Public Sub Atualizar(dependencias As DependenciasDTO)
+    Public Function Atualizar(dependencias As DependenciasDTO) As Integer
         Try
             ' Validação dos dados do dependencias (opcional)
-            dependenciasDAL.Update(dependencias)
+            Return dependenciasDAL.Update(dependencias)
         Catch ex As Exception
             Throw New Exception("Erro ao atualizar Dependência." & vbNewLine & ex.Message, ex)
         End Try
-    End Sub
+    End Function
 
     Public Function BuscarPorNome(Nome As String) As DependenciasDTO
         Try

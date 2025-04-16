@@ -7,21 +7,21 @@
         MyBase.New(connectionFactory)
     End Sub
 
-    Public Overrides Function Insert(tipo As TipoDTO) As Long
+    Public Overrides Function Insert(tipo As TipoDTO) As Integer
         Dim columns As New Dictionary(Of String, Object)()
         columns.Add("descricao", tipo.Descricao)
         Return Inserir(Tabela, columns)
     End Function
 
-    Public Overrides Sub Delete(tipoId As String)
-        Excluir(Tabela, $"id_tipo = {tipoId}")
-    End Sub
+    Public Overrides Function Delete(tipoId As String) As Integer
+        Return Excluir(Tabela, $"id_tipo = {tipoId}")
+    End Function
 
-    Public Overrides Sub Update(tipo As TipoDTO)
+    Public Overrides Function Update(tipo As TipoDTO) As Integer
         Dim columns As New Dictionary(Of String, Object)()
         columns.Add("descricao", tipo.Descricao)
-        Atualizar(Tabela, columns, $"id_tipo = '{tipo.Id}'")
-    End Sub
+        Return Atualizar(Tabela, columns, $"id_tipo = '{tipo.Id}'")
+    End Function
 
     Public Overrides Function GetByIdDt(tipoId As Integer) As DataTable
         Dim columns As New Dictionary(Of String, Object)()

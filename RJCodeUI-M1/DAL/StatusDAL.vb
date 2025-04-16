@@ -11,21 +11,21 @@ Public Class StatusDAL
         MyBase.New(connectionFactory)
     End Sub
 
-    Public Overrides Function Insert(status As StatusDTO) As Long
+    Public Overrides Function Insert(status As StatusDTO) As Integer
         Dim columns As New Dictionary(Of String, Object)()
         columns.Add("descricao", status.Descricao)
         Return Inserir(Tabela, columns)
     End Function
 
-    Public Overrides Sub Delete(statusId As String)
-        Excluir(Tabela, $"id_status = {statusId}")
-    End Sub
+    Public Overrides Function Delete(statusId As String) As Integer
+        Return Excluir(Tabela, $"id_status = {statusId}")
+    End Function
 
-    Public Overrides Sub Update(status As StatusDTO)
+    Public Overrides Function Update(status As StatusDTO) As Integer
         Dim columns As New Dictionary(Of String, Object)()
         columns.Add("descricao", status.Descricao)
-        Atualizar(Tabela, columns, $"id_status = '{status.Id}'")
-    End Sub
+        Return Atualizar(Tabela, columns, $"id_status = '{status.Id}'")
+    End Function
 
     Public Overrides Function GetByIdDt(statusId As Integer) As DataTable
         Dim columns As New Dictionary(Of String, Object)()

@@ -17,14 +17,14 @@ Public Class IgrejasBLL
         igrejasDAL = New IgrejasDAL(connectionFactory)
     End Sub
 
-    Public Sub Inserir(igrejas As IgrejasDTO)
+    Public Function Inserir(igrejas As IgrejasDTO) As Integer
         Try
             ' Validação dos dados do igrejas (opcional)
-            igrejasDAL.Insert(igrejas)
+            Return igrejasDAL.Insert(igrejas)
         Catch ex As Exception
             Throw New Exception("Erro ao inserir Casa de Oração." & vbNewLine & ex.Message, ex)
         End Try
-    End Sub
+    End Function
 
     Public Sub Excluir(igrejasId As Integer)
         Try
@@ -35,14 +35,14 @@ Public Class IgrejasBLL
         End Try
     End Sub
 
-    Public Sub Atualizar(igrejas As IgrejasDTO)
+    Public Function Atualizar(igrejas As IgrejasDTO) As Integer
         Try
             ' Validação dos dados do igrejas (opcional)
-            igrejasDAL.Update(igrejas)
+            Return igrejasDAL.Update(igrejas)
         Catch ex As Exception
             Throw New Exception("Erro ao atualizar Casa de Oração." & vbNewLine & ex.Message, ex)
         End Try
-    End Sub
+    End Function
 
     Public Function BuscarPorId(igrejasId As String) As IgrejasDTO
         Try

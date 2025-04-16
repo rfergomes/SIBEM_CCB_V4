@@ -8,25 +8,24 @@
         MyBase.New(connectionFactory)
     End Sub
 
-    Public Overrides Function Insert(tokenSolicitacaoOn As TokenSolicitacaoOnDTO) As Long
+    Public Overrides Function Insert(tokenSolicitacaoOn As TokenSolicitacaoOnDTO) As Integer
         Dim columns As New Dictionary(Of String, Object) From {
             {"nome", tokenSolicitacaoOn.Nome},
             {"email", tokenSolicitacaoOn.Email},
             {"telefone", tokenSolicitacaoOn.Telefone},
             {"igreja", tokenSolicitacaoOn.Igreja},
             {"cidade", tokenSolicitacaoOn.Cidade},
-            {"setor", tokenSolicitacaoOn.Setor},
             {"admlc", tokenSolicitacaoOn.AdmLc},
             {"status", tokenSolicitacaoOn.Status}
         }
         Return Inserir(Tabela, columns)
     End Function
 
-    Public Overrides Sub Delete(tokenSolicitacaoOnId As String)
-        Excluir(Tabela, $"AND id_solicitacao = {tokenSolicitacaoOnId}")
-    End Sub
+    Public Overrides Function Delete(tokenSolicitacaoOnId As String) As Integer
+        Return Excluir(Tabela, $"AND id_solicitacao = {tokenSolicitacaoOnId}")
+    End Function
 
-    Public Overrides Sub Update(tokenSolicitacaoOn As TokenSolicitacaoOnDTO)
+    Public Overrides Function Update(tokenSolicitacaoOn As TokenSolicitacaoOnDTO) As Integer
         Dim columns As New Dictionary(Of String, Object) From {
             {"id_solicitacao", tokenSolicitacaoOn.Id},
             {"nome", tokenSolicitacaoOn.Nome},
@@ -34,12 +33,11 @@
             {"telefone", tokenSolicitacaoOn.Telefone},
             {"igreja", tokenSolicitacaoOn.Igreja},
             {"cidade", tokenSolicitacaoOn.Cidade},
-            {"setor", tokenSolicitacaoOn.Setor},
             {"admlc", tokenSolicitacaoOn.AdmLc},
             {"status", tokenSolicitacaoOn.Status}
         }
-        Atualizar(Tabela, columns, $"AND id_solicitacao = '{tokenSolicitacaoOn.Id}'")
-    End Sub
+        Return Atualizar(Tabela, columns, $"AND id_solicitacao = '{tokenSolicitacaoOn.Id}'")
+    End Function
 
     Public Overrides Function GetByIdDt(tokenSolicitacaoOnId As Integer) As DataTable
         Dim columns As New Dictionary(Of String, Object)()
@@ -99,10 +97,6 @@
 
         If Not reader.IsDBNull(reader.GetOrdinal("cidade")) Then
             tokenSolicitacaoOn.Cidade = reader.GetString(reader.GetOrdinal("cidade"))
-        End If
-
-        If Not reader.IsDBNull(reader.GetOrdinal("setor")) Then
-            tokenSolicitacaoOn.Setor = reader.GetString(reader.GetOrdinal("setor"))
         End If
 
         If Not reader.IsDBNull(reader.GetOrdinal("admlc")) Then

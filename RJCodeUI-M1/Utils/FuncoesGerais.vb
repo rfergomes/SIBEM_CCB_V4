@@ -5,6 +5,8 @@
 Imports Vip.Notification
 Imports System.Text.RegularExpressions
 Imports System.Configuration
+Imports System.Text
+Imports System.Security.Cryptography
 
 Friend Module FuncoesGerais
     Private SQLite As New ConnectionFactory()
@@ -218,6 +220,33 @@ Friend Module FuncoesGerais
         Next
 
         Return dt
+    End Function
+
+    Public Function GerarTokenSHA256(ByVal input As String) As String
+        Try
+            ' Combina o input com um timestamp para garantir unicidade
+            Dim dataParaHash As String = input & DateTime.UtcNow.ToString("yyyyMMddHHmmssfff")
+
+            ' Converte o valor para bytes
+            Dim inputBytes As Byte() = Encoding.UTF8.GetBytes(dataParaHash)
+
+            ' Instancia o algoritmo SHA256
+            Using sha256 As SHA256 = SHA256.Create()
+                ' Calcula o hash
+                Dim hashBytes As Byte() = sha256.ComputeHash(inputBytes)
+
+                ' Converte o hash para uma string hexadecimal
+                Dim sb As New StringBuilder()
+                For Each b As Byte In hashBytes
+                    sb.Append(b.ToString("x2")) ' Converte para hexadecimal
+                Next
+
+                Return sb.ToString()
+            End Using
+        Catch ex As Exception
+            ' Trata possíveis erros e retorna uma mensagem padrão
+            Return "Erro ao gerar token: " & ex.Message
+        End Try
     End Function
 
 
