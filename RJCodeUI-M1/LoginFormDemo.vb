@@ -138,7 +138,7 @@
     End Sub
 
     Private Sub biGitHub_Click(ByVal sender As Object, ByVal e As EventArgs) Handles biGitHub.Click
-        Process.Start("https://github.com/rfergomes")
+        Process.Start("https://github.com/rfergomes/SIBEM_CCB_V4")
     End Sub
 
     Private Sub biFacebook_Click(ByVal sender As Object, ByVal e As EventArgs) Handles biFacebook.Click
